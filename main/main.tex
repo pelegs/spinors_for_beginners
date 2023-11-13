@@ -1,1 +1,41 @@
-% This would be the main tex file, bringing together all settings, chapters, etc.
+\documentclass[b5paper]{book}
+\usepackage[
+		b5paper,
+		margin=2cm,
+		%showframe
+	]{geometry}
+\setlength\parindent{0em}
+\setlength\parskip{1em}
+\raggedbottom
+
+%----------%
+% SETTINGS %
+%----------%
+
+% different setting files will be here
+
+%----------%
+% DOCUMENT %
+%----------%
+
+\begin{document}
+
+% Cover
+\input{graphics/cover/cover}
+
+% Rights, lefts, etc.
+\makeatletter
+\def\input@path{{./pre_content/}}
+\makeatother
+\input{rights}
+
+% Contents?
+HERE BE TABLE
+%\tableofcontents
+\newpage
+
+% Book content
+
+% Bibliography
+
+\end{document}
