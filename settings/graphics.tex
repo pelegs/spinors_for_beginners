@@ -42,3 +42,45 @@
 \colorlet{xcol5}{xorange}
 \colorlet{xcol6}{xcyan}
 \colorlet{xcol7}{xpink!75!black}
+
+%%%%%%%%%%%%%%%%%%%%%
+%        PGF        %
+%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pgfplots}
+% \usepgfplotslibrary{fillbetween, colormaps, colorbrewer, patchplots}
+\pgfplotsset{
+  compat=1.18,
+  %% Styles %%
+  xyplane/.style = {
+    axis x line=middle,
+    axis y line=middle,
+    xlabel=$x$,
+    ylabel=$y$,
+    every axis x label/.style={at={(ticklabel* cs:1.02)}, anchor=west},
+    every axis y label/.style={at={(ticklabel* cs:1.02)}, anchor=south},
+    axis line style={stealth-stealth, thick},
+    label style={font=\large},
+    tick label style={font=\large},
+    samples=100,
+    xmin=-5, xmax=5,
+    ymin=-5, ymax=5,
+    domain=-5:5,
+    grid=both,
+    major grid style={black!15},
+    minor grid style={black!10},
+    xticklabels={,},
+    yticklabels={,},
+  },
+}
+
+%%%%%%%%%%%%%%%%%%%%%%
+%        TikZ        %
+%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\tikzset{
+  %% Styles %%
+  vector/.style = {#1, ultra thick, ->, >=stealth, cap=round},
+}

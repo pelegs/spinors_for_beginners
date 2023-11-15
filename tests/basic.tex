@@ -16,5 +16,23 @@ Bla bla bla? Yes.
     \eb{1} = \colvec{1;0;\vdots;0}.
 \end{equation}
 
-Also, here are some numbers: $\iu,\ \eu,\ \Eu{\pi},\ \EX{4}$.
+Also, here are some numbers: $\iu,\ i,\ \eu,\ e,\ \Eu{\pi},\ \EX{4}$.
+
+Now\ldots a graph! With vectors and stuff!
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[
+        xyplane,
+        width=10cm, height=10cm,
+    ]
+    \draw[vector={xred}] (axis cs:0,0) -- (axis cs:3,4) node [midway, above left] {$\vec{a}$};
+    \draw[vector={xblue}] (axis cs:0,0) -- (axis cs:-4,1) node [midway, above left] {$\vec{b}$};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+    \caption{This is a figure, a plot even.}
+    \label{fig:blaplot}
+\end{figure}
+
 \end{document}
