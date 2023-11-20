@@ -1,0 +1,20 @@
+\section{This is a title}\label{sec:title}
+\lipsum[2-2]
+
+\begin{marginfigure}
+    \begin{center}
+    \begin{tikzpicture}
+    \begin{axis}[
+        xyplane,
+        width=6cm, height=6cm,
+    ]
+        \draw[vector={xred}] (0,0) -- (2,2) node[midway, above left] {$\vec{a}$};
+        \draw[vector={xblue}] (0,0) -- (-2,4) node[midway, above right] {$\vec{b}$};
+    \end{axis}
+    \end{tikzpicture}
+    \end{center}
+    \caption{A margin figure}
+    \label{fig:margin_figure}
+\end{marginfigure}
+
+This is a manualy-typed text. It even points to a figure (see \autoref{fig:margin_figure}).

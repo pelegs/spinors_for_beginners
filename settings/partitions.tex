@@ -1,0 +1,11 @@
+% section numbering
+\setcounter{secnumdepth}{2}
+
+% Chapter title
+\titleformat{\chapter}
+[block]% shape
+{\relax\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\begin{fullwidth}}{}}% format applied to label+text
+{\itshape\huge\thechapter}% label
+{1em}% horizontal separation between label and title body
+{\huge\rmfamily\itshape}% before the title body
+[\ifthenelse{\NOT\boolean{@tufte@symmetric}}{\end{fullwidth}}{}]% after the title body
