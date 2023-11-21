@@ -1,4 +1,4 @@
-\documentclass{tufte-book}
+\documentclass[a4paper]{tufte-book}
 \setlength\parindent{0em}
 \setlength\parskip{1em}
 \raggedbottom
@@ -20,7 +20,38 @@
 %----------%
 
 \begin{document}
-\part{Tests}
-\chapter{General layout test}
-\input{./tests/layout}
+% \part{Tests}
+% \chapter{General layout test}
+% \input{./tests/layout}
+
+\makeatletter
+
+%% -- PART 1: Background -- %%
+\part{Background Topics}
+
+% Linear algebra
+\chapter{Linear Algebra}
+\def\input@path{{./parts/background/linear_algebra}}
+\input{preface}
+
+% - Geometric algebra
+\chapter{Geometric Algebra}
+\def\input@path{{./parts/background/geometric_algebra}}
+\input{preface}
+
+% - Abstract algebra
+\chapter{Abstract Algebra}
+\def\input@path{{./parts/background/abstract_algebra}}
+\input{preface}
+
+% - Lie groups and algebras
+\chapter{Lie Groups and Algebras}
+\def\input@path{{./parts/background/lie_groups_algebras}}
+\input{preface}
+
+%% -- PART 2: Spinors -- %%
+\part{Spinors}
+
+
+\makeatother
 \end{document}
