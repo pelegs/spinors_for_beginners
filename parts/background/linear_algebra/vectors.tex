@@ -8,7 +8,7 @@ Therefore, for now I choose to limit the definition of vectors to the so-called 
 \begin{marginfigure}
     \begin{tikzpicture}
     \begin{axis}[
-        xyplane,
+        xyempty,
         width=7cm, height=7cm,
         ]
         \draw[vector={xred}] (0,0) -- (5,2);
@@ -38,4 +38,22 @@ Let's now overview the basic operations that can be done with vectors. Vectors c
     \label{fig:scaling_vectors}
 \end{marginfigure}
 
-Vectors can also be added together.
+Vectors can also be added together using the \textit{parallelogram rule}: given two vectors $\vec{a}$ and $\vec{b}$ we first place $\vec{b}$ such that its origin lies on the head of $\vec{a}$. The vector $\vec{c}$ from the origin of $\vec{a}$ to the head of $\vec{b}$ is the result of the addition.
+
+\begin{marginfigure}
+    \begin{tikzpicture}
+    \begin{axis}[
+        xyempty,
+        width=7cm, height=7cm,
+        ]
+        \coordinate (a) at (5,2);
+        \coordinate (b) at (-1,1);
+        \draw[vector={xred}] (0,0) -- (a) node [midway, above left] {$\vec{a}$};
+        \draw[vector={xblue}] (0,0) -- (b) node [midway, below left] {$\vec{b}$};
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Text.}
+    \label{fig:adding_vectors}
+\end{marginfigure}
+
+\lipsum[2-6]
