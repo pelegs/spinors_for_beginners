@@ -22,7 +22,7 @@ Therefore, for now I choose to limit the definition of vectors to the so-called 
     \label{fig:vectors}
 \end{marginfigure}
 
-Let's now overview the basic operations that can be done with vectors. Vectors can be scaled by any real number: scaling a vector means that we're changing the length of the vector without changing its direction (\cref{fig:scaling_vectors}). Note that direction here means the line from the vector's origin to its head: when we scale a vector by a negative number $\alpha\in\Rs$ we flip the vector's orientation and scale its length by the absolute value of $\alpha$ - the vector is then considered to stay in the same direction in space (\cref{fig:scaling_vectors}, again).
+Let's now overview the basic operations that can be done with vectors. One operation is \textit{scaling} by a real number: scaling a vector means that we're changing the norm of the vector without changing its direction (\cref{fig:scaling_vectors}). Note that by direction we mean the line going through the vector's origin and its head: when we scale a vector by a negative number $\alpha\in\Rs$ we flip the vector's orientation and scale its norm by the absolute value of $\alpha$ - the vector is then considered to stay in the same direction in space (\cref{fig:scaling_vectors}, again). Generally, the norm of a vector $\vec{u}$ is denoted using double vertical lines: $\vnorm{u}$.
 
 \begin{marginfigure}
     \resizebox{4cm}{!}{
@@ -38,22 +38,10 @@ Let's now overview the basic operations that can be done with vectors. Vectors c
     \label{fig:scaling_vectors}
 \end{marginfigure}
 
+A vector which has norm of $1$ is called a \textit{unit vector}. We will denote unit vectors in the book using the regular bold notation with a \enquote{hat} on top of it: $\uvec{a}$. Any vector can be made into a unit vector (be \textit{normalized}) by scaling the vector by the reciprocal of its norm (if it isn't zero): given a vector $\vec{u}$, we can scale it by $\vnorm{u}^{-1}$ and get the unit vector $\uvec{u}$, i.e.
+\begin{equation}
+    \uvec{u} = \frac{1}{\vnorm{u}}\vec{u}.
+    \label{eq:label}
+\end{equation}
+
 Vectors can also be added together using the \textit{parallelogram rule}: given two vectors $\vec{a}$ and $\vec{b}$ we first place $\vec{b}$ such that its origin lies on the head of $\vec{a}$. The vector $\vec{c}$ from the origin of $\vec{a}$ to the head of $\vec{b}$ is the result of the addition.
-
-\begin{marginfigure}
-    \begin{tikzpicture}
-    \begin{axis}[
-        xyempty,
-        width=7cm, height=7cm,
-        ]
-        \coordinate (a) at (5,2);
-        \coordinate (b) at (-1,1);
-        \draw[vector={xred}] (0,0) -- (a) node [midway, above left] {$\vec{a}$};
-        \draw[vector={xblue}] (0,0) -- (b) node [midway, below left] {$\vec{b}$};
-    \end{axis}
-    \end{tikzpicture}
-    \caption{Text.}
-    \label{fig:adding_vectors}
-\end{marginfigure}
-
-\lipsum[2-6]

@@ -1,3 +1,23 @@
+%% -- Tufte-related settings -- %%
+\makeatletter
+% Paragraph indentation and separation for normal text
+\renewcommand{\@tufte@reset@par}{%
+  \setlength{\RaggedRightParindent}{1.0pc}%
+  \setlength{\JustifyingParindent}{1.0pc}%
+  \setlength{\parindent}{1pc}%
+  \setlength{\parskip}{1em}%
+}
+\@tufte@reset@par
+
+% Paragraph indentation and separation for marginal text
+\renewcommand{\@tufte@margin@par}{%
+  \setlength{\RaggedRightParindent}{0pc}%
+  \setlength{\JustifyingParindent}{0pc}%
+  \setlength{\parindent}{0pc}%
+  \setlength{\parskip}{0pt}%
+}
+\makeatother
+
 \usepackage{booktabs}
 
 \usepackage{lipsum}
@@ -6,3 +26,5 @@
 % Language-related
 \usepackage[english]{babel}
 \usepackage[autostyle, german=guillemets, english=american]{csquotes}
+
+\usepackage{subfigure}
