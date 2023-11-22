@@ -1,1 +1,41 @@
 \section{Vectors and Vector Spaces}
+\newthought{Vectors are }the most basic and important element in linear algebra. There are several different approaches to defining a vector: physicists like to talk about vectors as objects with magnitude and direction. Computer scientists and programmers tend to view vectors as lists of numbers (and sometimes other types of objects as well). To the mathematician, vectors are elements of \textit{vector sets}, which are defined rigorously and precisely.
+
+The existence of different definitions leads to much confusion\sidenote{I admit that this is a classic case of \enquote{citation needed}, but it is something I come across often.}: for example, we usually think of matrices as \textit{acting} on vectors, so how can matrices be vectors themselves? Also - are vectors just list of numbers, or are there some such lists that aren't vectors? Can we always reduce any vector to a list of numbers? And what about the case of functions as vectors? Etc., etc.
+
+Therefore, for now I choose to limit the definition of vectors to the so-called \enquote{physicist's definition}: a vector is an object which has both a magnitude (also \textit{length} and \textit{norm}), and a direction. These can be easily visualized in 2- and 3-dimensional real spaces as arrows. We will later see how this translates into lists of numbers (and later still how we can define more abstract and inclusive vectors). Since vectors don't have positions, we can freely move them around in space, and normally present them as originating from the same point in space (\cref{fig:vectors}).
+
+\begin{marginfigure}
+    \begin{tikzpicture}
+    \begin{axis}[
+        xyplane,
+        width=7cm, height=7cm,
+        ]
+        \draw[vector={xred}] (0,0) -- (5,2);
+        \draw[vector={xblue}] (0,0) -- (-3,5);
+        \draw[vector={xgreen}] (0,0) -- (-1,-3);
+        \draw[vector={xpurple}] (0,0) -- (1,-4);
+        \draw[vector={xorange}] (0,0) -- (4,3);
+    \end{axis}
+    \end{tikzpicture}
+    \caption{Some vectors placed in 2-dimensional space such that they all originate from the same point.}
+    \label{fig:vectors}
+\end{marginfigure}
+
+Let's now overview the basic operations that can be done with vectors. Vectors can be scaled by any real number: scaling a vector means that we're changing the length of the vector without changing its direction (\cref{fig:scaling_vectors}). Note that direction here means the line from the vector's origin to its head: when we scale a vector by a negative number $\alpha\in\Rs$ we flip the vector's orientation and scale its length by the absolute value of $\alpha$ - the vector is then considered to stay in the same direction in space (\cref{fig:scaling_vectors}, again).
+
+\begin{marginfigure}
+    \resizebox{4cm}{!}{
+        \begin{tikzpicture}
+            \draw[vector={xred}] (0,0) -- ++(1.5,1.5) node[midway, above left] {$\vec{a}$};
+            \draw[vector={xblue}] (0,-1) -- ++(3,3) node[midway, above left] {$2\vec{a}$};
+            \draw[vector={xgreen}] (0,-2) -- ++(1,1) node[midway, above left, yshift=-7pt] {$\frac{1}{3}\vec{a}$};
+            \draw[vector={xpurple}] (1,-2) -- ++(-1.5,-1.5) node[midway, above left] {$-\vec{a}$};
+            \draw[vector={xorange}] (1,-3) -- ++(-3,-3) node[midway, above left] {$-2\vec{a}$};
+        \end{tikzpicture}
+    }
+    \caption{Some vectors placed in the origin of a 2-dimensional Cartesian coordinate system.}
+    \label{fig:scaling_vectors}
+\end{marginfigure}
+
+Vectors can also be added together.
