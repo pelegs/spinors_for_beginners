@@ -1,4 +1,5 @@
 \usepackage{enumitem}
+\usepackage{fontawesome}
 
 % Bold text itemize/enumerate
 % Taken from an answer to the TeX StackExchange question #266225
@@ -6,3 +7,79 @@
 {\begin{description}[leftmargin=*, before=\let\makelabel\descitemlabel]}
 {\end{description}}
 \newcommand{\descitemlabel}[1]{\textbullet\ \textbf{#1}:}
+
+\usepackage[most]{tcolorbox}
+
+\tikzset{
+	second box/.style={
+		anchor=east,
+		text=white,
+		rounded corners,
+		fill=#1,
+		xshift=-4mm,
+	},
+}
+
+\tcbset{
+	common/.style n args={2}{
+		colframe={#1},
+		colback={#1!5},
+		colbacktitle={#1},
+		lower separated=false,
+		coltitle=white,
+		boxrule=1pt,
+		fonttitle=\bfseries,
+		enhanced,
+		breakable,
+		top=8pt,
+		before skip=1em,
+		after skip=2em,
+		attach boxed title to top left={
+			yshift=-0.25cm,
+			xshift=0.38cm,
+		},
+		boxed title style={
+			boxrule=0pt,
+			colframe=white,
+			arc=5pt,
+			outer arc=4pt,
+		},
+		separator sign={~~},
+		overlay unbroken and last={
+			\node[text=white, align=right, rounded corners, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
+		}
+	},
+	defstyle/.style={
+		common={xpurple}{$\bm{\pi}$},
+	},
+	theoremstyle/.style={
+		common={xgraycyan}{$\multimapdotbothA$},
+	},
+	lemmastyle/.style={
+		common={xgrayblue}{$\multimap$},
+	},
+	proofstyle/.style={
+		common={xgreen}{\textbf{QED}},
+	},
+	examplestyle/.style={
+		common={xblue}{\faStar},
+	},
+	notestyle/.style={
+		common={xred}{\textbf{!}},
+	},
+	challengestyle/.style={
+		common={xorange}{\textbf{?}},
+	},
+	quotestyle/.style={
+		common={gray}{\textbf{"}},
+	},
+}
+
+\newtcbtheorem[auto counter, number within=chapter]{definition}{Definition}{defstyle}{def}
+\newtcbtheorem[auto counter, number within=chapter]{theorem}{Theorem}{theoremstyle}{theorem}
+\newtcbtheorem[auto counter, number within=chapter]{lemma}{Lemma}{lemmastyle}{lemma}
+\newtcbtheorem[auto counter, number within=chapter]{proof}{Proof}{proofstyle}{proof}
+\newtcbtheorem[auto counter, number within=chapter]{example}{Example}{examplestyle}{example}
+\newtcbtheorem[auto counter, number within=chapter]{note}{Note}{notestyle}{note}
+\newtcbtheorem[auto counter, number within=chapter]{challenge}{Challenge}{challengestyle}{challenge}
+\newtcbtheorem[]{nquote}{Quote}{quotestyle}{quote}

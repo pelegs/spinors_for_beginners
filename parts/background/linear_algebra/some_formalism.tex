@@ -59,3 +59,12 @@ To do so, let us first overview some fundamental (trivial, even) properties of $
 \end{descitemize}
 
 There are many other mathematical objects that have the same properties, for example matrices of the same dimensions, with the usual matrix addition and scalar multiplication operations: in this case, the zero matrix is the neutral element to addition and the scalar $1$ is the unity. Another example using functions can be seen in (EXAMPLE REF).
+
+We use the properties we described to define a general idea of a vector space. First, we choose a \textit{field} $\mathbb{F}$: a set whose elements will be our scalars. Usually the field is either $\Rs$ or $\Cs$, but there are many other options which we will ignore for now. Then, we choose a set $V$ and define two operations: one operation between two elements of $V$ (which we call \textit{addition}) and one between elements of $V$ and elements of the field $\mathbb{F}$ (which we call \text{scalar multiplication}).
+
+Now, if we defined all of the above (field + set + two operations) \textbf{and} they behave according to the properties we described for $\Rs[n]$ (closure, commutativity, associativity, etc.) \textbf{then} we say that the set $V$ is a vector set \textit{over} $\mathbb{F}$ with the two operations.
+
+%-- EXAMPLE: trivial vector space: {-1, 1, 0}?..
+\begin{example}{Trivial vector space}{trivial_vector_space}
+    What is the smallest vector space we can construct using a subset of $\Rs$ as a field? If we choose $V=\mathbb{F}=\emptyset$ and the usual addition and multiplication between, say, real numbers - this is a valid vector space (check for youself!). However, it's a very boring one. Let's try to build a small vector space with more than one element in $V$: \ldots
+\end{example}
