@@ -20,6 +20,8 @@
 	},
 }
 
+\tikzset{tcbreak/.style = {fill=white, thick, rounded corners, draw=#1, text=#1, font=\bfseries}}
+
 \tcbset{
 	common/.style n args={2}{
 		colframe={#1},
@@ -45,8 +47,32 @@
 			outer arc=4pt,
 		},
 		separator sign={~~},
-		overlay unbroken and last={
+		% -- overlays based on the following TeX SE answer: https://tex.stackexchange.com/a/545324/162087
+		overlay unbroken={
 			\node[text=white, align=right, rounded corners, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
+		},
+		overlay first={
+			\path[font=\small\itshape] (frame.south) node [tcbreak={#1}] (cont) {continues in the next page \faHandORight};
+			\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
+			(frame.south west) -- (cont.west)
+			(frame.south east) -- (cont.east);
+		},
+		overlay middle={%
+			\path[font=\small\itshape] (frame.north) node [tcbreak={#1}] (cont) {\faHandORight continues from the previous page};
+			\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
+			(frame.north west) -- (cont.west)
+			(frame.north east) -- (cont.east);
+			\path[font=\small\itshape] (frame.south) node [tcbreak={#1}] (cont) {continues in the next page \faHandORight};
+			\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
+			(frame.south west) -- (cont.west)
+			(frame.south east) -- (cont.east);
+		},
+		overlay last={
+			\node[text=white, align=right, rounded corners, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
+			\path[font=\small\itshape] (frame.north) node [tcbreak={#1}] (cont) {\faHandORight continues from the previous page};
+			\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
+			(frame.north west) -- (cont.west)
+			(frame.north east) -- (cont.east);
 		}
 	},
 	defstyle/.style={
