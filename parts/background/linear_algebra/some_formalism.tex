@@ -1,0 +1,55 @@
+\section{Some Formalism and General Vector Spaces}
+\newthought{Up until now in this chapter} we only looked at vectors in $\Rs[n]$ (and usually with $n\in\left\{2,3\right\}$). However, the ideas presented can be generalized to all kind of vector spaces. Yes - it is finally time to present the \enquote{mathematician's view of vectors}!
+
+To do so, let us first overview some fundamental (and even trivial) properties of $\Rs[n]$:
+\begin{descitemize}
+    \item[Closure of vector addition] the sum of any two vectors $\vec{u}$ and $\vec{v}$ in $\Rs[n]$ is also a vector in $\Rs[n]$ - i.e. 
+    \begin{equation}
+        \text{if}\ \vec{u}+\vec{v}=\vec{w},\ \text{then}\ \vec{w}\in\Rs[n].
+        \label{eq:vector_addition_closure}
+    \end{equation}
+    
+    \item[Commutativity of vector addition] resulting from the parallelogram rule, the addition of vectors is commutative - i.e.
+    \begin{equation}
+        \vec{u}+\vec{v}=\vec{v}+\vec{u}.
+        \label{eq:vector_addition_commutative_2}
+    \end{equation}
+
+    \item[Associativity of vector addition] the order of adding multiple vectors does not matter: for any three vectors $\vec{u},\ \vec{v},\ \vec{w}$ in $\Rs[n]$,
+    \begin{equation}
+        \vec{u}+\left(\vec{v}+\vec{w}\right) = \left(\vec{u}+\vec{v}\right)+\vec{w}.
+        \label{eq:vector_addition_associative}
+    \end{equation}
+    
+    \item[Existence of zero] the zero vector $\vec{0}$ is a neutral to addition - i.e.
+    \begin{equation}
+        \forall \vec{u}\in\Rs[n]:\ \vec{u}+\vec{0}=\vec{0}+\vec{u}=\vec{u}.
+        \label{eq:vector_zero_existence}
+    \end{equation}
+
+    \item[Existence additive inverse] for any vector $\vec{v}\in\Rs[n]$ there's an inverse - i.e
+    \begin{equation}
+        \forall \vec{v}\in\Rs[n]:\ \exists\left(-\vec{v}\right), \vec{v}+\left(-\vec{v}\right) = \vec{0}.
+        \label{eq:vector_zero_addition}
+    \end{equation}
+
+    \item[Closure of scalar multiplication] the result of scaling by $\lambda\in\Rs$ of any vector $\vec{v}\in\Rs[n]$ is also in $\Rs[n]$ - i.e. 
+    \begin{equation}
+        \forall\vec{v}\in\Rs[n] \text{and}\ \forall\lambda\in\Rs:\ \lambda\vec{v}\in\Rs[n].
+        \label{eq:scalar_multiplication_closure}
+    \end{equation}
+
+    \item[Associativity of scalar multiplication] for any two scalars $\lambda,\mu\in\Rs$, the order of scaling a vector $\vec{v}\in\Rs[n]$ doesn't matter - i.e.
+    \begin{equation}
+        \left(\lambda\vec{v}\right)\cdot\mu = \lambda\cdot\left(\mu\vec{v}\right).
+        \label{eq:scalar_multiplication_associative}
+    \end{equation}
+
+    \item[Existnce of unity] the number $1$ is neutral to scaling - i.e.
+        \begin{equation}
+            \forall \vec{v}\in\Rs[n]: 1\vec{v}=\vec{v}.
+            \label{eq:scalar_multiplication_unity}
+        \end{equation}
+
+    \item[Distributive laws] text\ldots
+\end{descitemize}

@@ -45,3 +45,27 @@ A vector which has norm of $1$ is called a \textit{unit vector}. We will denote 
 \end{equation}
 
 Vectors can also be added together using the \textit{parallelogram rule}: given two vectors $\vec{a}$ and $\vec{b}$ we first place $\vec{b}$ such that its origin lies on the head of $\vec{a}$. The vector $\vec{c}$ from the origin of $\vec{a}$ to the head of $\vec{b}$ is the result of the addition.
+
+%% -- Find how to properly set up a figure with sub-figures as NON-MARGIN.
+
+The addition rule of vectors is called the parallelogram rule because if we were to perdorm the addition of $\vec{a}+\vec{b}$ and $\vec{b}+\vec{a}$ we would get a parallelogram (\cref{fig:vector_addition_parallogram}). This aslo indicates that vector addition is \textit{commutative}:
+\begin{equation}
+    \vec{a}+\vec{b} = \vec{b}+\vec{a}.
+    \label{eq:vector_addition_commutative}
+\end{equation}
+
+\begin{marginfigure}
+    \begin{tikzpicture}
+            \coordinate (a) at (1,2);
+            \coordinate (b) at (3,1);
+            \coordinate (c) at (4,3);
+            % \getangle(0,0)(c)t
+            \draw[vector={xred}] (0,0) -- (a) node[midway, above left] {$\vec{a}$};
+            \draw[vector={xblue}] (0,0) -- (b) node[midway, below right] {$\vec{b}$};
+            \draw[vector={xblue, dashed}] (a) -- (c) node[midway, above left] {$\vec{b}$};
+            \draw[vector={xred, dashed}] (b) -- (c) node[midway, below right] {$\vec{a}$};
+            \draw[vector={dashed}] (0,0) -- (c) node[midway, above left, rotate=36.87] {$\vec{a}+\vec{b}$};
+    \end{tikzpicture}
+    \caption{No matter in which order we perform the addition of two vectors, the result is the same. This is due to the parallelogram rule of vector addition.}
+    \label{fig:vector_addition_parallogram}
+\end{marginfigure}

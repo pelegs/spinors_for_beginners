@@ -1,0 +1,8 @@
+\usepackage{enumitem}
+
+% Bold text itemize/enumerate
+% Taken from an answer to the TeX StackExchange question #266225
+\newenvironment{descitemize}
+{\begin{description}[leftmargin=*, before=\let\makelabel\descitemlabel]}
+{\end{description}}
+\newcommand{\descitemlabel}[1]{\textbullet\ \textbf{#1}:}
