@@ -1,7 +1,7 @@
 \section{Some Formalism and General Vector Spaces}
 \newthought{Up until now in this chapter} we only looked at vectors in $\Rs[n]$ (and usually with $n\in\left\{2,3\right\}$). However, the ideas presented can be generalized to all kind of vector spaces. Yes - it is finally time to present the \enquote{mathematician's view of vectors}!
 
-To do so, let us first overview some fundamental (and even trivial) properties of $\Rs[n]$:
+To do so, let us first overview some fundamental (trivial, even) properties of $\Rs[n]$:
 \begin{descitemize}
     \item[Closure of vector addition] the sum of any two vectors $\vec{u}$ and $\vec{v}$ in $\Rs[n]$ is also a vector in $\Rs[n]$ - i.e. 
     \begin{equation}
@@ -45,11 +45,17 @@ To do so, let us first overview some fundamental (and even trivial) properties o
         \label{eq:scalar_multiplication_associative}
     \end{equation}
 
-    \item[Existnce of unity] the number $1$ is neutral to scaling - i.e.
+    \item[Existnce of unity] the number $1$ is neutral with scaling - i.e.
         \begin{equation}
             \forall \vec{v}\in\Rs[n]: 1\vec{v}=\vec{v}.
             \label{eq:scalar_multiplication_unity}
         \end{equation}
 
-    \item[Distributive laws] text\ldots
+    \item[Distributive laws] vector addition and scaling are distributive together with addition of scalars, i.e. for any $\vec{v},\vec{u}\in\Rs[n]$ and $\lambda,\mu\in\Rs$:
+        \begin{align}
+            \lambda\left(\vec{v}+\vec{u}\right) &= \lambda\vec{v} + \lambda\vec{u},\ \text{and}\\ \left(\lambda+\mu\right)\vec{v} &= \lambda\vec{v} + \mu\vec{v}.
+            \label{eq:label}
+        \end{align}
 \end{descitemize}
+
+There are many other mathematical objects that have the same properties, for example matrices of the same dimensions, with the usual matrix addition and scalar multiplication operations: in this case, the zero matrix is the neutral element to addition and the scalar $1$ is the unity. Another example using functions can be seen in (EXAMPLE REF).
