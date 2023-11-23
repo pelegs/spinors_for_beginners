@@ -1,7 +1,10 @@
 \section{Some Formalism and General Vector Spaces}
-\newthought{Up until now in this chapter} we only looked at vectors in $\Rs[n]$ (and usually with $n\in\left\{2,3\right\}$). However, the ideas presented can be generalized to all kind of vector spaces. Yes - it is finally time to present the \enquote{mathematician's view of vectors}!
+\newthought{Up until now in this chapter} we only looked at vectors in $\Rs[n]$ (and usually with $n\in\left\{2,3\right\}$). The structure of these spaces allowed us to easily act on them using linear transformations, which we later represented as matrices - thus greatly simplifying operations that would otherwise be tedious to perform, for example shearing and rotations in higher dimensions.
 
-To do so, let us first overview some fundamental (trivial, even) properties of $\Rs[n]$:
+If we could generalize the structure of a vector space to other objects, perhaps (at least some of) the simple operations we applied to it might be dragged along with it. In fact, this is exactly what happens, and to see this we need to expand our definition of vector spaces. Yes - it is finally time to present the \enquote{mathematician's view of vectors}!
+
+To do so, we should first overview its fundamental properties of $\Rs[n]$. Then we can find other structures with these properties and apply the same ideas as those we found for $\Rs[n]$. So, what are these properties?
+
 \begin{descitemize}
     \item[Closure of vector addition] the sum of any two vectors $\vec{u}$ and $\vec{v}$ in $\Rs[n]$ is also a vector in $\Rs[n]$ - i.e. 
     \begin{equation}
@@ -58,15 +61,8 @@ To do so, let us first overview some fundamental (trivial, even) properties of $
         \end{align}
 \end{descitemize}
 
-There are many other mathematical objects that have the same properties, for example matrices of the same dimensions, with the usual matrix addition and scalar multiplication operations: in this case, the zero matrix is the neutral element to addition and the scalar $1$ is the unity. Another example using functions can be seen in (EXAMPLE REF).
-
-We use the properties we described to define a general idea of a vector space. First, we choose a \textit{field} $\mathbb{F}$: a set whose elements will be our scalars. Usually the field is either $\Rs$ or $\Cs$, but there are many other options which we will ignore for now. Then, we choose a set $V$ and define two operations: one operation between two elements of $V$ (which we call \textit{addition}) and one between elements of $V$ and elements of the field $\mathbb{F}$ (which we call \text{scalar multiplication}).
-
-Now, if we defined all of the above (field + set + two operations) \textbf{and} they behave according to the properties we described for $\Rs[n]$ (closure, commutativity, associativity, etc.) \textbf{then} we say that the set $V$ is a vector set \textit{over} $\mathbb{F}$ with the two operations.
-
-%-- EXAMPLE: trivial vector space: {-1, 1, 0}?..
-\begin{example}{Trivial vector space}{trivial_vector_space}
-    What is the smallest vector space we can construct using a subset of $\Rs$ as a field? If we choose $V=\mathbb{F}=\emptyset$ and the usual addition and multiplication between, say, real numbers - this is a valid vector space (check for youself!). However, it's a very boring one. Let's try to build a small vector space with more than one element in $V$: \ldots
-
-    \lipsum[1-6]
-\end{example}
+Let us now find other mathematical objects that behave similarly.
+%% Polynomials
+%% Functions (span space using dirac's delta)
+%% Then finally: general defintions of a vector space over any field F.
+%% !!! CORRECT ISSUE with \cref and example environment !!! %%
