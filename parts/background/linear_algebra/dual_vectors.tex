@@ -42,4 +42,55 @@ A bit of thinking further shows that in fact, \textit{any} linear map of the for
     \phi\left(\vec{v}\right) = \alpha_{1}v_{1} + \alpha_{2}v_{2} + \alpha_{3}v_{3},
     \label{eq:general_linear_measure_R3}
 \end{equation}
-where $\alpha_{1},\alpha_{2},\alpha_{3}$ are some real numbers. But this is exactly the definition of the inner product between $\colvec{\alpha_{1};\alpha_{2};\alpha_{3}}$ and $\vec{v}$! So we see that \textit{any} linear measurement on $\Rs[3]$ will take the form ofan inner product with some given vector. 
+where $\alpha_{1},\alpha_{2},\alpha_{3}$ are some real numbers. But this is exactly the definition of the inner product between $\colvec{\alpha_{1};\alpha_{2};\alpha_{3}}$ and $\vec{v}$! So we see that \textit{any} linear measurement on $\Rs[3]$ will take the form ofan inner product with some given vector.
+
+In other words, any vector in $\Rs[3]$ can be used to linearly measure all vectors in $\Rs[3]$ via the inner product, and in this context act as a \textit{functional} on elements of the space. Moreover, any possible linear measurement of vectors in $\Rs[3]$ would be of this form - and thus the space of linear maps of the form $\Rs[3]\to\Rs$ is itself a vector space with the same structure as $\Rs[3]$\sidenote{In fact, \textit{it is} $\Rs[3]$ in any sensible meaning.} and in this context we call it the \textit{dual space} of $\Rs[3]$, and its elements \textit{dual vectors}.
+
+Now, of course choosing $\Rs[3]$ was pretty arbitrary, so let us generalize somewhat the defintions:
+\begin{definition}{Text}{deftext}
+    The dual space of $\Rs[n]$ is the space of all linear maps of the form
+    \begin{equation*}
+        \phi:\Rs[n]\to\Rs,
+    \end{equation*}
+    which can be represented as the inner product between the elements of $\Rs[n]$. 
+
+    We call the elements of the dual space \textit{dual vectors}, and denote them with an asterisk: $\dualvec{v}$.
+\end{definition}
+
+To distinguish between vectors and dual vectors in practice, we represent dual vectors as \textit{row-vectors} instead of the usual \textit{column-vector} for vectors. For example, a dual vector from $\Rs[3]$ will have the form
+\begin{equation}
+    \dualvec{a} = \rowvec{a_{1};a_{2};a_{3}}.
+    \label{eq:dual_vectors_row_form}
+\end{equation}
+
+This way, the action of dual vectors on vectors (as functionals) is clearly seen via writing the inner product: given the dual vector $\dualvec{a}\in\Rs[n]$ and the vector $\vec{v}\in\Rs[n]$, their inner product can be written explicitely as
+\begin{equation}
+    \inner{\dualvec{a}}{\vec{v}} = \GenericRowVec{a} \GenericColVec{v} = a_{1}v_{1} + a_{2}v_{2} + \dots + a_{n}v_{n}.
+    \label{eq:dualvec_vec_inner}
+\end{equation}
+This corresponds well to a product between two matrices, one of dimensions $1\times n$ and the other of dimensions $n\times1$ - which will become handy when we discuss \textit{multi-linear forms}\sidenote{yes, these things get more complicated\ldots}.
+
+\begin{note}{Product order}{}
+    Using this formulation we must always multiply the dual vector and the vector such that the dual vector is \textit{on the left}. Otherwise, we should expect to get a matrix of dimensions $n\times n$.
+\end{note}
+
+A way to visualize dual vectors is using \textit{stacks}: since dual vectors have the same representation as \enquote{usual} vectors, they define a direction in a geometrical $n$-dimensional space. Since each direction in $\Rs[n]$ has a single corresponding $n-1$-dimensional hyperplane, to differentiate vectors and dual vectors we visualize dual vectors using the hyperplanes.
+
+This is a bit abstract, so let us look at our two favourite examples: $\Rs[2]$ and $\Rs[3]$. In $\Rs[2]$ the $n-1$-dimensional hyperplanes are simply lines (since $2-1=1$), which \enquote{stack} on top of each other in the direction of the dual vector they represent. See \cref{fig:2d_stacks} for a graphical representation.
+
+\begin{marginfigure}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xynogrid,
+                width=6cm, height=6cm,
+            ]
+            \foreach \dy in {-10,...,10}{
+                \addplot[thick, xblue] {-x+\dy};
+            }
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{This is a test}
+    \label{fig:2d_stacks}
+\end{marginfigure}
