@@ -1,1 +1,45 @@
 \section{Dual Vectors and Dual Spaces}
+% Section overview:
+% * important set of linear transformations: R^n -> R. Can provide us a kind of "measurement" of vectors.
+% * We call the space of all such LTs "the dual space" of R^n.
+% * Show the "layers" interpretation of dual vectors.
+% * Any dual vector can be represented using the dot product and elements of R^n* can be represented by a list of n real numbers... this is actually R^n itself!
+% If we represent the elements of R^n* as row vectors, we get a nice completness similar to matrix-matrix product.
+
+% relevant SE answers: https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-spaces
+
+\newthought{An important aspect of vector spaces}, which is sometimes waved away, is the question of \textit{measurement}: how do we give vectors a sense of magnitude? By \textit{magnitude} I mean a single real number we assign to each vector. Well, there's one obvious way: the norm. Normally\sidenote{pun kind-of intended.} it is either given as is (due to the Pythagorean theorem), or in the case of more abstract vector spaces formalized as the square root of the inner product of a vector with itself, i.e.
+\begin{equation}
+    \vnorm{v} = \sqrt{\inner{\vec{v}}{\vec{v}}}.
+    \label{eq:vector_norm}
+\end{equation}
+
+Of course, other so-called \enquote{$p$-norms} are possible and often used:
+\begin{equation}
+    \norm{\vec{v}}_{p} = \left(\abs{v_{1}}^{p}+\abs{v_{2}}^{p} + \dots + \abs{v_{n}}^{p}\right)^{\frac{1}{p}},
+    \label{eq:label}
+\end{equation}
+where $p=2$ is the normal \textit{Euclidean} norm we're used to.
+
+However, with the exception of the case $p=1$, these norms are non-linear. And if there's one insight that should be very clear to anyone who went through some university-level mathematics, it is that linear structures are so much easier to deal with than almost anything else\sidenote{that's why linear approximations are so often used all throughout science}.
+
+So instead of using the norm as a measurement, we would ideally like to use some linear function to measure our vectors. For example, let's try to come up with a linear way to measure vectors in $\Rs[3]$: given a vector $\vec{v}$, we can derive a linear map $\phi:\Rs[3]\to\Rs$ as follows:
+\begin{equation}
+    \phi\left(\vec{v}\right) = 3v_{1} - v_{2} + 5v_{3}.
+    \label{eq:linear_map_R3_example}
+\end{equation}
+Let's apply $\phi$ to some vectors and see the results:
+\begin{align*}
+    \colvec{1;0;0} &\to 3\cdot1 -1\cdot0 + 5\cdot0 = 3.\\
+    \colvec{0;1;0} &\to 3\cdot0 -1\cdot1 + 5\cdot0 = -1.\\
+    \colvec{0;0;1} &\to 3\cdot0 -1\cdot0 + 5\cdot1 = 5.\\
+    \colvec{1;-2;-1} &\to 3\cdot1 -1\cdot(-2) + 5\cdot(-1) = 3+2-5=0.\\
+\end{align*}
+We see that using this specific $\phi$ the standard basis vectors are \enquote{measured} to be of different values, and some vectors like $\vec{v}=\colvec{1;-2;-1}$ can measured to be $0$.
+
+A bit of thinking further shows that in fact, \textit{any} linear map of the form $\phi:\Rs[3]\to\Rs$ we can apply to the vectors of $\Rs[3]$ has to be in the following form:
+\begin{equation}
+    \phi\left(\vec{v}\right) = \alpha_{1}v_{1} + \alpha_{2}v_{2} + \alpha_{3}v_{3},
+    \label{eq:general_linear_measure_R3}
+\end{equation}
+where $\alpha_{1},\alpha_{2},\alpha_{3}$ are some real numbers. But this is exactly the definition of the inner product between $\colvec{\alpha_{1};\alpha_{2};\alpha_{3}}$ and $\vec{v}$! So we see that \textit{any} linear measurement on $\Rs[3]$ will take the form ofan inner product with some given vector. 

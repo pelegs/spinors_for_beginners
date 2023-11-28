@@ -1,5 +1,6 @@
 % Packages
 \usepackage{amsmath, mathtools, bm, commath}
+\usepackage{physics}
 \usepackage{siunitx}
 
 % General settings
@@ -24,6 +25,9 @@
 \newcommand{\vnorm}[1]{\left\| \vec{#1} \right\|}
 \newcommand{\cvec}[1]{\bm{\overline{#1}}}
 \newcommand{\mat}[1]{\bm{#1}}
+
+% Vector operations
+\newcommand{\inner}[2]{\langle #1,#2 \rangle}
 
 % Row- and column-vectors: arguments separated by ";".
 % Example: $\vec{a} = \colvec{1;2;3;4}$.
