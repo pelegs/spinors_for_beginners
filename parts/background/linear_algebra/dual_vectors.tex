@@ -76,7 +76,7 @@ This corresponds well to a product between two matrices, one of dimensions $1\ti
 
 A way to visualize dual vectors is using \textit{stacks}: since dual vectors have the same representation as \enquote{usual} vectors, they define a direction in a geometrical $n$-dimensional space. Since each direction in $\Rs[n]$ has a single corresponding $n-1$-dimensional hyperplane, to differentiate vectors and dual vectors we visualize dual vectors using the hyperplanes.
 
-This is a bit abstract, so let us look at our two favourite examples: $\Rs[2]$ and $\Rs[3]$. In $\Rs[2]$ the $n-1$-dimensional hyperplanes are simply lines (since $2-1=1$), which \enquote{stack} on top of each other in the direction of the dual vector they represent. See \cref{fig:2d_stacks} for a graphical representation.
+This is a bit abstract, so let us look at our two favourite examples: $\Rs[2]$ and $\Rs[3]$. In $\Rs[2]$ the $n-1$-dimensional hyperplanes are simply lines (since $2-1=1$), which \enquote{stack} on top of each other in the direction of the dual vector they represent. See \cref{fig:2d_stacks_1,fig:2d_stacks_2} for a graphical representation.
 
 \begin{marginfigure}
     \begin{center}
@@ -85,12 +85,30 @@ This is a bit abstract, so let us look at our two favourite examples: $\Rs[2]$ a
                 xynogrid,
                 width=6cm, height=6cm,
             ]
-            \foreach \dy in {-10,...,10}{
-                \addplot[thick, xblue] {-x+\dy};
+            \foreach \dy in {-5,...,5}{
+                \addplot[hyperplane1D={xpurple}] {-x+2*\dy};
             }
+            \draw[vector={xpurple!75!black}, thick] (0,0) -- (1.2,1.2);
             \end{axis}
         \end{tikzpicture}
     \end{center}
-    \caption{This is a test}
-    \label{fig:2d_stacks}
+    \caption{Graphical representation of the dual vector $\dualvec{a}=\rowvec{1;1}$. The purple lines are 1-dimensional hyperplanes, with one intersecting the origin. The small arrow shows the vector $\vec{v}=\colvec{1;1}$ which is orthogonal to the hyperplanes.}
+    \label{fig:2d_stacks_1}
+\end{marginfigure}
+\begin{marginfigure}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xynogrid,
+                width=6cm, height=6cm,
+            ]
+            \foreach \dy in {-6,...,6}{
+                \addplot[hyperplane1D={xblue}] {5/6*\dy};
+            }
+            \draw[vector={xblue!75!black}, thick] (1,0) -- (1,4);
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{A more \enquote{dense} stack oriented in parallel to the $x$-axis. This represents the dual vector $\dualvec{b}=\rowvec{}$, which has a greater magnitude than $\dualvec{a}$.}
+    \label{fig:2d_stacks_2}
 \end{marginfigure}

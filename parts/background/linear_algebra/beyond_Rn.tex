@@ -1,0 +1,78 @@
+\section{Vector Spaces Beyond $\Rs[n]$}
+\subsection{Why go beyond $\Rs[n]$?}
+\newthought{As mentiond before}, I'm a strong believer in studying linear algebra starting from the intuitive and easy to visualize geomteric cases - that is, the spaces $\Rs[2]$ and $\Rs[3]$. The generalization to $\Rs[n]$ is then pretty straight forward. However, there is nothing special about $\Rs[n]$ as a vector space (or even $\Cs[n]$ for that matter) - any set of objects with similar strucure to $\Rs[n]$ can be analyzed to yield equivalent properties.
+
+What do I mean by a set having a \enquote{similar structure} to $\Rs[n]$? This can answered by looking at the most fundamental properties of $\Rs[n]$ and looking for other mathematical objects which have these (or equivalent) properties. In this chapter we will find out that there are, in fact, many such objects - for example matrices, polynomials, and even (some) functions. Understanding the similarities to $\Rs[n]$ will then allow us to derive their own version of the ideas linear algebra gifts us with in regard to $\Rs[n]$ - such as (but not limited to!) meaningful subspaces, change of basis, eigen values/vectors and so on.
+
+These ideas will be proven as quite strong tools for any scientific field based in mathematics. In fact, many of the known advanced mathematical topics such as differential equations, Fourier series and transforms, graph theory and more - all use linear algebra on some mathematical structures except $\Rs[n]$.
+
+\subsection{The Fundamental Properties of $\Rs[n]$}
+So what are the fundamental properties of $\Rs[n]$ I mentioned? They are the following (note - some will seem trivial to even mention, but are important for generalization):
+\begin{descitemize}
+    \item[Closure of vector addition] adding together any two vectors in $\Rs[n]$ always results in a vector in $\Rs[n]$. Mathematically:
+    \begin{equation}
+        \forall\vec{u},\vec{w}\in\Rs[n]: \vec{v}+\vec{w}=\vec{a}\in\Rs[n].
+        \label{eq:vector_addition_closure}
+    \end{equation}
+    (Read: \enquote{for any vectors $\vec{u}$ and $\vec{w}$ in $\Rs[n]$, their sum, here called $\vec{a$}, is also a vector in $\Rs[n]$}.)
+    
+    \item[Commutativity of vector addition] it doesn't matter in which order we add to vectors together, the result is always the same (remember the parallelogram rule):
+    \begin{equation}
+        \vec{u}+\vec{v}=\vec{v}+\vec{u}.
+        \label{eq:vector_addition_commutative_2}
+    \end{equation}
+
+    \item[Associativity of vector addition] the order of adding multiple vectors also does not matter: for any three vectors $\vec{u},\ \vec{v},\ \vec{w}$ in $\Rs[n]$,
+    \begin{equation}
+        \vec{u}+\left(\vec{v}+\vec{w}\right) = \left(\vec{u}+\vec{v}\right)+\vec{w}.
+        \label{eq:vector_addition_associative}
+    \end{equation}
+    
+    \item[Existence of zero] there's always a vector which is neutral to addition - this is of course the zero vector $\vec{0}$:
+    \begin{equation}
+        \forall \vec{u}\in\Rs[n]:\ \vec{u}+\vec{0}=\vec{0}+\vec{u}=\vec{u}.
+        \label{eq:vector_zero_existence}
+    \end{equation}
+
+    \item[Existence additive inverse] any vector $\vec{v}\in\Rs[n]$ has an inverse:
+    \begin{equation}
+        \forall \vec{v}\in\Rs[n]:\ \exists\left(-\vec{v}\right), \vec{v}+\left(-\vec{v}\right) = \vec{0}.
+        \label{eq:vector_zero_addition}
+    \end{equation}
+
+\item[Closure of scalar multiplication] the result of scaling any vector $\vec{v}\in\Rs[n]$ by a real number $\lambda\in\Rs$ is also a vector in $\Rs[n]$:
+    \begin{equation}
+        \forall\vec{v}\in\Rs[n] \text{and}\ \forall\lambda\in\Rs:\ \lambda\vec{v}\in\Rs[n].
+        \label{eq:scalar_multiplication_closure}
+    \end{equation}
+
+\item[Associativity of scalar multiplication] the order of scaling a vector $\vec{v}$ by any two scalars $\lambda,\mu$ doesn't matter - the result would be the same no matter if we first scale $\vec{v}$ by $\lambda$ and then by $\mu$, or first scale $\vec{v}$ by $\mu$ and then by $\lambda$:
+    \begin{equation}
+        \left(\lambda\vec{v}\right)\cdot\mu = \lambda\cdot\left(\mu\vec{v}\right).
+        \label{eq:scalar_multiplication_associative}
+    \end{equation}
+
+    \item[Existnce of unity] the number $1$ is neutral with regards to vector scaling: for any vector $\vec{v}\in\Rs[n]$, scaling $\vec{v}$ by $1$ results in $\vec{v}$:
+        \begin{equation}
+            \forall \vec{v}\in\Rs[n]: 1\vec{v}=\vec{v}.
+            \label{eq:scalar_multiplication_unity}
+        \end{equation}
+
+    \item[Distributive laws] vector addition and scaling are distributive together with addition of scalars, i.e. for any $\vec{v},\vec{u}\in\Rs[n]$ and $\lambda,\mu\in\Rs$:
+        \begin{align}
+            \lambda\left(\vec{v}+\vec{w}\right) &= \lambda\vec{v} + \lambda\vec{w},\ \text{and}\\ \left(\lambda+\mu\right)\vec{v} &= \lambda\vec{v} + \mu\vec{v}.
+            \label{eq:label}
+        \end{align}
+\end{descitemize}
+
+
+%% !!! CORRECT ISSUE with \cref and example environment !!! %%
+
+% Outline:
+% * Linear algebra on R^n prooved useful (e.g. linear transformations, basis sets, etc.). It would be nice to have similar results for other structures.
+% * To find more structures for which we can derive similar ideas, we first need to overview the fundamental properties of vectors in R^n, and see if there are any other structures with similar properties.
+% * Fundamental properties
+% * Matrices have the same properties! (+elaboration)
+% * Polynomial functions have the same properties! (+elaboration)
+% * Functions have the same properties! (+elaboration)
+% * Using these properties to define a vector space + short discussion.
