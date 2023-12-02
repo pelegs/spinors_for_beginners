@@ -7,107 +7,29 @@
 % Basis sets and change of basis - covarience, contravarience and all that.
 % relevant SE answers: https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-spaces
 
-\newthought{An important aspect of vector spaces}, which is sometimes waved away, is the question of \textit{measurement}: how do we give vectors a sense of magnitude? By \textit{magnitude} I mean a single real number we assign to each vector. Well, there's one obvious way: the norm. Normally\sidenote{pun kind-of intended.} it is either given as is (due to the Pythagorean theorem), or in the case of more abstract vector spaces formalized as the square root of the inner product of a vector with itself, i.e.
-\begin{equation}
-    \vnorm{v} = \sqrt{\inner{\vec{v}}{\vec{v}}}.
-    \label{eq:vector_norm}
-\end{equation}
+\subsection{Measurements and rulers}
+\newthought{Usually, dual vectors are taught} by hitting the students with the definition of a dual space and then analyzing its properties. It's all very abstract and often leaves the students with a constant question in mind: \enquote{why do we care about dual vectors?}
 
-Of course, other so-called \enquote{$p$-norms} are possible and often used:
-\begin{equation}
-    \norm{\vec{v}}_{p} = \left(\abs{v_{1}}^{p}+\abs{v_{2}}^{p} + \dots + \abs{v_{n}}^{p}\right)^{\frac{1}{p}},
-    \label{eq:label}
-\end{equation}
-where $p=2$ is the normal \textit{Euclidean} norm we're used to.
+I would like to take a different approach here: instead of confronting you with the definition and then discuss practical details, I will start with explaining \textit{why} we care about dual vectors in the first place.
 
-However, with the exception of the case $p=1$, these norms are non-linear. And if there's one insight that should be very clear to anyone who went through some university-level mathematics, it is that linear structures are so much easier to deal with than almost anything else\sidenote{that's why linear approximations are so often used all throughout science}.
+Let us begin with discussing rulers\sidenote{The idea for this approach comes from a beautiful answer by \textit{Aloizio Macedo} to \href{https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-space}{a question in the mathematics stack exchange website}.}. A ruler is essentially a geometric object which allows one to measure the \textit{lengths} of different objects by counting the number of graduation lines between the beginning and end of an object.
 
-So instead of using the norm as a measurement, we would ideally like to use some linear function to measure our vectors. For example, let's try to come up with a linear way to measure vectors in $\Rs[3]$: given a vector $\vec{v}$, we can derive a linear map $\phi:\Rs[3]\to\Rs$ as follows:
-\begin{equation}
-    \phi\left(\vec{v}\right) = 3v_{1} - v_{2} + 5v_{3}.
-    \label{eq:linear_map_R3_example}
-\end{equation}
-Let's apply $\phi$ to some vectors and see the results:
-\begin{align*}
-    \colvec{1;0;0} &\to 3\cdot1 -1\cdot0 + 5\cdot0 = 3.\\
-    \colvec{0;1;0} &\to 3\cdot0 -1\cdot1 + 5\cdot0 = -1.\\
-    \colvec{0;0;1} &\to 3\cdot0 -1\cdot0 + 5\cdot1 = 5.\\
-    \colvec{1;-2;-1} &\to 3\cdot1 -1\cdot(-2) + 5\cdot(-1) = 3+2-5=0.\\
-\end{align*}
-We see that using this specific $\phi$ the standard basis vectors are \enquote{measured} to be of different values, and some vectors like $\vec{v}=\colvec{1;-2;-1}$ can measured to be $0$.
-
-A bit of thinking further shows that in fact, \textit{any} linear map of the form $\phi:\Rs[3]\to\Rs$ we can apply to the vectors of $\Rs[3]$ has to be in the following form:
-\begin{equation}
-    \phi\left(\vec{v}\right) = \alpha_{1}v_{1} + \alpha_{2}v_{2} + \alpha_{3}v_{3},
-    \label{eq:general_linear_measure_R3}
-\end{equation}
-where $\alpha_{1},\alpha_{2},\alpha_{3}$ are some real numbers. But this is exactly the definition of the inner product between $\colvec{\alpha_{1};\alpha_{2};\alpha_{3}}$ and $\vec{v}$! So we see that \textit{any} linear measurement on $\Rs[3]$ will take the form ofan inner product with some given vector.
-
-In other words, any vector in $\Rs[3]$ can be used to linearly measure all vectors in $\Rs[3]$ via the inner product, and in this context act as a \textit{functional} on elements of the space. Moreover, any possible linear measurement of vectors in $\Rs[3]$ would be of this form - and thus the space of linear maps of the form $\Rs[3]\to\Rs$ is itself a vector space with the same structure as $\Rs[3]$\sidenote{In fact, \textit{it is} $\Rs[3]$ in any sensible meaning.} and in this context we call it the \textit{dual space} of $\Rs[3]$, and its elements \textit{dual vectors}.
-
-Now, of course choosing $\Rs[3]$ was pretty arbitrary, so let us generalize somewhat the defintions:
-\begin{definition}{Text}{deftext}
-    The dual space of $\Rs[n]$ is the space of all linear maps of the form
-    \begin{equation*}
-        \phi:\Rs[n]\to\Rs,
-    \end{equation*}
-    which can be represented as the inner product between the elements of $\Rs[n]$. 
-
-    We call the elements of the dual space \textit{dual vectors}, and denote them with an asterisk: $\dualvec{v}$.
-\end{definition}
-
-To distinguish between vectors and dual vectors in practice, we represent dual vectors as \textit{row-vectors} instead of the usual \textit{column-vector} for vectors. For example, a dual vector from $\Rs[3]$ will have the form
-\begin{equation}
-    \dualvec{a} = \rowvec{a_{1};a_{2};a_{3}}.
-    \label{eq:dual_vectors_row_form}
-\end{equation}
-
-This way, the action of dual vectors on vectors (as functionals) is clearly seen via writing the inner product: given the dual vector $\dualvec{a}\in\Rs[n]$ and the vector $\vec{v}\in\Rs[n]$, their inner product can be written explicitely as
-\begin{equation}
-    \inner{\dualvec{a}}{\vec{v}} = \GenericRowVec{a} \GenericColVec{v} = a_{1}v_{1} + a_{2}v_{2} + \dots + a_{n}v_{n}.
-    \label{eq:dualvec_vec_inner}
-\end{equation}
-This corresponds well to a product between two matrices, one of dimensions $1\times n$ and the other of dimensions $n\times1$ - which will become handy when we discuss \textit{multi-linear forms}\sidenote{yes, these things get more complicated\ldots}.
-
-\begin{note}{Product order}{}
-    Using this formulation we must always multiply the dual vector and the vector such that the dual vector is \textit{on the left}. Otherwise, we should expect to get a matrix of dimensions $n\times n$.
-\end{note}
-
-A way to visualize dual vectors is using \textit{stacks}: since dual vectors have the same representation as \enquote{usual} vectors, they define a direction in a geometrical $n$-dimensional space. Since each direction in $\Rs[n]$ has a single corresponding $n-1$-dimensional hyperplane, to differentiate vectors and dual vectors we visualize dual vectors using the hyperplanes.
-
-This is a bit abstract, so let us look at our two favourite examples: $\Rs[2]$ and $\Rs[3]$. In $\Rs[2]$ the $n-1$-dimensional hyperplanes are simply lines (since $2-1=1$), which \enquote{stack} on top of each other in the direction of the dual vector they represent. See \cref{fig:2d_stacks_1,fig:2d_stacks_2} for a graphical representation.
-
-\begin{marginfigure}
+\begin{figure}
     \begin{center}
         \begin{tikzpicture}
-            \begin{axis}[
-                xynogrid,
-                width=6cm, height=6cm,
-            ]
-            \foreach \dy in {-5,...,5}{
-                \addplot[hyperplane1D={xpurple}] {-x+2*\dy};
-            }
-            \draw[vector={xpurple!75!black}, thick] (0,0) -- (1.2,1.2);
-            \end{axis}
+            \draw[thick] (0.5,0) rectangle (10,1.25);
+            \foreach \x [count=\k from 0] in {1,2,...,9} 
+                \draw[thick] (\x, 1.25) -- ++(0.0,-0.5) node[below] (g\k) {$\k$};
+            \foreach \y in {1.5,2.5,...,8.5} 
+                \draw[thick] (\y, 1.25) -- ++(0.0,-0.4);
+            \foreach \z in {1.1,1.2,...,8.9} 
+                \draw[thick] (\z, 1.25) -- ++(0.0,-0.25);
+            \node[below of=g0, font=\tiny, yshift=20] {unit};
+            \draw[thick, densely dashed, black!50] (3.5,1.5) -- ++(0,-0.25);
+            \draw[thick, densely dashed, black!50] (6.5,1.5) -- ++(0,-0.25);
+            \draw[vector={xred}] (3.5,1.5) -- ++(3,0);
         \end{tikzpicture}
     \end{center}
-    \caption{Graphical representation of the dual vector $\dualvec{a}=\rowvec{1;1}$. The purple lines are 1-dimensional hyperplanes, with one intersecting the origin. The small arrow shows the vector $\vec{v}=\colvec{1;1}$ which is orthogonal to the hyperplanes.}
-    \label{fig:2d_stacks_1}
-\end{marginfigure}
-\begin{marginfigure}
-    \begin{center}
-        \begin{tikzpicture}
-            \begin{axis}[
-                xynogrid,
-                width=6cm, height=6cm,
-            ]
-            \foreach \dy in {-6,...,6}{
-                \addplot[hyperplane1D={xblue}] {5/6*\dy};
-            }
-            \draw[vector={xblue!75!black}, thick] (1,0) -- (1,4);
-            \end{axis}
-        \end{tikzpicture}
-    \end{center}
-    \caption{A more \enquote{dense} stack oriented in parallel to the $x$-axis. This represents the dual vector $\dualvec{b}=\rowvec{}$, which has a greater magnitude than $\dualvec{a}$.}
-    \label{fig:2d_stacks_2}
-\end{marginfigure}
+    \caption{Measuring a vector using a ruler: the start of the vector sits at $2.5$ units, while its head is at $5.5$ units. Therefore we say that the vector is $5.5-2.5=3$ units in length.}
+    \label{fig:ruler_measure}
+\end{figure}
