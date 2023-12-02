@@ -93,8 +93,17 @@
 %%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{tikz, tikz-3dplot}
-\usetikzlibrary{calc, shapes}
+\usetikzlibrary{calc, shapes, intersections}
 \tikzset{
   %% Styles %%
   vector/.style = {#1, ultra thick, ->, >=stealth, cap=round},
+}
+\newcommand{\rulerTwoD}[6]{
+  \pgfmathsetmacro{\Vx}{#1};
+  \pgfmathsetmacro{\Vy}{#2};
+  \pgfmathsetmacro{\a}{#3};
+  \pgfmathsetmacro{\scale}{3*\a/sqrt(\Vx*\Vx+\Vy*\Vy)};
+  \foreach \b in {-#4,...,#4}
+    \addplot[very thick, #5] {-(\Vx/\Vy)*x+(\b/\a)};
+  \draw[vector={#6}] (0,0) -- (\Vx*\scale,\Vy*\scale);
 }
