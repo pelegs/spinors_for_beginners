@@ -12,12 +12,12 @@
 
 I would like to take a different approach here: instead of confronting you with the definition and then discuss practical details, I will start with explaining \textit{why} we care about dual vectors in the first place.
 
-Let us begin with discussing rulers\sidenote{The idea for this approach comes from a beautiful answer by \textit{Aloizio Macedo} to \href{https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-space}{a question in the mathematics stack exchange website}.}. A ruler is essentially a geometric object which allows one to measure the \textit{lengths} of different objects by counting the number of graduation lines between the beginning and end of an object.
+Let us begin with discussing rulers\sidenote{The idea for this approach comes from a beautiful answer by \textit{Aloizio Macedo} to \href{https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-space}{a question in the mathematics stack exchange website}.}. A ruler is essentially a geometric object which allows one to measure the \textit{lengths} of different objects by counting the number of graduation lines between the beginning and end of an object (\cref{fig:ruler_measure}). Of course the geometric objects we use normally are vectors.
 
 \begin{figure}
     \begin{center}
         \begin{tikzpicture}
-            \draw[thick] (0.5,0) rectangle (10,1.25);
+            \draw[thick, fill=black!5] (0.5,0) rectangle (10,1.25);
             \foreach \x [count=\k from 0] in {1,2,...,9} 
                 \draw[thick] (\x, 1.25) -- ++(0.0,-0.5) node[below] (g\k) {$\k$};
             \foreach \y in {1.5,2.5,...,8.5} 
@@ -32,4 +32,49 @@ Let us begin with discussing rulers\sidenote{The idea for this approach comes fr
     \end{center}
     \caption{Measuring a vector using a ruler: the start of the vector sits at $2.5$ units, while its head is at $5.5$ units. Therefore we say that the vector is $5.5-2.5=3$ units in length.}
     \label{fig:ruler_measure}
+\end{figure}
+
+Of course, we can have rulers with different distances between consecutive graduation (i.e. they can be more or less \enquote{dense}), which would yield different measurements for the same vectors. Another property a ruler has its \textit{orientation}: while it is most common to measure by placing a ruler parallel to the distance we wish to measure, it is not \textit{strictly} necessary. If we imagine that the graduation on a ruler are infinitely long and there are infinitely many of them in both directions, we can easily measure vectors that do not align with the ruler (\cref{fig:ruler_measure_at_angle}).
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}
+            \begin{axis}[
+                xynogrid,
+                width=7cm, height=7cm,
+                xmin=-2, xmax=4,
+                ymin=-2, ymax=4,
+                ticks=none,
+                axis on top,
+            ]
+            \pgfmathsetmacro{\Vx}{2};
+            \pgfmathsetmacro{\Vy}{3};
+            \pgfmathsetmacro{\a}{0.8};
+            \pgfmathsetmacro{\scale}{\a/sqrt(\Vx*\Vx+\Vy*\Vy)};
+            \foreach \b in {-5,...,5}
+                \addplot[ultra thick, xblue!25] {-(\Vx/\Vy)*x+(\b/\a)};
+            % \draw[vector={xblue!50!black}] (0,0) -- (\Vx*\scale,\Vy*\scale);
+            \draw[vector={xred}] (0,0) -- (0.75,2.25);
+            \draw[vector={xdarkgreen}] (0,0) -- (4,-1.4);
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{Measuring two vectors at an angle to the graduation of some ruler. Here the ruler is represented by infinitely long graduations line in blue. Note that although the green vector appears longer than the red vector, it is measured by the ruler to be about $1$ unit long, while the red vector is measured to be a bit more than $2$ units in length.}
+    \label{fig:ruler_measure_at_angle}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+        \tdplotsetmaincoords{70}{110}
+        \begin{tikzpicture}[tdplot_main_coords]
+            \pgfmathsetmacro{\a}{3}
+            \pgfmathsetmacro{\b}{\a+0.5}
+            \foreach \z in {-2,-1,...,2}
+                \draw[very thick, xblue, fill=xblue, opacity=0.5] (-\a,-\a,\z) -- (-\a,\a,\z) -- (\a,\a,\z) -- (\a,-\a,\z) -- cycle;
+            \draw[vector={xdarkblue}] (-\b,\b,-2) -- (-\b,\b,2);
+            \draw[vector={xred}] (0,0,-2) -- (\b,0,2);
+        \end{tikzpicture}
+    \end{center}
+    \caption{Measuring two vectors at an angle to the graduation of some ruler. Here the ruler is represented by infinitely long graduations line in blue. Note that although the green vector appears longer than the red vector, it is measured by the ruler to be about $1$ unit long, while the red vector is measured to be a bit more than $2$ units in length.}
+    \label{fig:ruler_measure_at_angle}
 \end{figure}
