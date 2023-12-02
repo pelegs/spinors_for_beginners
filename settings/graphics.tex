@@ -105,5 +105,4 @@
   \pgfmathsetmacro{\scale}{3*\a/sqrt(\Vx*\Vx+\Vy*\Vy)};
   \foreach \b in {-#4,...,#4}
     \addplot[very thick, #5] {-(\Vx/\Vy)*x+(\b/\a)};
-  \draw[vector={#6}] (0,0) -- (\Vx*\scale,\Vy*\scale);
 }
