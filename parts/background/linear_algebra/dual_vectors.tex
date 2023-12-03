@@ -7,143 +7,30 @@
 % Basis sets and change of basis - covarience, contravarience and all that.
 % relevant SE answers: https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-spaces
 
-\subsection{Measurements and rulers\\(or: why should I care about dual vectors?)}
-\newthought{Usually, dual vectors are taught} by hitting the students with the definition of a dual space and then analyzing its properties. It's all very abstract and often leaves the students with a constant question in mind: \enquote{\textit{why do we care about dual vectors?}}.
-I would like to take a different approach here: instead of confronting you with the definition and then discuss practical details, I will start with explaining \textit{why} we care about dual vectors in the first place.
-
-Let us begin with discussing rulers\sidenote{The idea for this approach comes from a beautiful answer by \textit{Aloizio Macedo} to \href{https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-space}{a question in the mathematics stack exchange website}.}. A ruler is essentially a geometric measuring tool which allows us to measure the \textit{lengths} of different objects by counting the number of graduation lines between the beginning and end of an object (\cref{fig:ruler_measure}). Of course in linear algebra, the geometric objects we measure using rulers are vectors.
-
-\begin{figure}
-    \begin{center}
-        \begin{tikzpicture}
-            \draw[thick, fill=black!5] (0.5,0) rectangle (10,1.25);
-            \foreach \x [count=\k from 0] in {1,2,...,9} 
-                \draw[thick] (\x, 1.25) -- ++(0.0,-0.5) node[below] (g\k) {$\k$};
-            \foreach \y in {1.5,2.5,...,8.5} 
-                \draw[thick] (\y, 1.25) -- ++(0.0,-0.4);
-            \foreach \z in {1.1,1.2,...,8.9} 
-                \draw[thick] (\z, 1.25) -- ++(0.0,-0.25);
-            \node[below of=g0, font=\tiny, yshift=20] {unit};
-            \draw[thick, densely dashed, black!50] (3.5,1.5) -- ++(0,-0.25);
-            \draw[thick, densely dashed, black!50] (6.5,1.5) -- ++(0,-0.25);
-            \draw[vector={xred}] (3.5,1.5) -- ++(3,0);
-            \draw[ultra thick, dashed, xred] (3.5,1.25) -- ++(3,0);
-        \end{tikzpicture}
-    \end{center}
-    \caption{Measuring a vector using a ruler: the start of the vector sits at $2.5$ units, while its head is at $5.5$ units. Therefore we say that the vector is $5.5-2.5=3$ units in length.}
-    \label{fig:ruler_measure}
-\end{figure}
-
-In $\Rs[2]$ rulers can be represented as follows: the $0$-graduation, which I denote as $L_{0}$ here, is represented by a line going through the origin with a direction orthogonal to the that of the ruler. The rest of the graduation marks are then drawn as the lines that are parallel to $L_{0}$ such that they are spaced equaly apart (see \cref{fig:rulers_2D}).
-
-\begin{figure}
+\subsection{Linear measurements and rulers\\(or: why should I care about dual vectors?)}
+\begin{marginfigure}
     \begin{center}
         \begin{tikzpicture}
             \begin{axis}[
-                xynogrid,
-                width=6cm, height=6cm,
-                xmin=-4, xmax=4,
-                ymin=-4, ymax=4,
-                ticks=none,
-                axis on top,
-                name=leftGraph,
+                xyplane,
+                width=7cm, height=7cm,
             ]
-            \rulerTwoD{1}{3}{.55}{3}{xblue}{blue!75!black}
-
-            \end{axis}
-            \begin{axis}[
-                xynogrid,
-                width=6cm, height=6cm,
-                xmin=-4, xmax=4,
-                ymin=-4, ymax=4,
-                ticks=none,
-                axis on top,
-                name=rightGraph,
-                at={($(leftGraph.south east)+(1.5cm,0)$)},
-            ]
-            \rulerTwoD{-2}{1}{.6}{7}{xorange}{orange!75!black}
+            % \draw[vector={xblue}] (0,0) -- (2,-3);
+            \addplot[name path=A, function={xred}] {6*exp(-x^2/2)-2};
+            \addplot[name path=B, function={xblue}] {5/(1+exp(-x))};
+            \addplot[xpurple, fill opacity=0.2] fill between[of=A and B, soft clip={domain=.5:5}];
+            \addplot[xgreen, fill opacity=0.2] fill between[of=A and B, soft clip={domain=-1:0.5}];
             \end{axis}
         \end{tikzpicture}
     \end{center}
-    \caption{Two rulers in $\Rs[2]$, each represented as the infinite set of lines which are parallel to the zero graduation line $L_{0}$, and are equaly spaced apart.}
-    \label{fig:rulers_2D}
-\end{figure}
+    \caption{Test.}
+    \label{fig:test}
+\end{marginfigure}
 
-Using this representation, each ruler is uniquely described using two properties: an orientation and the distance between its graduation lines. These two properties essentially correspond to a vector in $\Rs[2]$. However, while a ruler can be uniquely described by a vector in $\Rs[2]$, it is not the same as a geometric vector! It is a ruler. One way of keeping the difference between the two types of vectors is by denoting the graduations using their \enquote{frequency} per unit length instead of their distance. That way, the greater the frequency (i.e. the smaller the distance between the graduations) - the greater the length of the vector representing the ruler.
 
-In $\Rs[3]$ the graduations are represented in the same way as in $\Rs[n]$, except that \textit{planes} are used instead of line (\cref{fig:rulers_3D}). The planes together are also called a \enquote{stack}.
+To be written:
 
-\begin{figure}
-    \begin{center}
-        \tdplotsetmaincoords{50}{110}
-        \begin{tikzpicture}[tdplot_main_coords, rotate=0, scale=0.85]
-            \pgfmathsetmacro{\a}{1.5}
-            \pgfmathsetmacro{\b}{\a+0.5}
-            \foreach \z in {-2,-1.25,...,2}
-                \draw[very thick, xblue, fill=xblue, opacity=0.5] (-\a,-\a,\z) -- (-\a,\a,\z) -- (\a,\a,\z) -- (\a,-\a,\z) -- cycle;
-            \draw[vector={xdarkblue}] (-\b,\b,-1.5) -- (-\b,\b,1.5);
-        \end{tikzpicture}
-        \hfill
-        \tdplotsetmaincoords{40}{120}
-        \begin{tikzpicture}[tdplot_main_coords, rotate=105, scale=0.85]
-            \pgfmathsetmacro{\a}{1.5}
-            \pgfmathsetmacro{\b}{\a+0.5}
-            \foreach \z in {-3,-1.5,...,3}
-                \draw[very thick, xdarkgreen, fill=xgreen, opacity=0.5] (-\a,-\a,\z) -- (-\a,\a,\z) -- (\a,\a,\z) -- (\a,-\a,\z) -- cycle;
-            \draw[vector={xdarkgreen}] (-\b,\b,-1) -- (-\b,\b,1);
-        \end{tikzpicture}
-    \end{center}
-    \caption{Representation of rulers in $\Rs[3]$; as with the lines in the case of $\Rs[2]$, I added a vector showing the direction and density of the graduation marks. Note how the planes (stacks) in blue are more densely spaced compared to the green planes, and therefore the vector representing that respective ruler is longer compared to the vector representing the ruler in green.}
-    \label{fig:rulers_3D}
-\end{figure}
-
-In general, a ruler in $\Rs[n]$ is represented by a set of parallel and equally spaced \textit{hyperplanes} of $(n-1)$-dimensions. 
-
-Using a ruler to measure a vector is done by projecting the vector onto the ruler (\cref{fig:vector_projection_on_ruler}): given a ruler, vectors are measured as greater the more they are pointing at a parallel direction to the ruler (and, of course, the longer they are in general).
-
-\begin{figure}
-    \begin{center}
-        \begin{tikzpicture}[rotate=20]
-            \draw[thick, fill=black!5] (0.5,0) rectangle (10,1.25);
-            \foreach \x [count=\k from 0] in {1,2,...,9} 
-                \draw[thick] (\x, 1.25) -- ++(0.0,-0.5) node[below] (g\k) {$\k$};
-            \foreach \y in {1.5,2.5,...,8.5} 
-                \draw[thick] (\y, 1.25) -- ++(0.0,-0.4);
-            \foreach \z in {1.1,1.2,...,8.9} 
-                \draw[thick] (\z, 1.25) -- ++(0.0,-0.25);
-            \node[below of=g0, font=\tiny, yshift=20] {unit};
-            \draw[thick, densely dashed, black!50] (3.5,1.5) -- ++(0,-0.25);
-            \draw[thick, densely dashed, black!50] (6.5,3.5) -- ++(0,-2.25);
-            \draw[vector={xpurple}] (3.5,1.5) -- ++(3,2);
-            \draw[ultra thick, dashed, xpurple] (3.5,1.25) -- ++(3,0);
-        \end{tikzpicture}
-    \end{center}
-    \caption{Projecting a vector onto a ruler in $\Rs[2]$.}
-    \label{fig:vector_projection_on_ruler}
-\end{figure}
-
-In linear algebra a projection is measured using the \textit{inner product}, and that is exactly what we use to measure vectors using a given ruler: we simple calculate the inner product of the two quantities.
-
-By the way, you probably already guessed that rulers are just another name for \textit{dual vectors}. In this book I denote them using an asterisk: $\dualvec{a},\ \dualvec{v}$, etc.
-
-In any case, dual vectors are written as row vectors so they can be distinguished from vectors in actual calculations. That way, the inner product of a dual vector and a vector is consistent with the rules of matrix multiplication: a dual vector is interpreted as a matrix with dimensions $1\times n$ (since it has one row and $n$ columns), while a vector is interpreted as a matrix with dimensions $n\times 1$. Their product is therefore has dimension $1\times 1$, neatly fitting the idea of the inner product generating scalars.
-
-The most general form of an inner product between a dual vector and a vector in $\Rs[n]$ has the following form:
-\begin{align}
-    \inner{\dualvec{\alpha}}{\vec{v}} &= \GenericRowVec{\alpha} \GenericColVec{v}\\
-                                      &= \alpha_{1}v_{1} + \alpha_{2}v_{2} + \dots + \alpha_{n}v_{n}.
-    \label{eq:dualvec_vec_as_inner_prod}
-\end{align}
-
-This is in fact also the most generic for of a linear transformation $\phi:\Rs[n]\to\Rs$ acting on a vector in $\Rs[n]$. Indeed, dual vectors are usually interpreted as \textit{functionals}, taking vectors as arguments. In that interpretation, \cref{eq:dualvec_vec_as_inner_prod} can be written as
-\begin{equation}
-    \dualvec{\alpha}\left(\vec{v}\right) = \alpha_{1}v_{1} + \alpha_{2}v_{2} + \dots + \alpha_{n}v_{n},
-    \label{eq:dualvec_vec_as_functional}
-\end{equation}
-and dual vectors are usually called \textit{1-forms}.
-
-\subsection{Some formalism}
-To be written: 
+\subsection{Introducing some formalism}
 \begin{enumerate}
     \item Dual vectors form a vector space $\dualspace{V}$.
     \item Formal definition of dual spaces.
@@ -151,8 +38,31 @@ To be written:
 \end{enumerate}
 
 \subsection{Basis sets and coordinate transformations}
-To be written:
 \begin{enumerate}
     \item Dual basis: converting from a basis set in $V$ to its dual in $\dualspace{V}$.
     \item Covariance of dual vectors basis change vs. contra-varience of vectors.
 \end{enumerate}
+
+% \begin{figure}
+%     \begin{center}
+%         \tdplotsetmaincoords{50}{110}
+%         \begin{tikzpicture}[tdplot_main_coords, rotate=0, scale=0.85]
+%             \pgfmathsetmacro{\a}{1.5}
+%             \pgfmathsetmacro{\b}{\a+0.5}
+%             \foreach \z in {-2,-1.25,...,2}
+%                 \draw[very thick, xblue, fill=xblue, opacity=0.5] (-\a,-\a,\z) -- (-\a,\a,\z) -- (\a,\a,\z) -- (\a,-\a,\z) -- cycle;
+%             \draw[vector={xdarkblue}] (-\b,\b,-1.5) -- (-\b,\b,1.5);
+%         \end{tikzpicture}
+%         \hfill
+%         \tdplotsetmaincoords{40}{120}
+%         \begin{tikzpicture}[tdplot_main_coords, rotate=105, scale=0.85]
+%             \pgfmathsetmacro{\a}{1.5}
+%             \pgfmathsetmacro{\b}{\a+0.5}
+%             \foreach \z in {-3,-1.5,...,3}
+%                 \draw[very thick, xdarkgreen, fill=xgreen, opacity=0.5] (-\a,-\a,\z) -- (-\a,\a,\z) -- (\a,\a,\z) -- (\a,-\a,\z) -- cycle;
+%             \draw[vector={xdarkgreen}] (-\b,\b,-1) -- (-\b,\b,1);
+%         \end{tikzpicture}
+%     \end{center}
+%     \caption{Representation of rulers in $\Rs[3]$; as with the lines in the case of $\Rs[2]$, I added a vector showing the direction and density of the graduation marks. Note how the planes (stacks) in blue are more densely spaced compared to the green planes, and therefore the vector representing that respective ruler is longer compared to the vector representing the ruler in green.}
+%     \label{fig:rulers_3D}
+% \end{figure}

@@ -48,7 +48,7 @@
 %%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{pgfplots}
-% \usepgfplotslibrary{fillbetween, colormaps, colorbrewer, patchplots}
+\usepgfplotslibrary{fillbetween}%, colormaps, colorbrewer, patchplots}
 \pgfplotsset{
   compat=1.16,
   %% Styles %%
@@ -59,13 +59,12 @@
     ylabel=$y$,
     every axis x label/.style={at={(ticklabel* cs:1.02)}, anchor=west},
     every axis y label/.style={at={(ticklabel* cs:1.02)}, anchor=south},
-    axis line style={stealth-stealth, thick},
+    axis line style={stealth-stealth, very thick, black!65},
     label style={font=\large},
     tick label style={font=\large},
     samples=100,
     xmin=-5, xmax=5,
     ymin=-5, ymax=5,
-    domain=-5:5,
     grid=both,
     major grid style={black!15},
     minor grid style={black!10},
@@ -86,6 +85,13 @@
     major grid style = {draw=black!0},
   },
   hyperplane1D/.style = {thick, #1},
+  %% Function plots
+  function/.style = {
+    ultra thick, draw=#1,
+  },
+  filledfunction/.style = {
+    function={#1}, opacity=1, fill=#1, fill opacity=0.3,
+  },
 }
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -96,7 +102,7 @@
 \usetikzlibrary{calc, shapes, intersections}
 \tikzset{
   %% Styles %%
-  vector/.style = {#1, ultra thick, ->, >=stealth, cap=round},
+  vector/.style = {#1, ultra thick, -stealth, cap=round},
   pics/ruler/.style n args = {5}{
       code = {
           % Parameters
