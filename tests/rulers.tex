@@ -1,0 +1,45 @@
+\documentclass{standalone}
+\usepackage{tikz, calc}
+
+\tikzset{
+    pics/ruler/.style n args = {5}{
+        code = {
+            % Parameters
+            \pgfmathsetmacro{\width}{#1}
+            \pgfmathsetmacro{\height}{#2}
+            \pgfmathsetmacro{\yMaj}{\height/3}
+            \pgfmathsetmacro{\yMid}{\yMaj*0.7}
+            \pgfmathsetmacro{\yMin}{\yMaj*0.5}
+            \pgfmathsetmacro{\dxMaj}{#3}
+            \pgfmathsetmacro{\dxMin}{\dxMaj*0.1}
+            \pgfmathsetmacro{\maxMajGrad}{ceil((\width-2)/\dxMaj)}
+            \pgfmathsetmacro{\maxMidGrad}{\maxMajGrad-0.5}
+            \pgfmathsetmacro{\maxMinGrad}{(\maxMajGrad-1)*10}
+
+            % Main rectangle
+            \draw[thick, fill=#4] (0,0) rectangle (\width,\height);
+
+            % Graduations
+            % Major
+            \foreach \x [count=\k from 0] in {1,2,...,\maxMajGrad}
+                \draw[thick] ({\x*\dxMaj}, \height) -- ++(0.0,-\yMaj) node[below] (g\k) {$\k$};
+            % Middle
+            \foreach \y in {1.5,2.5,...,\maxMidGrad}
+                \draw[thick] ({\y*\dxMaj}, \height) -- ++(0.0,-\yMid);
+            % Minor
+            \foreach \z in {1,2,...,\maxMinGrad} 
+                \draw[thin] ({\dxMaj+\z*\dxMin}, \height) -- ++(0.0,-\yMin);
+
+            % units label
+            \node[below of=g0, font=\small, yshift={11*\height}] {#5};
+        }
+    }
+}
+
+\begin{document}
+\begin{tikzpicture}
+    \path pic[rotate=25, transform shape] (a) {ruler={17}{1.5}{2}{blue!7.5}{$R_{1}$}};
+    \path[below right of= a, xshift=4cm] pic[rotate=65, transform shape] {ruler={11}{1.5}{0.75}{red!7.5}{$R_{2}$}};
+    \path[above left of= a, xshift=2cm, yshift=2cm] pic[rotate=85, transform shape] {ruler={11}{1.5}{1.05}{green!7.5}{$R_{3}$}};
+\end{tikzpicture}
+\end{document}

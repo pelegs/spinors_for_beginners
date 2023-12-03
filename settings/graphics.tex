@@ -97,6 +97,38 @@
 \tikzset{
   %% Styles %%
   vector/.style = {#1, ultra thick, ->, >=stealth, cap=round},
+  pics/ruler/.style n args = {5}{
+      code = {
+          % Parameters
+          \pgfmathsetmacro{\width}{#1}
+          \pgfmathsetmacro{\height}{#2}
+          \pgfmathsetmacro{\yMaj}{\height/3}
+          \pgfmathsetmacro{\yMid}{\yMaj*0.7}
+          \pgfmathsetmacro{\yMin}{\yMaj*0.5}
+          \pgfmathsetmacro{\dxMaj}{#3}
+          \pgfmathsetmacro{\dxMin}{\dxMaj*0.1}
+          \pgfmathsetmacro{\maxMajGrad}{ceil((\width-2)/\dxMaj)}
+          \pgfmathsetmacro{\maxMidGrad}{\maxMajGrad-0.5}
+          \pgfmathsetmacro{\maxMinGrad}{(\maxMajGrad-1)*10}
+
+          % Main rectangle
+          \draw[thick, fill=#4] (0,0) rectangle (\width,\height);
+
+          % Graduations
+          % Major
+          \foreach \x [count=\k from 0] in {1,2,...,\maxMajGrad}
+              \draw[thick] ({\x*\dxMaj}, \height) -- ++(0.0,-\yMaj) node[below] (g\k) {$\k$};
+          % Middle
+          \foreach \y in {1.5,2.5,...,\maxMidGrad}
+              \draw[thick] ({\y*\dxMaj}, \height) -- ++(0.0,-\yMid);
+          % Minor
+          \foreach \z in {1,2,...,\maxMinGrad} 
+              \draw[thin] ({\dxMaj+\z*\dxMin}, \height) -- ++(0.0,-\yMin);
+
+          % units label
+          \node[below of=g0, font=\small, yshift={11*\height}] {#5};
+      }
+  }
 }
 \newcommand{\rulerTwoD}[6]{
   \pgfmathsetmacro{\Vx}{#1};
