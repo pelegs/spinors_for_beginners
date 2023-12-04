@@ -27,6 +27,20 @@
     \label{fig:test}
 \end{marginfigure}
 
+\lipsum[1-2]
+
+\begin{figure}
+    \begin{center}
+        \begin{tikzpicture}
+            \path pic[rotate=25, transform shape] (A) {ruler={12}{1.5}{2}{xred!15}{$R_{1}$}};
+            \path[below of=A] pic[rotate=78, transform shape] {ruler={7}{1.5}{0.8}{xblue!15}{$R_{2}$}};
+            \path[on background layer, below of=A, anchor=center, yshift=8cm] pic[rotate=-60, transform shape] {ruler={11}{1.5}{1.2}{xgreen!15}{$R_{3}$}};
+        \end{tikzpicture}
+    \end{center}
+    \caption{Some rulers.}
+    \label{fig:}
+\end{figure}
+
 
 To be written:
 
