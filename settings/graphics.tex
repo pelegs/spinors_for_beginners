@@ -99,7 +99,7 @@
 %%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{tikz, tikz-3dplot}
-\usetikzlibrary{calc, shapes, intersections, backgrounds}
+\usetikzlibrary{calc, shapes, intersections, backgrounds, decorations.markings}
 \tikzset{
   %% Styles %%
   vector/.style = {#1, ultra thick, -stealth, cap=round},
@@ -134,6 +134,19 @@
           % units label
           \node[below of=g0, font=\small, yshift={11*\height}] {#5};
       }
+  },
+  arcnode/.style 2 args={                
+    decoration={
+      raise=#1,             
+      markings,   
+      mark=at position 0.5 with { 
+        \node[inner sep=0] {#2};
+      }
+    },
+    postaction={decorate}
+  },
+  perpline/.style = {
+    very thick, densely dotted, draw=#1
   }
 }
 \newcommand{\rulerTwoD}[6]{

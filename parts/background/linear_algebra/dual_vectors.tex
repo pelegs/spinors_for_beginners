@@ -8,41 +8,60 @@
 % relevant SE answers: https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-spaces
 
 \subsection{Linear measurements and rulers\\(or: why should I care about dual vectors?)}
+\newthought{Frequently in linear algebra} we want to measure vectors. A measure in this context is a way to assign each vector a real number which somehow reflects its properties (i.e. direction and/or magnitude). Mathematically, we are looking for a function $\phi:\Rs[n]\to\Rs$ - we feed it a vector, and it returns some measurement.
+
+One common way to measure vectors is using the norm: the norm of a vector in $\Rs[n]$ using the standard basis set $\eb{1},\eb{2},\dots,\eb{n}$ is given by
+\begin{equation}
+    \vnorm{v} = \sqrt{v_{1}^{2}+v_{2}+\dots+v_{n}^{2}},
+    \label{eq:std_norm}
+\end{equation}
+where the numbers $v_{1},v_{2},\dots,v_{n}$ are the components in each of the respective basis vectors.
+
+While the norm does tell us something useful about a vector, it has two drawbacks: it doesn't tell us anything about the vector's orientation in space, and even worse - it is not linear. We can try and simplify the calculation of the norm by dropping the square root and calculating the \textit{square norm}, but that too isn't linear, nor does it tell us anything about the vector's orientation.
+
+Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing more than a set of graduation lines with an orientation in space (\cref{fig:rulers}). We can therefore represent a ruler using a vector: the magnitude of the vector is the frequency of the graduation lines, while its direction is the direction of the ruler (which is orthogonal to the graduation lines).
+
 \begin{marginfigure}
     \begin{center}
-        \begin{tikzpicture}
-            \begin{axis}[
-                xyplane,
-                width=7cm, height=7cm,
-            ]
-            % \draw[vector={xblue}] (0,0) -- (2,-3);
-            \addplot[name path=A, function={xred}] {6*exp(-x^2/2)-2};
-            \addplot[name path=B, function={xblue}] {5/(1+exp(-x))};
-            \addplot[xpurple, fill opacity=0.2] fill between[of=A and B, soft clip={domain=.5:5}];
-            \addplot[xgreen, fill opacity=0.2] fill between[of=A and B, soft clip={domain=-1:0.5}];
-            \end{axis}
+        \begin{tikzpicture}[scale=0.55]
+            \path pic[rotate=25, transform shape] (A) {ruler={10}{1.5}{2}{xred!15}{$R_{1}$}};
+            \path[below of=A.south west, xshift=4cm, yshift=-2cm] pic[rotate=55, transform shape] {ruler={7}{1.5}{0.8}{xblue!15}{$R_{2}$}};
+            \path[on background layer, below of=A, anchor=center, yshift=4cm] pic[rotate=-60, transform shape] {ruler={8}{1.5}{1.0}{xgreen!15}{$R_{3}$}};
         \end{tikzpicture}
     \end{center}
-    \caption{Test.}
-    \label{fig:test}
+    \caption{Three rulers, $R_{1},R_{2},R_{3}$, each with its own orientation and frequency of graduation lines.}
+    \label{fig:rulers}
 \end{marginfigure}
 
-\lipsum[1-2]
+Now, we usually rotate rulers to align with the orientation of the magnitude we wish to measure - however here we want our rulers to also measure orientation. Therefore, instead of rotating the ruler to align with a vector we wish to measure, we \textit{project} the vector on the ruler and then take our measurement.
+
+\begin{marginfigure}
+    \begin{center}
+        \begin{tikzpicture}[scale=0.55]
+            \draw[perpline={black!40}] (2,3) -- ++(0.25,-1);
+            \draw[perpline={black!40}] (6,5) -- ++(0.5,-2);
+            \path pic[rotate=15, transform shape] (A) {ruler={10}{1.5}{1}{black!15}{$R_{1}$}};
+            \draw[line width=1mm, xred, opacity=0.5] (2.25,2.05) -- (6.5,3.155);
+            \draw[vector={xred}] (2,3) -- ++(4,2) node[midway, above] {$\vec{v}$};
+        \end{tikzpicture}
+    \end{center}
+    \caption{Measuring a vector using a ruler by projecting the vector onto the ruler. The result of the projection is drawn as a red line on the ruler.}
+    \label{fig:rulers}
+\end{marginfigure}
 
 \begin{figure}
     \begin{center}
         \begin{tikzpicture}
-            \path pic[rotate=25, transform shape] (A) {ruler={12}{1.5}{2}{xred!15}{$R_{1}$}};
-            \path[below of=A] pic[rotate=78, transform shape] {ruler={7}{1.5}{0.8}{xblue!15}{$R_{2}$}};
-            \path[on background layer, below of=A, anchor=center, yshift=8cm] pic[rotate=-60, transform shape] {ruler={11}{1.5}{1.2}{xgreen!15}{$R_{3}$}};
+            \begin{axis}[
+                xynogrid,
+            ]
+            \end{axis}
         \end{tikzpicture}
     \end{center}
-    \caption{Some rulers.}
-    \label{fig:}
+    \caption{}
+    \label{fig:rulers_as_lines}
 \end{figure}
 
-
-To be written:
 
 \subsection{Introducing some formalism}
 \begin{enumerate}
@@ -56,6 +75,55 @@ To be written:
     \item Dual basis: converting from a basis set in $V$ to its dual in $\dualspace{V}$.
     \item Covariance of dual vectors basis change vs. contra-varience of vectors.
 \end{enumerate}
+% ---------------------------------------------------------------- %
+% STUFF I MIGHT NEED LATER...
+%
+% \begin{marginfigure}
+%     \begin{center}
+%         \begin{tikzpicture}
+%             \begin{axis}[
+%                 xyplane,
+%                 width=7cm, height=7cm,
+%             ]
+%             % \draw[vector={xblue}] (0,0) -- (2,-3);
+%             \addplot[name path=A, function={xred}] {6*exp(-x^2/2)-2};
+%             \addplot[name path=B, function={xblue}] {5/(1+exp(-x))};
+%             \addplot[xpurple, fill opacity=0.2] fill between[of=A and B, soft clip={domain=.5:5}];
+%             \addplot[xgreen, fill opacity=0.2] fill between[of=A and B, soft clip={domain=-1:0.5}];
+%             \end{axis}
+%         \end{tikzpicture}
+%     \end{center}
+%     \caption{Drawing functions.}
+%     \label{fig:funcs_test}
+% \end{marginfigure}
+
+% \begin{marginfigure}
+%     \begin{center}
+%         \begin{tikzpicture}
+%             \begin{axis}[
+%                 xyplane,
+%                 width=7cm, height=7cm,
+%             ]
+%                 \pgfmathsetmacro{\ax}{3}
+%                 \pgfmathsetmacro{\ay}{0.5}
+%                 \pgfmathsetmacro{\bx}{-2}
+%                 \pgfmathsetmacro{\by}{4}
+%                 \pgfmathsetmacro{\tha}{atan2(\ay,\ax)}
+%                 \pgfmathsetmacro{\thb}{atan2(\by,\bx)}
+%                 \pgfmathsetmacro{\angL}{1.75}
+%                 \coordinate (a) at (axis direction cs:\ax,\ay);
+%                 \coordinate (b) at (axis direction cs:\bx,\by);
+%
+%                 % Draw
+%                 \draw[ultra thick, dashed, xgreen, fill=xgreen, fill opacity=0.25, arcnode={6}{$\theta$}, text opacity=1] (0,0) -- ({\angL*cos(\tha)},{\angL*sin(\tha)}) arc (\tha:\thb:\angL) -- cycle;
+%                 \draw[vector={xred}] (0,0) -- ++(a) node[pos=1.1] {$\vec{a}$};
+%                 \draw[vector={xblue}] (0,0) -- ++(b) node[pos=1.1] {$\vec{b}$};
+%             \end{axis}
+%         \end{tikzpicture}
+%     \end{center}
+%     \caption{Drawing vectors.}
+%     \label{fig:vecs_test}
+% \end{marginfigure}
 
 % \begin{figure}
 %     \begin{center}
@@ -80,3 +148,4 @@ To be written:
 %     \caption{Representation of rulers in $\Rs[3]$; as with the lines in the case of $\Rs[2]$, I added a vector showing the direction and density of the graduation marks. Note how the planes (stacks) in blue are more densely spaced compared to the green planes, and therefore the vector representing that respective ruler is longer compared to the vector representing the ruler in green.}
 %     \label{fig:rulers_3D}
 % \end{figure}
+
