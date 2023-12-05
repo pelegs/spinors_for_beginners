@@ -14,13 +14,13 @@
 	second box/.style={
 		anchor=east,
 		text=white,
-		rounded corners,
+		% rounded corners,
 		fill=#1,
 		xshift=-4mm,
 	},
 }
 
-\tikzset{tcbreak/.style = {fill=white, thick, rounded corners, draw=#1, text=#1, font=\bfseries}}
+\tikzset{tcbreak/.style = {fill=white, thick, draw=#1, text=#1, font=\bfseries}}
 
 \tcbset{
 	common/.style n args={2}{
@@ -34,6 +34,7 @@
 		enhanced,
 		breakable,
 		top=8pt,
+		sharp corners,
 		before skip=1em,
 		after skip=2em,
 		attach boxed title to top left={
@@ -43,13 +44,13 @@
 		boxed title style={
 			boxrule=0pt,
 			colframe=white,
-			arc=5pt,
-			outer arc=4pt,
+			arc=0pt,
+			outer arc=0pt,
 		},
 		separator sign={~~},
 		% -- overlays based on the following TeX SE answer: https://tex.stackexchange.com/a/545324/162087
 		overlay unbroken={
-			\node[text=white, align=right, rounded corners, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
+			\node[text=white, align=right, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
 		},
 		overlay first={
 			\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
@@ -68,7 +69,7 @@
 			\path[font=\small\itshape] (frame.south) node [tcbreak={#1}] (cont) {continues in the next page \faHandORight};
 		},
 		overlay last={
-			\node[text=white, align=right, rounded corners, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
+			\node[text=white, align=right, fill=#1, xshift=-4mm, minimum height=6mm, anchor=east] at (frame.south east) {#2};
 			\draw[thick, #1, decoration={coil, amplitude=0.5mm}, decorate]
 				(frame.north west) -- (frame.north east);
 			\path[font=\small\itshape] (frame.north) node [tcbreak={#1}] (cont) {\faHandORight continues from the previous page};
@@ -93,7 +94,7 @@
 		common={xred}{\textbf{!}},
 	},
 	challengestyle/.style={
-		common={xorange}{\textbf{?}},
+		common={xgreen}{\textbf{?}},
 	},
 	quotestyle/.style={
 		common={gray}{\textbf{"}},
