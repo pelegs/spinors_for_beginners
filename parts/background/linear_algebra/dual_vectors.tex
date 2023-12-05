@@ -19,49 +19,93 @@ where the numbers $v_{1},v_{2},\dots,v_{n}$ are the components in each of the re
 
 While the norm does tell us something useful about a vector, it has two drawbacks: it doesn't tell us anything about the vector's orientation in space, and even worse - it is not linear. We can try and simplify the calculation of the norm by dropping the square root and calculating the \textit{square norm}, but that too isn't linear, nor does it tell us anything about the vector's orientation.
 
-Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing more than a set of graduation lines with an orientation in space (\cref{fig:rulers}). We can therefore represent a ruler using a vector: the magnitude of the vector is the frequency of the graduation lines, while its direction is the direction of the ruler (which is orthogonal to the graduation lines).
+Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing more than a set of graduation lines with an orientation in space (\cref{fig:rulers}). We can therefore represent a ruler using a vector: the magnitude of the vector is the frequency of the graduation lines, while its direction is the direction of the ruler (which is orthogonal to the graduation lines). To not confuse ruler vectors with \enquote{regular} vectors, I will denote ruler vectors using a greek letter and an asterisk, e.g. $\dualvec{\alpha}$.
 
-\begin{marginfigure}
-    \begin{center}
+\begin{marginfigure}[-35\baselineskip]
+    \begin{center} 
         \begin{tikzpicture}[scale=0.55]
             \path pic[rotate=25, transform shape] (A) {ruler={10}{1.5}{2}{xred!15}{$R_{1}$}};
-            \path[below of=A.south west, xshift=4cm, yshift=-2cm] pic[rotate=55, transform shape] {ruler={7}{1.5}{0.8}{xblue!15}{$R_{2}$}};
-            \path[on background layer, below of=A, anchor=center, yshift=4cm] pic[rotate=-60, transform shape] {ruler={8}{1.5}{1.0}{xgreen!15}{$R_{3}$}};
+            \path[below of=A.south west, xshift=4cm, yshift=-2cm] pic[rotate=55, transform shape] {ruler={7}{1.5}{0.8}{xblue!15}{$\dualvec{\alpha}_{2}$}};
+            \path[on background layer, below of=A, anchor=center, yshift=4cm] pic[rotate=-60, transform shape] {ruler={8}{1.5}{1.0}{xgreen!15}{$\dualvec{\alpha}_{3}$}};
         \end{tikzpicture}
     \end{center}
-    \caption{Three rulers, $R_{1},R_{2},R_{3}$, each with its own orientation and frequency of graduation lines.}
+    \caption{Three rulers, $\dualvec{\alpha}_{1},\dualvec{\alpha}_{2},\dualvec{\alpha}_{3}$, each with its own orientation and frequency of graduation lines.}
     \label{fig:rulers}
 \end{marginfigure}
 
-Now, we usually rotate rulers to align with the orientation of the magnitude we wish to measure - however here we want our rulers to also measure orientation. Therefore, instead of rotating the ruler to align with a vector we wish to measure, we \textit{project} the vector on the ruler and then take our measurement.
+Now, we usually rotate rulers to align with the orientation of the magnitude we wish to measure - however here we want our rulers to also measure orientation. Therefore, instead of rotating the ruler to align with a vector we wish to measure, we \textit{project} the vector on the ruler and then take our measurement (\cref{fig:projecting_onto_rulers}).
 
 \begin{marginfigure}
     \begin{center}
         \begin{tikzpicture}[scale=0.55]
             \draw[perpline={black!40}] (2,3) -- ++(0.25,-1);
             \draw[perpline={black!40}] (6,5) -- ++(0.5,-2);
-            \path pic[rotate=15, transform shape] (A) {ruler={10}{1.5}{1}{black!15}{$R_{1}$}};
+            \path pic[rotate=15, transform shape] (A) {ruler={10}{1.5}{1}{black!15}{$\dualvec{\alpha}$}};
             \draw[line width=1mm, xred, opacity=0.5] (2.25,2.05) -- (6.5,3.155);
             \draw[vector={xred}] (2,3) -- ++(4,2) node[midway, above] {$\vec{v}$};
         \end{tikzpicture}
     \end{center}
     \caption{Measuring a vector using a ruler by projecting the vector onto the ruler. The result of the projection is drawn as a red line on the ruler.}
-    \label{fig:rulers}
+    \label{fig:projecting_onto_rulers}
 \end{marginfigure}
 
-\begin{figure}
+Since projection in linear algebra is calculated via the inner product, the measurement $m$ of a vector $\vec{v}$ using a ruler $\dualvec{\alpha}$ is given by
+\begin{equation}
+    m = \inner{\dualvec{\alpha}}{\vec{v}}.
+    \label{eq:ruler_measurement}
+\end{equation}
+
+However, since we can represent a ruler using a vector, we can use the vector representation in \cref{eq:ruler_measurement}. And again, to distinguish ruler vectors from \enquote{regular} vectors written in an excplicit form, we write the ruler vectors as row vectors:
+\begin{align}
+    \inner{\dualvec{\alpha}}{\vec{v}} &= \GenericRowVec{\alpha}\GenericColVec{v}\\\nonumber
+                                      &= \alpha_{1}v_{1} + \alpha_{2}v_{2} + \dots + \alpha_{n}v_{n}.
+    \label{eq:ruler_measurement_explicit}
+\end{align}
+
+Another reason for representing rulers as row vectors is that it corresponds well to matrix multiplication: if we regard a row vector as a $1\times n$ matrix, and a column vector as an $n\times1$ matrix, the resulting product is a $1\times1$ matrix, which is equivalent to a scalar. This will become handy when we discuss higher-order rulers (which in turn can handle higher-order \enquote{vectors}).
+
+A convinient visualization for rulers in $\Rs[2]$ is their representation as a set of parallel lines which are the extensions of the ruler's graduation marks. We draw the first line going through the origin and orthogonal to the orientation of the vector representation of the ruler. Then, we draw a line for each integer multiple of the frequency of the ruler's graduation marks. This results in a set of evenly spaced and parllel lines, which fit precisely with the main graduation mark of the ruler they represent (\cref{fig:rulers_as_lines}).
+
+\begin{marginfigure}[-20\baselineskip]
     \begin{center}
         \begin{tikzpicture}
             \begin{axis}[
                 xynogrid,
+                width=6cm, height=6cm,
             ]
+            \foreach \m in {-5,...,5}
+                \addplot[hyperplane1D={xblue}] {-x+3.2*\m};
             \end{axis}
+            \path[xshift=2cm, yshift=-1.825cm, opacity=1] pic[rotate=45, transform shape] (A) {ruler={5.5}{1}{1}{xblue!5}{}};
         \end{tikzpicture}
     \end{center}
-    \caption{}
+    \caption{The graphical representation of a ruler shown next to the ruler, such that the infinite set of lines drawn match the ruler's graduation marks.}
     \label{fig:rulers_as_lines}
-\end{figure}
+\end{marginfigure}
 
+In $\Rs[3]$ a ruler is represented in a similar way, but with \textit{planes} instead of lines (\cref{fig:rulers_as_planes}). And in general, the rulers for a space $\Rs[n]$ can be represented using an infinite set of $(n-1)$-dimensional \textit{hyperplanes}.
+
+\begin{marginfigure}
+    \begin{center}
+        \tdplotsetmaincoords{50}{110}
+        \begin{tikzpicture}[tdplot_main_coords, rotate=0, scale=0.85]
+            \pgfmathsetmacro{\a}{1.5}
+            \pgfmathsetmacro{\b}{\a+0.5}
+            \foreach \z in {-2,-1.25,...,2}
+                \draw[very thick, xgreen, fill=xgreen, opacity=0.5] (-\a,-\a,\z) -- (-\a,\a,\z) -- (\a,\a,\z) -- (\a,-\a,\z) -- cycle;
+        \end{tikzpicture}
+        \begin{tikzpicture}
+            \node (O) at (0,0) {};
+            \path[above of=O, yshift=4.6mm] pic[rotate=90, transform shape] (A) {ruler={5}{1}{0.5}{xgreen!5}{}};
+        \end{tikzpicture}
+    \end{center}
+    \caption{Representation of rulers in $\Rs[3]$ as planes.}
+    \label{fig:rulers_as_planes}
+\end{marginfigure}
+
+From \cref{eq:ruler_measurement_explicit} we can see that any ruler $\dualvec{\alpha}$ can be written as the left half of an inner product, i.e. $\inner{\dualvec{\alpha}}{\cdot}$. This hints that the ruler is \textit{acting} on vectors, yielding a scalar. Looking at the explicit form of a ruler acting on a vector, we can see that not only do rulers represent linear functions, but they in-fact represent \textit{all} the possible \textit{linear} functions of the type $\phi:\Rs[n]\to\Rs$. Such functions are called \textit{linear forms}, or more specifically in this case a \textit{1-form}.
+
+Since rulers can be represented as vectors but aren't exactly the same as \enquote{regular} vectors, they are also called \textit{dual vectors}, which is the name I will use for them from now on. For any vector space $\Rs[n]$, the dual vectors form a vector space of their own, called the \textit{dual space to $\Rs[n]$}.
 
 \subsection{Introducing some formalism}
 \begin{enumerate}
@@ -148,4 +192,3 @@ Now, we usually rotate rulers to align with the orientation of the magnitude we 
 %     \caption{Representation of rulers in $\Rs[3]$; as with the lines in the case of $\Rs[2]$, I added a vector showing the direction and density of the graduation marks. Note how the planes (stacks) in blue are more densely spaced compared to the green planes, and therefore the vector representing that respective ruler is longer compared to the vector representing the ruler in green.}
 %     \label{fig:rulers_3D}
 % \end{figure}
-

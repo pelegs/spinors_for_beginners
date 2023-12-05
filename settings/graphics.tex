@@ -59,7 +59,7 @@
     ylabel=$y$,
     every axis x label/.style={at={(ticklabel* cs:1.02)}, anchor=west},
     every axis y label/.style={at={(ticklabel* cs:1.02)}, anchor=south},
-    axis line style={stealth-stealth, very thick, black!65},
+    axis line style={stealth-stealth, very thick},
     label style={font=\large},
     tick label style={font=\large},
     samples=100,
@@ -84,7 +84,7 @@
     ylabel = {},
     major grid style = {draw=black!0},
   },
-  hyperplane1D/.style = {thick, #1},
+  hyperplane1D/.style = {very thick, #1},
   %% Function plots
   function/.style = {
     ultra thick, draw=#1,
