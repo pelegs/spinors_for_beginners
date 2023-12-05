@@ -5,9 +5,10 @@
 % These inner products actually represent all possible linear functionals Rn->R. They make a linear space on their own.
 % Define general idea of dual spaces.
 % Basis sets and change of basis - covarience, contravarience and all that.
-% relevant SE answers: https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-spaces
+% relevant SE answers: https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-spaces, https://math.stackexchange.com/a/3751/849224
+% Citation in bibliography file
 
-\subsection{Linear measurements and rulers\\(or: why should I care about dual vectors?)}
+\subsection{Linear measurements and rulers\\(or: why do we care about dual vectors?)}
 \newthought{Frequently in linear algebra} we want to measure vectors. A measure in this context is a way to assign each vector a real number which somehow reflects its properties (i.e. direction and/or magnitude). Mathematically, we are looking for a function $\phi:\Rs[n]\to\Rs$ - we feed it a vector, and it returns some measurement.
 
 One common way to measure vectors is using the norm: the norm of a vector in $\Rs[n]$ using the standard basis set $\eb{1},\eb{2},\dots,\eb{n}$ is given by
@@ -107,7 +108,32 @@ From \cref{eq:ruler_measurement_explicit} we can see that any ruler $\dualvec{\a
 
 Since rulers can be represented as vectors but aren't exactly the same as \enquote{regular} vectors, they are also called \textit{dual vectors}, which is the name I will use for them from now on. For any vector space $\Rs[n]$, the dual vectors form a vector space of their own, called the \textit{dual space to $\Rs[n]$}.
 
+The linearity of the dual vectors space simplifies many calculations - foremost, it allows us to construct dual vectors from other dual vectors using linear combinations. For example, suppose we have two dual vectors
+\begin{align}
+    \dualvec{\alpha} &= \rowvec{1;-4;0},\\\nonumber
+    \dualvec{\beta} &= \rowvec{2;1;3}.
+    \label{eq:two_dual_vecs_in_R3}
+\end{align}
+
+We can use $\dualvec{\alpha}$ and $\dualvec{\beta}$ to create a third dual vector $\dualvec{\gamma}$:
+\begin{align}
+    \dualvec{\gamma}&=5\rowvec{1;-4;0} + 2\rowvec{2;1;3}\\\nonumber  
+               &= \rowvec{5+4;-20+2;0+6}\\\nonumber
+               &= \rowvec{9;-18;6}.
+    \label{eq:linear_comb_dual_vecs}
+\end{align}
+
+The application of $\dualvec{\gamma}$ on any vector $\vec{v}\in\Rs[3]$ is then given by
+\begin{equation}
+    \inner{\dualvec{\gamma}}{\vec{v}} = 9v_{1} -18v_{2} +6v_{3},
+    \label{eq:application_gamma_on_vec}
+\end{equation}
+which is exactly the application of $\dualvec{\alpha}$ on the vector five times followed by the application of $\dualvec{\beta}$ twice.
+
 \subsection{Introducing some formalism}
+Now that we know \textit{why} we use dual vectors, we can formalize the concept and find useful properties. Given a vector space $V$ over a field $\mathbb{F}$, its dual space (denoted $\dualspace{V}$) is the set of all the linear functions $\phi:V\to\mathbb{F}$.
+
+
 \begin{enumerate}
     \item Dual vectors form a vector space $\dualspace{V}$.
     \item Formal definition of dual spaces.
