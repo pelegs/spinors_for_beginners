@@ -104,6 +104,52 @@ The reverse transformation can be calculated by applying the inverse transformat
     \color{xdarkblue}\rowvec{\eb{1};\eb{2}}.
     \label{eq:eb_from_ebc}
 \end{equation}
-(where $\Backw=\begin{bmatrix}\frac{1}{4} & \frac{1}{2}\\ -1 & 2\end{bmatrix}$)
+(where in our case $\Backw=\begin{bmatrix}\frac{1}{4} & \frac{1}{2}\\ -1 & 2\end{bmatrix}$)
 
-\subsection{Contravarience behabiour of vectors}
+To summarize: given a set $\oldB$ of basis vectors in $\Rs[2]$, we can transform them into the basis vectors set $\newB$ by using the forward transformation $\Forw=\begin{bmatrix}F_{11} & F_{12} \\ F_{21} & F_{22}\end{bmatrix}$. To get back the original basis vectors from the transformed vectors we use the inverse transfomation $\Backw=\begin{bmatrix}F_{11} & F_{12} \\ F_{21} & F_{22}\end{bmatrix}^{-1}$. If the matrix $Forw$ is invertible - i.e. if its two columns are not linearly depended (equivalently, if $F_{11}F_{22}\neq F_{12}F_{21}$), then $\Backw=\frac{1}{F_{11}F_{22}-F_{12}F_{21}}\begin{bmatrix}F_{22} & -F_{12} \\ -F_{21} & F_{11}\end{bmatrix}$.
+
+\subsection{The more general case, $\Rs[n]$}
+In $\Rs[n]$ the transformations behave in a similar way: given the transformation rule that each new basis vector $\ebcr{i}\in\newB$ is a linear combination of the old basis vector set $\oldB$, i.e.
+\begin{align*}
+    \ebcr{1} &= F_{11}\ebr{1} + F_{12}\ebr{2} + \dots + F_{1n}\ebr{n},\\\nonumber
+    \ebcr{2} &= F_{21}\ebr{1} + F_{22}\ebr{2} + \dots + F_{2n}\ebr{n},\\\nonumber
+    \vdots &= \vdots \\ \nonumber
+    \ebcr{n} &= F_{n1}\ebr{1} + F_{n2}\ebr{2} + \dots + F_{nn}\ebr{n},
+    \label{eq:full_coords_trans_as_equations}
+\end{align*}
+we can write the transformation in matrix form as
+\begin{equation}
+    \color{xdarkred}\rowvec{\ebc{1},\ebc{2},\dots,\ebc{n}}
+    \color{black}=
+    \color{blue}\rowvec{\eb{1},\eb{2},\dots,\eb{n}}
+    \color{black}\GNMatrix{F}{n}{n}.
+    \label{eq:full_coords_trans}
+\end{equation}
+
+Per new basis vector $\ebcr{i}$ \cref{eq:full_coords_trans} has the form
+\begin{equation}
+    \ebcr{i} = \displaystyle\sum_{j=1}^{n}F_{ji}\ebr{j}.
+    \label{eq:coords_trans_per_vector}
+\end{equation}
+
+Similarly, the inverse operation is given by
+\begin{align*}
+    \ebr{1} &= F^{-1}_{11}\ebcr{1} + F^{-1}_{12}\ebcr{2} + \dots + F^{-1}_{1n}\ebcr{n},\\\nonumber
+    \ebr{2} &= F^{-1}_{21}\ebcr{1} + F^{-1}_{22}\ebcr{2} + \dots + F^{-1}_{2n}\ebcr{n},\\\nonumber
+    \vdots &= \vdots \\ \nonumber
+    \ebr{n} &= F^{-1}_{n1}\ebcr{1} + F^{-1}_{n2}\ebcr{2} + \dots + F^{-1}_{nn}\ebcr{n},
+    \label{eq:full_BACK_coords_trans_as_equations}
+\end{align*}
+and its matrix form is
+\begin{equation}
+    \color{xdarkblue}\rowvec{\eb{1},\eb{2},\dots,\eb{n}}
+    \color{black}=
+    \color{xdarkred}\rowvec{\ebc{1},\ebc{2},\dots,\ebc{n}}
+    \color{black}\GNMatrix{F^{-1}}{n}{n},
+    \label{eq:full_BACK_coords_trans}
+\end{equation}
+i.e.
+\begin{equation}
+    \ebr{i} = \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\ebcr{j}.
+    \label{eq:coords_trans_per_vector}
+\end{equation}
