@@ -1,0 +1,109 @@
+\section{Change of Coordinates}
+\newthought{In introductory linear algebra courses} you should have learned about change of coordinate systems: a coordinate system is just another name for a basis set of whatever vector space is used (in this section it's $\Rs[n]$). A change of coordinate system is the transformation of vectors from being represented in one basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ to being represented in another basis set $\tilde{B}=\left\{\ebc{1},\ebc{2},\dots,\ebc{n}\right\}$. Since such transformations are linear they are commonly represented in a matrix form.
+
+In this section we will discuss \textit{how} vectors and their components change under change of basis sets. There are many components involved in these kind of transformations, which causes them to be quite confusing. I will therefore color code the equations consistently as a visual guide. In addition, I will always introduce the $\Rs[2]$ case first, before giving the generalized form for $\Rs[n]$.
+
+\subsection{Change of basis set in $\Rs[2]$}
+Suppose we use the standard basis set to represent $\Rs[2]$:
+\begin{equation}
+    \color{xdarkblue}
+    B = \left\{\eb{1},\eb{2}\right\} = \left\{\colvec{1;0},\colvec{0;1}\right\},
+    \color{black}
+    \label{eq:std_basis_set_R2}
+\end{equation}
+and we want to change our coordinate system to use the following basis set:
+\begin{equation}
+    \color{xdarkred}
+    \tilde{B} = \left\{\ebc{1},\ebc{2}\right\} = \left\{\colvec{2;1},\colvec{-\frac{1}{2};\frac{1}{4}}\right\}.
+    \color{black}
+    \label{eq:transformed_basis_set_R2}
+\end{equation}
+(the two basis sets are shown in \cref{fig:two_basis_sets_R2})
+
+\begin{marginfigure}[0\baselineskip]
+    \begin{center} 
+        \begin{tikzpicture}
+            \begin{axis}[
+                xynoaxes,
+                width=6cm, height=6cm,
+                xmin=-0.75, xmax=2.5,
+                ymin=-0.75, ymax=2.5,
+                xtick={0,1,2}, extra x ticks=0,
+                ytick={0,1,2}, extra y ticks=0,
+                major grid style={dotted, draw=black!50},
+            ]
+                \draw[vector={xdarkblue}] (0,0) -- (1,0) node[pos=1.2] {$\eb{1}$};
+                \draw[vector={xdarkblue}] (0,0) -- (0,1) node[pos=1.2] {$\eb{2}$};
+                \draw[vector={xdarkred}] (0,0) -- (2,1) node[pos=1.075] {$\ebc{1}$};
+                \draw[vector={xdarkred}] (0,0) -- (-0.5,0.25) node[pos=1.3] {$\ebc{2}$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{The standard basis set $\color{xdarkblue}{B}$ and a new basis set $\color{xdarkred}{\tilde{B}}$ shown together.}
+    \label{fig:two_basis_sets_R2}
+\end{marginfigure}
+
+\vspace{1.5em}
+\begin{equation}
+    \Forw =
+    \begin{bmatrix}
+        \tikzmark{ebc1}{2} & \tikzmark{ebc2}{-\frac{1}{2}} \\
+        1 & \frac{1}{4}
+    \end{bmatrix}.
+    \label{eq:forward_trans}
+\end{equation}
+
+\tikz[overlay, remember picture]{
+    \node[xdarkred] (ebc1txt) at ($(pic cs:ebc1)+(4pt,1cm)$) {$\ebc{1}$};
+    \node[xdarkred] (ebc2txt) at ($(pic cs:ebc2)+(4pt,1cm)$) {$\ebc{2}$};
+    \draw[-stealth, xdarkred] (ebc1txt) -- ($(pic cs:ebc1)+(4pt,10pt)$);
+    \draw[-stealth, xdarkred] (ebc2txt) -- ($(pic cs:ebc2)+(4pt,10pt)$);
+}
+
+Now, if we want to transform $\ebc{1}$ and $\ebc{2}$ into $\ebcr{1}$ and $\ebcr{2}$ using $\Forw$, we simply multiply them by $\Forw$:
+\begin{align}
+    \ebcr{1} &= \Forw \ebr{1},\\\nonumber
+    \ebcr{2} &= \Forw \ebr{2}.
+    \label{eq:transforming_ebs}
+\end{align}
+
+To make \cref{eq:transforming_ebs} more concise, we can collect the two vectors into a matrix disguised as a row vecor:
+\begin{equation}
+    \color{xdarkblue}
+    \eb{} =
+    \begin{bmatrix}
+        1 & 0\\
+        0 & 1
+    \end{bmatrix} = \rowvec{\eb{1},\eb{2}}
+    \color{black}.
+    \label{eq:eb_matrix}
+\end{equation}
+
+We then get that \cref{eq:transforming_ebs} can be written in vector-matrix notation as
+\begin{equation}
+    \color{xdarkred}\ebcr{} = \rowvec{\eb{1};\eb{2}}
+    \color{black} =
+    \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
+    \color{black}
+        \begin{bmatrix}
+            2 & -\frac{1}{2}\\
+            1 & \frac{1}{4}
+        \end{bmatrix}
+        = \rowvec{2\ebr{1}+\ebr{2};-\frac{1}{2}\ebr{1}+\frac{1}{4}\ebr{2}}.
+    \label{eq:full_forward_trans}
+\end{equation}
+
+The reverse transformation can be calculated by applying the inverse transformation $\Backw$ on \cref{eq:full_forward_trans}:
+\begin{equation}
+    \color{xdarkred}\rowvec{\ebc{1};\ebc{2}}
+    \color{black}\Backw =
+    \left(
+        \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
+        \color{black} \Forw
+    \right)\Backw =
+    \color{xdarkblue}\rowvec{\eb{1};\eb{2}}.
+    \label{eq:eb_from_ebc}
+\end{equation}
+(where $\Backw=\begin{bmatrix}\frac{1}{4} & \frac{1}{2}\\ -1 & 2\end{bmatrix}$)
+
+\subsection{Contravarience behabiour of vectors}

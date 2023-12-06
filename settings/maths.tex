@@ -54,8 +54,18 @@
 \newcommand{\GenericRowVec}[2][n]{\rowvec{#2_{1};#2_{2};\dots;#2_{#1}}}
 \newcommand{\GenericColVec}[2][n]{\colvec{#2_{1};#2_{2};\vdots;#2_{#1}}}
 
-% Basis vectors
+% Basis vectors and transformations
 \newcommand{\eb}[1]{\vec{e}_{#1}}
+\newcommand{\ebc}[1]{\tilde{\vec{e}}_{#1}}
+\newcommand{\ebr}[1]{\color{xdarkblue}\eb{#1}\color{black}}
+\newcommand{\ebcr}[1]{\color{xdarkred}\ebc{#1}\color{black}}
+\newcommand{\oldB}{\color{xdarkblue}B\color{lack}}
+\newcommand{\newB}{\color{xdarkred}\tilde{B}\color{black}}
+\newcommand{\Forw}{\bm{F}}
+\newcommand{\Backw}{\bm{F^{-1}}}
+
+% Dark equal?
+\newcommand{\beq}{\color{black}{=}}
 
 % Better imaginary unit and natural base notation (to separate from variables)
 \newcommand{\iu}{\mathrm{i}\mkern1mu}

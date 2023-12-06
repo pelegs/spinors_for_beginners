@@ -71,25 +71,33 @@
     xticklabels={,},
     yticklabels={,},
   },
-  xynogrid/.style = {
+  xynogrid/.style={
     xyplane,
     major grid style={opacity=0},
     minor grid style={opacity=0},
   },
-  xyempty/.style = {
+  xynoaxes/.style={
     xyplane,
-    axis line style = {draw=none},
-    tick style = {draw=none},
-    xlabel = {},
-    ylabel = {},
-    major grid style = {draw=black!0},
+    axis line style={draw=none},
+    xlabel={}, ylabel={},
+    extra x tick labels={,},
+    extra y tick labels={,},
+    tick style={draw=none},
   },
-  hyperplane1D/.style = {very thick, #1},
+  xyempty/.style={
+    xyplane,
+    axis line style={draw=none},
+    tick style={draw=none},
+    xlabel={},
+    ylabel={},
+    major grid style={draw=black!0},
+  },
+  hyperplane1D/.style={very thick, #1},
   %% Function plots
-  function/.style = {
+  function/.style={
     ultra thick, draw=#1,
   },
-  filledfunction/.style = {
+  filledfunction/.style={
     function={#1}, opacity=1, fill=#1, fill opacity=0.3,
   },
 }
@@ -99,7 +107,7 @@
 %%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{tikz, tikz-3dplot}
-\usetikzlibrary{calc, shapes, intersections, backgrounds, decorations.markings}
+\usetikzlibrary{calc, shapes, intersections, backgrounds, decorations.markings, tikzmark}
 \tikzset{
   %% Styles %%
   vector/.style = {#1, ultra thick, -stealth, cap=round},
