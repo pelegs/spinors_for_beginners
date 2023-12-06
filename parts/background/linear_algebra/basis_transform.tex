@@ -128,7 +128,7 @@ we can write the transformation in matrix form as
 
 Per new basis vector $\ebcr{i}$ \autoref{eq:full_coords_trans} has the form
 \begin{equation}
-    \ebcr{i} = \displaystyle\sum_{j=1}^{n}F_{ji}\ebr{j}.
+    \ebcr{j} = \displaystyle\sum_{k=1}^{n}F_{kj}\ebr{k}.
     \label{eq:coords_trans_per_vector}
 \end{equation}
 
@@ -140,7 +140,7 @@ Similarly, the inverse operation is given by
     \ebr{n} &= F^{-1}_{n1}\ebcr{1} + F^{-1}_{n2}\ebcr{2} + \dots + F^{-1}_{nn}\ebcr{n},
     \label{eq:full_BACK_coords_trans_as_equations}
 \end{align*}
-and its matrix form is
+its matrix form is
 \begin{equation}
     \color{xdarkblue}\rowvec{\eb{1},\eb{2},\dots,\eb{n}}
     \color{black}=
@@ -148,5 +148,27 @@ and its matrix form is
     \color{black}\GNMatrix{F^{-1}}{n}{n},
     \label{eq:full_BACK_coords_trans}
 \end{equation}
+and per basis vector the transformation is
+\begin{equation}
+    \ebr{i} = \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\ebcr{j}.
+    \label{eq:coords_BACK_trans_per_vector}
+\end{equation}
 
-By subtituting \autoref{eq:coords_trans_per_vector}
+By subtituting \autoref{eq:coords_trans_per_vector} into \autoref{eq:coords_BACK_trans_per_vector}, we get
+\begin{align}
+    \ebr{i} &= \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\ebcr{j}\\\nonumber
+            &= \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\left(\displaystyle\sum_{k=1}^{n}F_{kj}\ebr{k}\right)\\\nonumber
+            &= \displaystyle\sum_{k=1}^{n}\left(\tikzmark{scval1}\displaystyle\sum_{j=1}^{n}F_{kj}F^{-1}_{ji}\tikzmark{scval2}\right)\ebr{k}.
+    \label{eq:transformation_subtitution}
+\end{align}
+\tikz[overlay, remember picture]{
+    \draw[curly={xdarkgreen}{5pt}{9pt}] ($(pic cs:scval1)+(0,-10pt)$) -- ($(pic cs:scval2)+(0,-10pt)$) node[midway, below, yshift=-13pt] {this is just a number!}; 
+}
+
+\autoref{eq:transformation_subtitution} just tells us something we already know: each basis vector $\ebr{i}$ equals to a linear combination of the \textit{same set} of basis vectors. This must mean that for $k=i$ the number in paranthesis is one, and for any other value of $k$ it is zero - i.e. it equals $\delta_{ik}$:
+\begin{equation}
+    \ebr{i}=\displaystyle\sum_{k=1}^{n}\delta_{ik}\ebr{k}.
+    \label{eq:trans_delta}
+\end{equation}
+
+In turn, \autoref{eq:trans_delta} means that the matrix $\Forw\Backw=\bm{I}_{n}$, the identity matrix in $\Rs[n]$ - and thus the matrices $\Forw$ and $\Backw$ are eachother's inverses.

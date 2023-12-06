@@ -155,7 +155,10 @@
   },
   perpline/.style = {
     very thick, densely dotted, draw=#1
-  }
+  },
+  curly/.style n args = {3}{
+    #1, very thick, decorate, decoration={brace, amplitude=#2, raise=#3, mirror}
+  },
 }
 \newcommand{\rulerTwoD}[6]{
   \pgfmathsetmacro{\Vx}{#1};
