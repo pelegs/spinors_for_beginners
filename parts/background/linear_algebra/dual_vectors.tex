@@ -1,3 +1,4 @@
+\newpage
 \section{Dual Vectors and Dual Spaces}
 % Overview:
 % Measuring vectors: rulers. How they look like in R2, R3, etc.
@@ -20,7 +21,7 @@ where the numbers $v_{1},v_{2},\dots,v_{n}$ are the components in each of the re
 
 While the norm does tell us something useful about a vector, it has two drawbacks: it doesn't tell us anything about the vector's orientation in space, and even worse - it is not linear. We can try and simplify the calculation of the norm by dropping the square root and calculating the \textit{square norm}, but that too isn't linear, nor does it tell us anything about the vector's orientation.
 
-Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing more than a set of graduation lines with an orientation in space (\cref{fig:rulers}). We can therefore represent a ruler using a vector: the magnitude of the vector is the frequency of the graduation lines, while its direction is the direction of the ruler (which is orthogonal to the graduation lines). To not confuse ruler vectors with \enquote{regular} vectors, I will denote ruler vectors using a greek letter and an asterisk, e.g. $\dualvec{\alpha}$.
+Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing more than a set of graduation lines with an orientation in space (\autoref{fig:rulers}). We can therefore represent a ruler using a vector: the magnitude of the vector is the frequency of the graduation lines, while its direction is the direction of the ruler (which is orthogonal to the graduation lines). To not confuse ruler vectors with \enquote{regular} vectors, I will denote ruler vectors using a greek letter and an asterisk, e.g. $\dualvec{\alpha}$.
 
 \begin{marginfigure}[-35\baselineskip]
     \begin{center} 
@@ -34,7 +35,7 @@ Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing
     \label{fig:rulers}
 \end{marginfigure}
 
-Now, we usually rotate rulers to align with the orientation of the magnitude we wish to measure - however here we want our rulers to also measure orientation. Therefore, instead of rotating the ruler to align with a vector we wish to measure, we \textit{project} the vector on the ruler and then take our measurement (\cref{fig:projecting_onto_rulers}).
+Now, we usually rotate rulers to align with the orientation of the magnitude we wish to measure - however here we want our rulers to also measure orientation. Therefore, instead of rotating the ruler to align with a vector we wish to measure, we \textit{project} the vector on the ruler and then take our measurement (\autoref{fig:projecting_onto_rulers}).
 
 \begin{marginfigure}
     \begin{center}
@@ -56,7 +57,7 @@ Since projection in linear algebra is calculated via the inner product, the meas
     \label{eq:ruler_measurement}
 \end{equation}
 
-However, since we can represent a ruler using a vector, we can use the vector representation in \cref{eq:ruler_measurement}. And again, to distinguish ruler vectors from \enquote{regular} vectors written in an excplicit form, we write the ruler vectors as row vectors:
+However, since we can represent a ruler using a vector, we can use the vector representation in \autoref{eq:ruler_measurement}. And again, to distinguish ruler vectors from \enquote{regular} vectors written in an excplicit form, we write the ruler vectors as row vectors:
 \begin{align}
     \inner{\dualvec{\alpha}}{\vec{v}} &= \GenericRowVec{\alpha}\GenericColVec{v}\\\nonumber
                                       &= \alpha_{1}v_{1} + \alpha_{2}v_{2} + \dots + \alpha_{n}v_{n}.
@@ -65,7 +66,7 @@ However, since we can represent a ruler using a vector, we can use the vector re
 
 Another reason for representing rulers as row vectors is that it corresponds well to matrix multiplication: if we regard a row vector as a $1\times n$ matrix, and a column vector as an $n\times1$ matrix, the resulting product is a $1\times1$ matrix, which is equivalent to a scalar. This will become handy when we discuss higher-order rulers (which in turn can handle higher-order \enquote{vectors}).
 
-A convinient visualization for rulers in $\Rs[2]$ is their representation as a set of parallel lines which are the extensions of the ruler's graduation marks. We draw the first line going through the origin and orthogonal to the orientation of the vector representation of the ruler. Then, we draw a line for each integer multiple of the frequency of the ruler's graduation marks. This results in a set of evenly spaced and parllel lines, which fit precisely with the main graduation mark of the ruler they represent (\cref{fig:rulers_as_lines}).
+A convinient visualization for rulers in $\Rs[2]$ is their representation as a set of parallel lines which are the extensions of the ruler's graduation marks. We draw the first line going through the origin and orthogonal to the orientation of the vector representation of the ruler. Then, we draw a line for each integer multiple of the frequency of the ruler's graduation marks. This results in a set of evenly spaced and parllel lines, which fit precisely with the main graduation mark of the ruler they represent (\autoref{fig:rulers_as_lines}).
 
 \begin{marginfigure}[-20\baselineskip]
     \begin{center}
@@ -77,14 +78,14 @@ A convinient visualization for rulers in $\Rs[2]$ is their representation as a s
             \foreach \m in {-5,...,5}
                 \addplot[hyperplane1D={xblue}] {-x+3.2*\m};
             \end{axis}
-            \path[xshift=2cm, yshift=-1.825cm, opacity=1] pic[rotate=45, transform shape] (A) {ruler={5.5}{1}{1}{xblue!5}{}};
+            \path[xshift=1.5cm, yshift=-1.325cm, opacity=1] pic[rotate=45, transform shape] (A) {ruler={5.1}{1}{1}{xblue!5}{}};
         \end{tikzpicture}
     \end{center}
     \caption{The graphical representation of a ruler shown next to the ruler, such that the infinite set of lines drawn match the ruler's graduation marks.}
     \label{fig:rulers_as_lines}
 \end{marginfigure}
 
-In $\Rs[3]$ a ruler is represented in a similar way, but with \textit{planes} instead of lines (\cref{fig:rulers_as_planes}). And in general, the rulers for a space $\Rs[n]$ can be represented using an infinite set of $(n-1)$-dimensional \textit{hyperplanes}.
+In $\Rs[3]$ a ruler is represented in a similar way, but with \textit{planes} instead of lines (\autoref{fig:rulers_as_planes}). And in general, the rulers for a space $\Rs[n]$ can be represented using an infinite set of $(n-1)$-dimensional \textit{hyperplanes}.
 
 \begin{marginfigure}
     \begin{center}
@@ -104,11 +105,11 @@ In $\Rs[3]$ a ruler is represented in a similar way, but with \textit{planes} in
     \label{fig:rulers_as_planes}
 \end{marginfigure}
 
-From \cref{eq:ruler_measurement_explicit} we can see that any ruler $\dualvec{\alpha}$ can be written as the left half of an inner product, i.e. $\inner{\dualvec{\alpha}}{\cdot}$. This hints that the ruler is \textit{acting} on vectors, yielding a scalar. Looking at the explicit form of a ruler acting on a vector, we can see that not only do rulers represent linear functions, but they in-fact represent \textit{all} the possible \textit{linear} functions of the type $\phi:\Rs[n]\to\Rs$. Such functions are called \textit{linear forms}, or more specifically in this case a \textit{1-form}.
+From \autoref{eq:ruler_measurement_explicit} we can see that any ruler $\dualvec{\alpha}$ can be written as the left half of an inner product, i.e. $\inner{\dualvec{\alpha}}{\cdot}$. This hints that the ruler is \textit{acting} on vectors, yielding a scalar. Looking at the explicit form of a ruler acting on a vector, we can see that not only do rulers represent linear functions, but they in-fact represent \textit{all} the possible \textit{linear} functions of the type $\phi:\Rs[n]\to\Rs$. Such functions are called \textit{linear forms}, or more specifically in this case a \textit{1-form}.
 
 Since rulers can be represented as vectors but aren't exactly the same as \enquote{regular} vectors, they are also called \textit{dual vectors}, which is the name I will use for them from now on. For any vector space $\Rs[n]$, the dual vectors form a vector space of their own, called the \textit{dual space to $\Rs[n]$}.
 
-The linearity of the dual vectors space simplifies many calculations - foremost, it allows us to construct dual vectors from other dual vectors using linear combinations. See \cref{example:dual_linear_comb} below.
+The linearity of the dual vectors space simplifies many calculations - foremost, it allows us to construct dual vectors from other dual vectors using linear combinations. See \autoref{example:dual_linear_comb} below.
 
 \begin{example}{Linear combination of dual vectors}{dual_linear_comb}
    Suppose we have two dual vectors
