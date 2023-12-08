@@ -55,6 +55,12 @@
 \newcommand{\GenericRowVec}[2][n]{\rowvec{#2_{1};#2_{2};\dots;#2_{#1}}}
 \newcommand{\GenericColVec}[2][n]{\colvec{#2_{1};#2_{2};\vdots;#2_{#1}}}
 
+% Colored vectors
+\newcommand{\colorVec}[2]{\color{#1}{\vec{#2}}\color{black}}
+\newcommand{\vred}{\colorVec{xdarkred}{v}}
+\newcommand{\vblue}{\colorVec{xdarkblue}{v}}
+\newcommand{\vgreen}{\colorVec{xdarkgreen}{v}}
+
 % Basis vectors and transformations
 \newcommand{\eb}[1]{\vec{e}_{#1}}
 \newcommand{\ebc}[1]{\tilde{\vec{e}}_{#1}}

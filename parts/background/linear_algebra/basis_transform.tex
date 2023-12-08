@@ -1,7 +1,12 @@
 \section{Change of Coordinates}
 \newthought{In introductory linear algebra courses} you should have learned about change of coordinate systems: a coordinate system is just another name for a basis set of whatever vector space is used (in this section it's $\Rs[n]$). A change of coordinate system is the transformation of vectors from being represented in one basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ to being represented in another basis set $\tilde{B}=\left\{\ebc{1},\ebc{2},\dots,\ebc{n}\right\}$. Since such transformations are linear they are commonly represented in a matrix form.
 
-In this section we will discuss \textit{how} vectors and their components change under change of basis sets. There are many components involved in these kind of transformations, which causes them to be quite confusing. I will therefore color code the equations consistently as a visual guide. In addition, I will always introduce the $\Rs[2]$ case first, before giving the generalized form for $\Rs[n]$.
+In this section we will discuss \textit{how} vectors and their components transform under change of basis sets. These transformations can be quite confusing, so I color coded the equations consistently as a visual guide. In addition, the $\Rs[2]$ case is intoduced first, before giving the generalized form for $\Rs[n]$.
+% GIVE CREDIT TO EIGENCHRIS HERE!
+
+Before we do this, there is one important idea to understand: vectors themselves do not change under change of basis - their magnitude and orientation stay the same no matter how \textit{we} measure them. The component of a vector are a way to describe (or \enquote{measure}) the vector using a certain basis set, so it should not be surprising that they change under change of basis.
+
+With that in mind, let us look at an example of a basis set change in $\Rs[2]$.
 
 \subsection{Change of basis set in $\Rs[2]$}
 Suppose we use the standard basis set to represent $\Rs[2]$:
@@ -18,7 +23,7 @@ and we want to change our coordinate system to use the following basis set:
     \color{black}
     \label{eq:transformed_basis_set_R2}
 \end{equation}
-(the two basis sets are shown in \autoref{fig:two_basis_sets_R2})
+(the vectors composing the two basis sets are shown in \autoref{fig:two_basis_sets_R2})
 
 \begin{marginfigure}[0\baselineskip]
     \begin{center} 
@@ -43,6 +48,8 @@ and we want to change our coordinate system to use the following basis set:
     \label{fig:two_basis_sets_R2}
 \end{marginfigure}
 
+The transformation between the basis sets can be represented in matrix form:
+
 \vspace{1.5em}
 \begin{equation}
     \Forw =
@@ -60,7 +67,11 @@ and we want to change our coordinate system to use the following basis set:
     \draw[-stealth, xdarkred] (ebc2txt) -- ($(pic cs:ebc2)+(4pt,10pt)$);
 }
 
-Now, if we want to transform $\ebc{1}$ and $\ebc{2}$ into $\ebcr{1}$ and $\ebcr{2}$ using $\Forw$, we simply multiply them by $\Forw$:
+\begin{note}{The components of $\Forw$}{}
+    The columns of $\Forw$ are exactly the two vectors of $\newB$ because $\oldB$ is the standard basis. The transformation matrix is not that obvious between any two basis sets.
+\end{note}
+
+Now, if we want to transform $\ebr{1}$ and $\ebr{2}$ into $\ebcr{1}$ and $\ebcr{2}$ using $\Forw$, we simply multiply each of the vectors by $\Forw$:
 \begin{align}
     \ebcr{1} &= \Forw \ebr{1},\\\nonumber
     \ebcr{2} &= \Forw \ebr{2}.
@@ -75,13 +86,13 @@ To make \autoref{eq:transforming_ebs} more concise, we can collect the two vecto
         1 & 0\\
         0 & 1
     \end{bmatrix} = \rowvec{\eb{1},\eb{2}}
-    \color{black}.
+    \color{black},
     \label{eq:eb_matrix}
 \end{equation}
 
-We then get that \autoref{eq:transforming_ebs} can be written in vector-matrix notation as
+and find that \autoref{eq:transforming_ebs} can be written in vector-matrix notation as
 \begin{equation}
-    \color{xdarkred}\ebcr{} = \rowvec{\eb{1};\eb{2}}
+    \color{xdarkred}\ebcr{} = \rowvec{\ebcr{1};\ebcr{2}}
     \color{black} =
     \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
     \color{black}
@@ -94,21 +105,25 @@ We then get that \autoref{eq:transforming_ebs} can be written in vector-matrix n
 \end{equation}
 
 The reverse transformation can be calculated by applying the inverse transformation $\Backw$ on \autoref{eq:full_forward_trans}:
-\begin{equation}
+\begin{align}
     \color{xdarkred}\rowvec{\ebc{1};\ebc{2}}
-    \color{black}\Backw =
+    \color{black}\Backw &=
     \left(
         \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
         \color{black} \Forw
-    \right)\Backw =
-    \color{xdarkblue}\rowvec{\eb{1};\eb{2}}.
+    \right)\Backw \nonumber\\
+                        &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
+                           \color{black}\Forw\Backw \nonumber\\
+                        &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
+                            \color{black}\bm{I}_{2} \nonumber\\
+                        &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}.
     \label{eq:eb_from_ebc}
-\end{equation}
+\end{align}
 (where in our case $\Backw=\begin{bmatrix}\frac{1}{4} & \frac{1}{2}\\ -1 & 2\end{bmatrix}$)
 
-To summarize: given a set $\oldB$ of basis vectors in $\Rs[2]$, we can transform them into the basis vectors set $\newB$ by using the forward transformation $\Forw=\begin{bmatrix}F_{11} & F_{12} \\ F_{21} & F_{22}\end{bmatrix}$. To get back the original basis vectors from the transformed vectors we use the inverse transfomation $\Backw=\begin{bmatrix}F_{11} & F_{12} \\ F_{21} & F_{22}\end{bmatrix}^{-1}$. If the matrix $Forw$ is invertible - i.e. if its two columns are not linearly depended (equivalently, if $F_{11}F_{22}\neq F_{12}F_{21}$), then $\Backw=\frac{1}{F_{11}F_{22}-F_{12}F_{21}}\begin{bmatrix}F_{22} & -F_{12} \\ -F_{21} & F_{11}\end{bmatrix}$.
+\underline{To summarize}: given a set $\oldB$ of basis vectors in $\Rs[2]$, we can transform it into the basis vectors set $\newB$ by using the forward transformation $\Forw=\begin{bmatrix}F_{11} & F_{12} \\ F_{21} & F_{22}\end{bmatrix}$. To get back the original basis vectors from the transformed vectors we use the inverse transfomation $\Backw=\begin{bmatrix}F_{11} & F_{12} \\ F_{21} & F_{22}\end{bmatrix}^{-1}$ (if it exists - i.e. if $\Forw$ is invertible).
 
-\subsection{The more general case, $\Rs[n]$}
+\subsection{The more general case: $\Rs[n]$}
 In $\Rs[n]$ the transformations behave in a similar way: given the transformation rule that each new basis vector $\ebcr{i}\in\newB$ is a linear combination of the old basis vector set $\oldB$, i.e.
 \begin{align*}
     \ebcr{1} &= F_{11}\ebr{1} + F_{12}\ebr{2} + \dots + F_{1n}\ebr{n},\\\nonumber
@@ -126,12 +141,11 @@ we can write the transformation in matrix form as
     \label{eq:full_coords_trans}
 \end{equation}
 
-Per new basis vector $\ebcr{i}$ \autoref{eq:full_coords_trans} has the form
+\autoref{eq:full_coords_trans} can be written in index notation, which shows us how each vector is transformed:
 \begin{equation}
     \ebcr{j} = \displaystyle\sum_{k=1}^{n}F_{kj}\ebr{k}.
     \label{eq:coords_trans_per_vector}
 \end{equation}
-
 Similarly, the inverse operation is given by
 \begin{align*}
     \ebr{1} &= F^{-1}_{11}\ebcr{1} + F^{-1}_{12}\ebcr{2} + \dots + F^{-1}_{1n}\ebcr{n},\\\nonumber
@@ -140,7 +154,7 @@ Similarly, the inverse operation is given by
     \ebr{n} &= F^{-1}_{n1}\ebcr{1} + F^{-1}_{n2}\ebcr{2} + \dots + F^{-1}_{nn}\ebcr{n},
     \label{eq:full_BACK_coords_trans_as_equations}
 \end{align*}
-its matrix form is
+with the matrix form being
 \begin{equation}
     \color{xdarkblue}\rowvec{\eb{1},\eb{2},\dots,\eb{n}}
     \color{black}=
@@ -148,12 +162,11 @@ its matrix form is
     \color{black}\GNMatrix{F^{-1}}{n}{n},
     \label{eq:full_BACK_coords_trans}
 \end{equation}
-and per basis vector the transformation is
+and the index notation being
 \begin{equation}
     \ebr{i} = \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\ebcr{j}.
     \label{eq:coords_BACK_trans_per_vector}
 \end{equation}
-
 By subtituting \autoref{eq:coords_trans_per_vector} into \autoref{eq:coords_BACK_trans_per_vector}, we get
 \begin{align}
     \ebr{i} &= \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\ebcr{j}\\\nonumber
@@ -165,10 +178,69 @@ By subtituting \autoref{eq:coords_trans_per_vector} into \autoref{eq:coords_BACK
     \draw[curly={xdarkgreen}{5pt}{9pt}] ($(pic cs:scval1)+(0,-10pt)$) -- ($(pic cs:scval2)+(0,-10pt)$) node[midway, below, yshift=-13pt] {this is just a number!}; 
 }
 
-\autoref{eq:transformation_subtitution} just tells us something we already know: each basis vector $\ebr{i}$ equals to a linear combination of the \textit{same set} of basis vectors. This must mean that for $k=i$ the number in paranthesis is one, and for any other value of $k$ it is zero - i.e. it equals $\delta_{ik}$:
+Now, \autoref{eq:transformation_subtitution} simply tells us something we already know: each basis vector $\ebr{i}$ is equal to a linear combination of the \textit{same set} of basis vectors. This must mean that for $k=i$ the number in paranthesis is one, and for any other value of $k$ it is zero - i.e. it equals $\delta_{ik}$:
 \begin{equation}
     \ebr{i}=\displaystyle\sum_{k=1}^{n}\delta_{ik}\ebr{k}.
     \label{eq:trans_delta}
 \end{equation}
 
-In turn, \autoref{eq:trans_delta} means that the matrix $\Forw\Backw=\bm{I}_{n}$, the identity matrix in $\Rs[n]$ - and thus the matrices $\Forw$ and $\Backw$ are eachother's inverses.
+In turn, \autoref{eq:trans_delta} means that the matrix $\Forw\Backw=\bm{I}_{n}$, the identity matrix in $\Rs[n]$ - and thus the matrices $\Forw$ and $\Backw$ are eachother's inverses, exactly as we expect.
+
+\subsection{Components transformation}
+Now let us discuss how the \textit{components} of a vector transform under change of basis: suppose we have the vector $\vgreen$ as depicted in \autoref{fig:vec_in_2_basis_sets}. Using the standard basis set (depicted in blue) we can write $\vgreen=\ebr{1}+\ebr{2}$, or simply $\vgreen=\color{xdarkgreen}{\colvec{1;1}}$. However, by using the basis set $\newB=\left\{2\ebr{1};\ebr{2}\right\}$ (i.e. $\ebr{1}$ is scaled by $2$), $\vgreen$ is now $\vgreen=\frac{1}{2}\ebcr{1}+\ebcr{2}=\color{xdarkgreen}{\colvec{\frac{1}{2};1}}$.
+
+\begin{marginfigure}[0\baselineskip]
+    \begin{center} 
+        \begin{tikzpicture}
+            \begin{axis}[
+                xynoaxes,
+                width=6cm, height=6cm,
+                xmin=-0.75, xmax=2.5,
+                ymin=-0.75, ymax=2.5,
+                xtick={0,1,2}, extra x ticks=0,
+                ytick={0,1,2}, extra y ticks=0,
+                major grid style={dotted, draw=black!50},
+            ]
+                \draw[vector={xdarkred}] (0,0) -- (2,0) node[pos=1.0, below] {$\ebc{1}=2\eb{1}$};
+                \draw[vector={xdarkblue}] (0,0) -- (1,0) node[below] {$\eb{1}$};
+                \draw[vector={xdarkblue}] (0,0) -- (0,1) node[pos=1.2] {$\eb{2}$};
+                \draw[vector={xdarkgreen}] (0,0) -- (1,1) node[pos=1.2] {$\vec{v}$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{A vector $\vgreen$ and two different sets of basis vectors: in blue the standard basis vectors and in red the basis set $\newB=\left\{2\ebr{1},\ebr{2}\right\}$.}
+    \label{fig:vec_in_2_basis_sets}
+\end{marginfigure}
+
+We see that by scaling a basis vector by $2$, its repspective component is scaled by $\frac{1}{2}$. In general, when we scale the basis vector $i$ by a non-zero scalar $\alpha$, the respective $i$-th component is scaled by $\frac{1}{\alpha}$.
+
+What about rotating the basis set? Again, we take the vector from \autoref{fig:vec_in_2_basis_sets}, but this time we rotate the standard basis set by some angle $\theta$ (\autoref{fig:vec_in_2_basis_sets_2}). The result is that the vector $\vgreen$ is rotated by $-\theta$ with respect to the new basis set. If you don't see this, look at the angle between $\vgreen$ and $\ebr{1}$: it is exactly $\ang{45}$ (since $\vgreen=\ebr{1}+\ebr{2}$). The angle between $\vgreen$ and $\ebcr{1}$, on the other hand, is smaller than $\ang{45}$ - which means that $\vgreen$ got relatively rotated \textit{towards} it. This is the opposite direction of the rotation from $\ebr{1}$ to $\ebcr{1}$.
+
+\begin{marginfigure}[0\baselineskip]
+    \begin{center} 
+        \begin{tikzpicture}
+            \begin{axis}[
+                xynoaxes,
+                width=6cm, height=6cm,
+                xmin=-0.75, xmax=2.5,
+                ymin=-0.75, ymax=2.5,
+                xtick={0,1,2}, extra x ticks=0,
+                ytick={0,1,2}, extra y ticks=0,
+                major grid style={dotted, draw=black!50},
+            ]
+                \pgfmathsetmacro{\th}{30}
+                \draw[opacity=0.5, thick, -stealth, densely dotted] (-0.15,1.2) arc (100:{100+\th-10}:1.15);
+                \draw[opacity=0.5, thick, -stealth, densely dotted] (1.15,0.15) arc (10:{\th-5}:1.15);
+                \draw[vector={xdarkblue}] (0,0) -- (1,0) node[pos=1.2] {$\eb{1}$};
+                \draw[vector={xdarkblue}] (0,0) -- (0,1) node[pos=1.2] {$\eb{2}$};
+                \draw[vector={xdarkred}] (0,0) -- ({cos(\th)},{sin(\th)}) node[pos=1.15] {$\ebc{1}$};
+                \draw[vector={xdarkred}] (0,0) -- ({sin(-\th)},{cos(\th)}) node[pos=1.15] {$\ebc{2}$};
+                \draw[vector={xdarkgreen}] (0,0) -- (1,1) node[pos=1.2] {$\vec{v}$};
+            \end{axis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{A vector $\vgreen$ and two different sets of basis vectors: in blue the standard basis vectors and in red the basis set $\newB=\left\{2\ebr{1},\ebr{2}\right\}$.}
+    \label{fig:vec_in_2_basis_sets_2}
+\end{marginfigure}
+
+It seems that vector coordinates transform \textit{counter} to the change in basis. To be sure, let us take a look at
