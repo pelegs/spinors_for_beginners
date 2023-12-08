@@ -1,106 +1,127 @@
 \section{Vector Spaces Beyond $\Rs[n]$}
-\subsection{Why go beyond $\Rs[n]$?}
-\newthought{As mentiond before}, I'm a strong believer in studying linear algebra starting from the intuitive and easy to visualize geomteric cases - that is, the spaces $\Rs[2]$ and $\Rs[3]$. The generalization to $\Rs[n]$ is then pretty straight forward. However, there is nothing special about $\Rs[n]$ as a vector space (or even $\Cs[n]$ for that matter) - any set of objects with similar strucure to $\Rs[n]$ can be analyzed to yield equivalent properties.
+This section will cover the formal definition of vectors, so that the reader learns how to apply linear algebra ideas from $\Rs[n]$ into any abstract vector space.
 
-What do I mean by a set having a \enquote{similar structure} to $\Rs[n]$? This can answered by looking at the most fundamental properties of $\Rs[n]$ and looking for other mathematical objects which have these (or equivalent) properties. In this chapter we will find out that there are, in fact, many such objects - for example matrices, polynomials, and even (some) functions. Understanding the similarities to $\Rs[n]$ will then allow us to derive their own version of the ideas linear algebra gifts us with in regard to $\Rs[n]$ - such as (but not limited to!) meaningful subspaces, change of basis, eigen values/vectors and so on.
-
-These ideas will be proven as quite strong tools for any scientific field based in mathematics. In fact, many of the known advanced mathematical topics such as differential equations, Fourier series and transforms, graph theory and more - all use linear algebra on some mathematical structures except $\Rs[n]$.
-
-\subsection{The Fundamental Properties of $\Rs[n]$}
-So what are the fundamental properties of $\Rs[n]$ I mentioned? They are the following (note - some will seem trivial to even mention, but are important for generalization):
-\begin{descitemize}
-    \item[Closure of vector addition] adding together any two vectors in $\Rs[n]$ always results in a vector in $\Rs[n]$. Mathematically:
-    \begin{equation}
-        \forall\vec{u},\vec{w}\in\Rs[n]: \vec{v}+\vec{w}=\vec{a}\in\Rs[n].
-        \label{eq:vector_addition_closure}
-    \end{equation}
-    (Read: \enquote{for any vectors $\vec{u}$ and $\vec{w}$ in $\Rs[n]$, their sum, here called $\vec{a}$, is also a vector in $\Rs[n]$}.)
-    
-    \item[Commutativity of vector addition] it doesn't matter in which order we add to vectors together, the result is always the same (remember the parallelogram rule):
-    \begin{equation}
-        \vec{u}+\vec{v}=\vec{v}+\vec{u}.
-        \label{eq:vector_addition_commutative_2}
-    \end{equation}
-
-    \item[Associativity of vector addition] the order of adding multiple vectors also does not matter: for any three vectors $\vec{u},\ \vec{v},\ \vec{w}$ in $\Rs[n]$,
-    \begin{equation}
-        \vec{u}+\left(\vec{v}+\vec{w}\right) = \left(\vec{u}+\vec{v}\right)+\vec{w}.
-        \label{eq:vector_addition_associative}
-    \end{equation}
-    
-    \item[Existence of zero] there's always a vector which is neutral to addition - this is of course the zero vector $\vec{0}$:
-    \begin{equation}
-        \forall \vec{u}\in\Rs[n]:\ \vec{u}+\vec{0}=\vec{0}+\vec{u}=\vec{u}.
-        \label{eq:vector_zero_existence}
-    \end{equation}
-
-    \item[Existence of additive inverse] any vector $\vec{v}\in\Rs[n]$ has an inverse:
-    \begin{equation}
-        \forall \vec{v}\in\Rs[n]:\ \exists\left(-\vec{v}\right), \vec{v}+\left(-\vec{v}\right) = \vec{0}.
-        \label{eq:vector_zero_addition}
-    \end{equation}
-
-\item[Closure of scalar multiplication] the result of scaling any vector $\vec{v}\in\Rs[n]$ by a real number $\lambda\in\Rs$ is also a vector in $\Rs[n]$:
-    \begin{equation}
-        \forall\vec{v}\in\Rs[n] \text{and}\ \forall\lambda\in\Rs:\ \lambda\vec{v}\in\Rs[n].
-        \label{eq:scalar_multiplication_closure}
-    \end{equation}
-
-\item[Associativity of scalar multiplication] the order of scaling a vector $\vec{v}$ by any two scalars $\lambda,\mu$ doesn't matter - the result would be the same no matter if we first scale $\vec{v}$ by $\lambda$ and then by $\mu$, or first scale $\vec{v}$ by $\mu$ and then by $\lambda$:
-    \begin{equation}
-        \left(\lambda\vec{v}\right)\cdot\mu = \lambda\cdot\left(\mu\vec{v}\right).
-        \label{eq:scalar_multiplication_associative}
-    \end{equation}
-
-    \item[Existnce of unity] the number $1$ is neutral with regards to vector scaling: for any vector $\vec{v}\in\Rs[n]$, scaling $\vec{v}$ by $1$ results in $\vec{v}$:
-        \begin{equation}
-            \forall \vec{v}\in\Rs[n]: 1\vec{v}=\vec{v}.
-            \label{eq:scalar_multiplication_unity}
-        \end{equation}
-
-    \item[Distributive laws] vector addition and scaling are distributive together with addition of scalars, i.e. for any $\vec{v},\vec{u}\in\Rs[n]$ and $\lambda,\mu\in\Rs$:
-        \begin{align}
-            \lambda\left(\vec{v}+\vec{w}\right) &= \lambda\vec{v} + \lambda\vec{w},\ \text{and}\\ \left(\lambda+\mu\right)\vec{v} &= \lambda\vec{v} + \mu\vec{v}.
-            \label{eq:label}
-        \end{align}
-\end{descitemize}
-
-All these properties ensure that we can perform the familiar linear aglebra operations on vectors in $\Rs[n]$. For example, in order to define a basis set we need to be able to define a linear combination of vectors which is in the same space as the vectors themselves. To do that, we need to be able to scale and add vectors and stay in the same space - these are the closure properties.
-
-Let us now see two examples of mathematical objects which have these properties: polynomials of degree $n$, and functions $f:\Rs\to\Rs$ defined on some interval $I=[a,b]$ (where $a,b\in\Rs$ and $a<b$). We will then see how classifying them as vector spaces can yield useful results.
-
-\subsection{Polynomials of degree $n$}
-First, we should define exactly which polynomials we are discussing: these are the functions of the type $P:\Rs\to\Rs$ (i.e. they take real numbers as input and give real numbers as outputs) and of the form
-\begin{equation}
-    P_{n}(x) = a_{0} + a_{1}x + a_{2}x^{2} + \dots + a_{n}x^{n} = \displaystyle\sum_{k=0}^{n}a_{k}x^{k},
-    \label{eq:polynomials_for_analysis}
-\end{equation}
-where $a_{i}\in\Rs$ and $n\in\mathbb{N}$ (i.e. $n=1,2,3,\dots$). Let us define as $V$ the set of all these polynomials. Indeed, adding together two polynomials in $V$, namely $P_{n}(x)=\displaystyle\sum_{k=0}^{n}p_{k}x^{k}$ and $Q_{n}(x)=\displaystyle\sum_{k=0}^{n}q_{k}x^{k}$, result in a third polynomial of the form:
-\begin{align}
-    P_{n}(x) + Q_{n}(x) &= p_{0}+q_{0} + \left(p_{1}+q_{1}\right)x + \left(p_{2}+q_{2}\right)x^{2} + \dots + \left(p_{n}+q_{n}\right)x^{n}\\\nonumber
-                        &= \displaystyle\sum_{k=0}^{n}\left(p_{k}+q_{k}\right)x^{k}\in V.
-    \label{eq:adding_polynomials}
-\end{align}
-
-Scaling any polynomial $P_{n}(x)\in V$ by some real number $\alpha$ also results in a polynomial in $V$:
-\begin{align}
-    \alpha P_{n}(x) &= \alpha \displaystyle\sum_{k=0}^{n}p_{k}x^{n}\\\nonumber
-                    &= \displaystyle\sum_{k=0}^{n}(\alpha p_{k})x^{k} \in V.
-    \label{eq:scaling_polynomials}
-\end{align}
-(since $\alpha p_{k}$ is a real number)
-
-I encourage you to show that the polynomials in $V$ conform to the rest of the vector properties. I will however show by myself two of these properties, since they might be confusing at first: these are the existence of a zero polynomial, and $1$ being nutral in regards to scaling.
-\begin{descitemize}
-    \item[Zero polynomial] the polynomial $P_{n}(x) = 0$ (i.e. the polynomial with all coefficients being zero) is neutral to addition. If we look at \cref{eq:adding_polynomials} this becomes obvious.
-    \item[Unity scalar] same as with geometric vectors, the number $1$ is neutral in regards to scaling polynomials. Again, simply look at the definition of scaling (\cref{eq:scaling_polynomials}) makes this pretty clear.
-\end{descitemize}
-
-MORE TEXT
-
-\subsection{Real Functions defined on an interval $[a,b]$}
+% \subsection{Why go beyond $\Rs[n]$?}
+% \newthought{As mentiond before}, I'm a strong believer in studying linear algebra starting from the intuitive and easy to visualize geomteric cases - that is, the spaces $\Rs[2]$ and $\Rs[3]$. The generalization to $\Rs[n]$ is then pretty straight forward. However, there is nothing special about $\Rs[n]$ as a vector space (or even $\Cs[n]$ for that matter) - any set of objects with similar strucure to $\Rs[n]$ can be analyzed to yield equivalent properties.
+%
+% What do I mean by a set having a \enquote{similar structure} to $\Rs[n]$? This can answered by looking at the most fundamental properties of $\Rs[n]$ and looking for other mathematical objects which have these (or equivalent) properties. In this chapter we will find out that there are, in fact, many such objects - for example matrices, polynomials, and even (some) functions. Understanding the similarities to $\Rs[n]$ will then allow us to derive their own version of the ideas linear algebra gifts us with in regard to $\Rs[n]$ - such as (but not limited to!) meaningful subspaces, change of basis, eigen values/vectors and so on.
+%
+% These ideas will be proven as quite strong tools for any scientific field based in mathematics. In fact, many of the known advanced mathematical topics such as differential equations, Fourier series and transforms, graph theory and more - all use linear algebra on some mathematical structures except $\Rs[n]$.
+%
+% \subsection{The Fundamental Properties of $\Rs[n]$}
+% So what are the fundamental properties of $\Rs[n]$ I mentioned? They are the following (note - some will seem trivial to even mention, but are important for generalization):
+% \begin{descitemize}
+%     \item[Closure of vector addition] adding together any two vectors in $\Rs[n]$ always results in a vector in $\Rs[n]$. Mathematically:
+%     \begin{equation}
+%         \forall\vec{u},\vec{w}\in\Rs[n]: \vec{v}+\vec{w}=\vec{a}\in\Rs[n].
+%         \label{eq:vector_addition_closure}
+%     \end{equation}
+%     (Read: \enquote{for any vectors $\vec{u}$ and $\vec{w}$ in $\Rs[n]$, their sum, here called $\vec{a}$, is also a vector in $\Rs[n]$}.)
+%     
+%     \item[Commutativity of vector addition] it doesn't matter in which order we add to vectors together, the result is always the same (remember the parallelogram rule):
+%     \begin{equation}
+%         \vec{u}+\vec{v}=\vec{v}+\vec{u}.
+%         \label{eq:vector_addition_commutative_2}
+%     \end{equation}
+%
+%     \item[Associativity of vector addition] the order of adding multiple vectors also does not matter: for any three vectors $\vec{u},\ \vec{v},\ \vec{w}$ in $\Rs[n]$,
+%     \begin{equation}
+%         \vec{u}+\left(\vec{v}+\vec{w}\right) = \left(\vec{u}+\vec{v}\right)+\vec{w}.
+%         \label{eq:vector_addition_associative}
+%     \end{equation}
+%     
+%     \item[Existence of zero] there's always a vector which is neutral to addition - this is of course the zero vector $\vec{0}$:
+%     \begin{equation}
+%         \forall \vec{u}\in\Rs[n]:\ \vec{u}+\vec{0}=\vec{0}+\vec{u}=\vec{u}.
+%         \label{eq:vector_zero_existence}
+%     \end{equation}
+%
+%     \item[Existence of additive inverse] any vector $\vec{v}\in\Rs[n]$ has an inverse:
+%     \begin{equation}
+%         \forall \vec{v}\in\Rs[n]:\ \exists\left(-\vec{v}\right), \vec{v}+\left(-\vec{v}\right) = \vec{0}.
+%         \label{eq:vector_zero_addition}
+%     \end{equation}
+%
+% \item[Closure of scalar multiplication] the result of scaling any vector $\vec{v}\in\Rs[n]$ by a real number $\lambda\in\Rs$ is also a vector in $\Rs[n]$:
+%     \begin{equation}
+%         \forall\vec{v}\in\Rs[n] \text{and}\ \forall\lambda\in\Rs:\ \lambda\vec{v}\in\Rs[n].
+%         \label{eq:scalar_multiplication_closure}
+%     \end{equation}
+%
+% \item[Associativity of scalar multiplication] the order of scaling a vector $\vec{v}$ by any two scalars $\lambda,\mu$ doesn't matter - the result would be the same no matter if we first scale $\vec{v}$ by $\lambda$ and then by $\mu$, or first scale $\vec{v}$ by $\mu$ and then by $\lambda$:
+%     \begin{equation}
+%         \left(\lambda\vec{v}\right)\cdot\mu = \lambda\cdot\left(\mu\vec{v}\right).
+%         \label{eq:scalar_multiplication_associative}
+%     \end{equation}
+%
+%     \item[Existnce of unity] the number $1$ is neutral with regards to vector scaling: for any vector $\vec{v}\in\Rs[n]$, scaling $\vec{v}$ by $1$ results in $\vec{v}$:
+%         \begin{equation}
+%             \forall \vec{v}\in\Rs[n]: 1\vec{v}=\vec{v}.
+%             \label{eq:scalar_multiplication_unity}
+%         \end{equation}
+%
+%     \item[Distributive laws] vector addition and scaling are distributive together with addition of scalars, i.e. for any $\vec{v},\vec{u}\in\Rs[n]$ and $\lambda,\mu\in\Rs$:
+%         \begin{align}
+%             \lambda\left(\vec{v}+\vec{w}\right) &= \lambda\vec{v} + \lambda\vec{w},\ \text{and}\\ \left(\lambda+\mu\right)\vec{v} &= \lambda\vec{v} + \mu\vec{v}.
+%             \label{eq:label}
+%         \end{align}
+% \end{descitemize}
+%
+% All these properties ensure that we can perform the familiar linear aglebra operations on vectors in $\Rs[n]$. For example, in order to define a basis set we need to be able to define a linear combination of vectors which is in the same space as the vectors themselves. To do that, we need to be able to scale and add vectors and stay in the same space - these are the closure properties.
+%
+% Let us now see two examples of mathematical objects which have these properties: polynomials of degree $n$, and functions $f:\Rs\to\Rs$ defined on some interval $I=[a,b]$ (where $a,b\in\Rs$ and $a<b$). We will then see how classifying them as vector spaces can yield useful results.
+%
+% \subsection{Polynomials of degree $n$}
+% First, we should define exactly which polynomials we are discussing: these are the functions of the type $P:\Rs\to\Rs$ (i.e. they take real numbers as input and give real numbers as outputs) and of the form
+% \begin{equation}
+%     P_{n}(x) = a_{0} + a_{1}x + a_{2}x^{2} + \dots + a_{n}x^{n} = \displaystyle\sum_{k=0}^{n}a_{k}x^{k},
+%     \label{eq:polynomials_for_analysis}
+% \end{equation}
+% where $a_{i}\in\Rs$ and $n\in\mathbb{N}$ (i.e. $n=1,2,3,\dots$). Let us define as $V$ the set of all these polynomials. Indeed, adding together two polynomials in $V$, namely $P_{n}(x)=\displaystyle\sum_{k=0}^{n}p_{k}x^{k}$ and $Q_{n}(x)=\displaystyle\sum_{k=0}^{n}q_{k}x^{k}$, result in a third polynomial of the form:
+% \begin{align}
+%     P_{n}(x) + Q_{n}(x) &= p_{0}+q_{0} + \left(p_{1}+q_{1}\right)x + \left(p_{2}+q_{2}\right)x^{2} + \dots + \left(p_{n}+q_{n}\right)x^{n}\\\nonumber
+%                         &= \displaystyle\sum_{k=0}^{n}\left(p_{k}+q_{k}\right)x^{k}\in V.
+%     \label{eq:adding_polynomials}
+% \end{align}
+%
+% Scaling any polynomial $P_{n}(x)\in V$ by some real number $\alpha$ also results in a polynomial in $V$:
+% \begin{align}
+%     \alpha P_{n}(x) &= \alpha \displaystyle\sum_{k=0}^{n}p_{k}x^{n}\\\nonumber
+%                     &= \displaystyle\sum_{k=0}^{n}(\alpha p_{k})x^{k} \in V.
+%     \label{eq:scaling_polynomials}
+% \end{align}
+% (since $\alpha p_{k}$ is a real number)
+%
+% I encourage you to show that the polynomials in $V$ conform to the rest of the vector properties. I will however show by myself two of these properties, since they might be confusing at first: these are the existence of a zero polynomial, and $1$ being nutral in regards to scaling.
+% \begin{descitemize}
+%     \item[Zero polynomial] the polynomial $P_{n}(x) = 0$ (i.e. the polynomial with all coefficients being zero) is neutral to addition. If we look at \cref{eq:adding_polynomials} this becomes obvious.
+%     \item[Unity scalar] same as with geometric vectors, the number $1$ is neutral in regards to scaling polynomials. Again, simply look at the definition of scaling (\cref{eq:scaling_polynomials}) makes this pretty clear.
+% \end{descitemize}
+%
+% MORE TEXT
+%
+% \subsection{Real Functions defined on an interval $[a,b]$}
 
 %% !!! CORRECT ISSUE with \cref and example environment !!! %%
+
+\subsection{Dual vector spaces}
+
+Text text text.
+
+\begin{definition}{Dual space}{dual_space}
+    Given a vector space $V$ over a field $\mathbb{F}$, its \textit{dual space}, denoted $\dualspace{V}$, is the set of all the linear functions $\phi:V\to\mathbb{F}$. The elements of $\dualspace{V}$ are called \textit{dual vectors}.
+\end{definition}
+
+A dual space equipped with a closed addition operation between any two of its elements and a closed product between its elements and the elements of the field $\mathbb{F}$ is itself a \textit{vector space}, with similar structure to the space $V$.
+
+\begin{challenge}{Dual space as a vector space}{dual_vector_space_challange}
+    Show that a dual space euipped with addition and scalar product as defined above is indeed a vector space (Use the definition XXX).
+\end{challenge}
+
+To write:
+\begin{enumerate}
+    \item Examples of dual vectors of functions?..
+\end{enumerate}
 
 % Outline:
 % * Linear algebra on R^n prooved useful (e.g. linear transformations, basis sets, etc.). It would be nice to have similar results for other structures.
