@@ -1,8 +1,7 @@
 \section{Change of Coordinates}
 \newthought{In introductory linear algebra courses} you should have learned about change of coordinate systems: a coordinate system is just another name for a basis set of whatever vector space is used (in this section it's $\Rs[n]$). A change of coordinate system is the transformation of vectors from being represented in one basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ to being represented in another basis set $\tilde{B}=\left\{\ebc{1},\ebc{2},\dots,\ebc{n}\right\}$. Since such transformations are linear they are commonly represented in a matrix form.
 
-In this section we will discuss \textit{how} vectors and their components transform under change of basis sets. These transformations can be quite confusing, so I color coded the equations consistently as a visual guide. In addition, the $\Rs[2]$ case is intoduced first, before giving the generalized form for $\Rs[n]$.
-% GIVE CREDIT TO EIGENCHRIS HERE!
+In this section we will discuss \textit{how} vectors and their components transform under change of basis sets. These transformations can be quite confusing, so I color coded the equations consistently as a visual guide. In addition, the $\Rs[2]$ case is intoduced first, before giving the generalized form for $\Rs[n]$. \sidenote{This section is heavily based on Eigenchris' video series \href{https://www.youtube.com}{Tensors for Beginners}.}
 
 Before we do this, there is one important idea to understand: vectors themselves do not change under change of basis - their magnitude and orientation stay the same no matter how \textit{we} measure them. The component of a vector are a way to describe (or \enquote{measure}) the vector using a certain basis set, so it should not be surprising that they change under change of basis.
 
@@ -59,7 +58,6 @@ The transformation between the basis sets can be represented in matrix form:
     \end{bmatrix}.
     \label{eq:forward_trans}
 \end{equation}
-
 \tikz[overlay, remember picture]{
     \node[xdarkred] (ebc1txt) at ($(pic cs:ebc1)+(4pt,1cm)$) {$\ebc{1}$};
     \node[xdarkred] (ebc2txt) at ($(pic cs:ebc2)+(4pt,1cm)$) {$\ebc{2}$};
@@ -72,11 +70,13 @@ The transformation between the basis sets can be represented in matrix form:
 \end{note}
 
 Now, if we want to transform $\ebr{1}$ and $\ebr{2}$ into $\ebcr{1}$ and $\ebcr{2}$ using $\Forw$, we simply multiply each of the vectors by $\Forw$:
-\begin{align}
-    \ebcr{1} &= \Forw \ebr{1},\\\nonumber
-    \ebcr{2} &= \Forw \ebr{2}.
+\begin{equation}
+    \begin{aligned}
+        \ebcr{1} &= \Forw \ebr{1},\\\nonumber
+        \ebcr{2} &= \Forw \ebr{2}.
+    \end{aligned}
     \label{eq:transforming_ebs}
-\end{align}
+\end{equation}
 
 To make \autoref{eq:transforming_ebs} more concise, we can collect the two vectors into a matrix disguised as a row vecor:
 \begin{equation}
@@ -105,20 +105,22 @@ and find that \autoref{eq:transforming_ebs} can be written in vector-matrix nota
 \end{equation}
 
 The reverse transformation can be calculated by applying the inverse transformation $\Backw$ on \autoref{eq:full_forward_trans}:
-\begin{align}
-    \color{xdarkred}\rowvec{\ebc{1};\ebc{2}}
-    \color{black}\Backw &=
-    \left(
-        \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
-        \color{black} \Forw
-    \right)\Backw \nonumber\\
-                        &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
-                           \color{black}\Forw\Backw \nonumber\\
-                        &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
-                            \color{black}\bm{I}_{2} \nonumber\\
-                        &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}.
+\begin{equation}
+    \begin{aligned}
+        \color{xdarkred}\rowvec{\ebc{1};\ebc{2}}
+        \color{black}\Backw &=
+        \left(
+            \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
+            \color{black} \Forw
+        \right)\Backw \nonumber\\
+                            &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
+                               \color{black}\Forw\Backw \nonumber\\
+                            &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}
+                                \color{black}\bm{I}_{2} \nonumber\\
+                            &= \color{xdarkblue}\rowvec{\eb{1};\eb{2}}.
+    \end{aligned}
     \label{eq:eb_from_ebc}
-\end{align}
+\end{equation}
 (where in our case $\Backw=\begin{bmatrix}\frac{1}{4} & \frac{1}{2}\\ -1 & 2\end{bmatrix}$)
 
 \underline{To summarize}: given a set $\oldB$ of basis vectors in $\Rs[2]$, we can transform it into the basis vectors set $\newB$ by using the forward transformation $\Forw=\begin{bmatrix}F_{11} & F_{12} \\ F_{21} & F_{22}\end{bmatrix}$. To get back the original basis vectors from the transformed vectors we use the inverse transfomation $\Backw=\begin{bmatrix}F_{11} & F_{12} \\ F_{21} & F_{22}\end{bmatrix}^{-1}$ (if it exists - i.e. if $\Forw$ is invertible).
@@ -168,12 +170,14 @@ and the index notation being
     \label{eq:coords_BACK_trans_per_vector}
 \end{equation}
 By subtituting \autoref{eq:coords_trans_per_vector} into \autoref{eq:coords_BACK_trans_per_vector}, we get
-\begin{align}
-    \ebr{i} &= \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\ebcr{j}\\\nonumber
-            &= \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\left(\displaystyle\sum_{k=1}^{n}F_{kj}\ebr{k}\right)\\\nonumber
-            &= \displaystyle\sum_{k=1}^{n}\left(\tikzmark{scval1}\displaystyle\sum_{j=1}^{n}F_{kj}F^{-1}_{ji}\tikzmark{scval2}\right)\ebr{k}.
+\begin{equation}
+    \begin{aligned}
+        \ebr{i} &= \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\ebcr{j}\\
+                &= \displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\left(\displaystyle\sum_{k=1}^{n}F_{kj}\ebr{k}\right)\\
+                &= \displaystyle\sum_{k=1}^{n}\left(\tikzmark{scval1}\displaystyle\sum_{j=1}^{n}F_{kj}F^{-1}_{ji}\tikzmark{scval2}\right)\ebr{k}.
+    \end{aligned}
     \label{eq:transformation_subtitution}
-\end{align}
+\end{equation}
 \tikz[overlay, remember picture]{
     \draw[curly={xdarkgreen}{5pt}{9pt}] ($(pic cs:scval1)+(0,-10pt)$) -- ($(pic cs:scval2)+(0,-10pt)$) node[midway, below, yshift=-13pt] {this is just a number!}; 
 }
@@ -243,4 +247,101 @@ What about rotating the basis set? Again, we take the vector from \autoref{fig:v
     \label{fig:vec_in_2_basis_sets_2}
 \end{marginfigure}
 
-It seems that vector coordinates transform \textit{counter} to the change in basis. To be sure, let us take a look at
+It seems that vector coordinates transform \textit{counter} to the change in basis. To be sure, let us take a look at the most general case. Given any vector $\vgreen$ we can express it in a basis set $\oldB=\left\{\ebr{1},\ebr{2},\dots,\ebr{n}\right\}$ using the respective components $\color{xblue}v_{i}\color{black}$:
+\begin{equation}
+    \vgreen = \displaystyle\sum_{i=1}^{n}\color{xblue}v_{i}\ebr{i}.
+    \label{eq:vector_in_old_basis}
+\end{equation}
+In some other basis $\newB=\left\{\ebcr{1},\ebcr{2},\dots,\ebcr{n}\right\}$ it has other components which we denote as $\color{xred}\tilde{v}_{i}\color{black}$:
+\begin{equation}
+    \vgreen = \displaystyle\sum_{j=1}^{n}\color{xred}\tilde{v}_{j}\ebcr{j}.
+    \label{eq:vector_in_new_basis}
+\end{equation}
+We can subtitute into \autoref{eq:vector_in_old_basis} the explicit form of the vectors in $\oldB$ (\autoref{eq:coords_BACK_trans_per_vector}):
+\begin{equation}
+    \begin{aligned}
+        \vgreen &= \displaystyle\sum_{i=1}^{n}\color{xblue}v_{i}\ebr{i} \nonumber\\
+                &= \displaystyle\sum_{i=1}^{n}\color{xblue}v_{i}
+                   \color{black}\left(\displaystyle\sum_{j=1}^{n}F^{-1}_{ji}\ebcr{j}\right) \nonumber\\
+                &= \displaystyle\sum_{i=1}^{n}\tikzmark{vstart}{}\displaystyle\sum_{j=1}^{n}\left(F^{-1}_{ji}\color{xblue}v_{i}\tikzmark{vend}{}\color{black}\right)\ebcr{i}.
+    \end{aligned}
+    \label{eq:transformation_of_components}
+\end{equation}
+\tikz[overlay, remember picture]{
+    \draw[curly={xred}{5pt}{9pt}] ($(pic cs:vstart)+(0,-5pt)$) -- ($(pic cs:vend)+(0,-5pt)$) node[midway, below, yshift=-15pt] {$\tilde{v}_{i}$}; 
+}
+
+Comparing the last equality in \autoref{eq:transformation_of_components} to \autoref{eq:vector_in_old_basis}, we see that under a basis change the components of $\vgreen$ go from $\color{xblue}v_{i}\color{black}$ to $\color{xred}\tilde{v}_{i}\color{black}$ via the \textit{inverse transformation} $\Backw$. This is in agreement with what we saw in the specific example: the inverse transformation of scaling is scaling by the inverse, and the inverse transformation of rotation by an angle is rotation by the opposite angle.
+
+Due to this behaviour we say that vectors are \textit{contravarient}, and sometimes even refer to them as \textit{contravarient vectors}\sidenote{this is a hint that there is at least another type of vectors: those that transform together with a change in basis, or \textit{covarient vectors}. Indeed, we will meet these \enquote{co-vectors} soon.}
+
+\subsection{Index position and the Einstein summation convention}
+To always remember that vector components are contravarient in regards to change of basis, we will from now on denote them using a superscript instead of a subscript:
+\begin{equation}
+    \vec{v} = \displaystyle\sum_{i=1}^{n}v^{i}\eb{i}.
+    \label{eq:superscript_indeces}
+\end{equation}
+
+In the case of a generic vector in $\Rs[n]$ the upper-index notation translates into writing its explicit column-component form as follows:
+\begin{equation}
+    \vec{v} = \GenericColVec{v}
+    \label{eq:upper_index_colvec}
+\end{equation}
+It is important to always keep in mind that using the upper-index notation for vector components means that powers have to be more explicitely written, as to not confuse the reader. For example, the standard $L_{2}$ norm is written as
+\begin{equation}
+    \vnorm{v} = \sqrt{\left(v^{1}\right)^{2}+\left(v^{2}\right)^{2}+\dots+\left(v^{n}\right)^{2}}.
+    \label{eq:L2_norm_upper_index_notation}
+\end{equation}
+While this can seem as unnessecary complication now, it will soon become clear why it is needed - especially when we use multiple components of different types (some contravarient and some covarient).
+
+In addition to the upper index notation for vector components, this book (and almost all relevant texts) use the \textit{Einstein summation convention}: where an index appears twice in a single term - once as an upper index and once as a lower index (the order does not matter), we should view the term as having a sum infront of it. This sum is done over all relevant values of the index in question (unless otherwise stated). Below are some examples of using this convention.
+
+\begin{example}{Einstein summation convention \#1}{esc1}
+    The standard way of writing a vector explicitely in the basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ is
+    \begin{equation}
+        \vec{v} = \displaystyle\sum_{i=1}^{n}v^{i}\eb{i}.
+        \label{eq:std_vector_sum}
+    \end{equation}
+    Using Einstein's convention, this becomes simply
+    \begin{equation}
+        \vec{v} = v^{i}\eb{i},
+        \label{eq:einsten_vec}
+    \end{equation}
+    where from context we know that $i\in\left\{1,2,\dots,n\right\}$.
+\end{example}
+
+\begin{example}{Einstein summation convention \#2}{esc2}
+    The inner product of two vectors $\vec{v},\vec{w}$ can be written explicitely as
+    \begin{equation}
+        \inner{\vec{v}}{\vec{w}} = \displaystyle\sum_{i=1}^{n}v^{i}w^{i}.
+        \label{eq:inner_prod_std}
+    \end{equation}
+    (note that the upper-index notation is used here)
+
+    However, if we consider the vectors as being matrices, the first being an $1\times n$ matrix and the second an $n\times1$ matrix, we can transpose the first vector from standard column form
+    \[
+        \vec{v} = \GenericColVec{v}
+    \]
+    into the row form:
+    \[
+        \vec{v}^{\top} = \GenericRowVec{v}.
+    \]
+    (note that the components of $\vec{v}$ as a row-vector are in lower-index notation. The reason for this will become clearer in the next section)
+    Indeed, the matrix product of a $1\times n$ matrix with an $n\times1$ matrix has dimenstion of $1\times1=1$, just like a scalar.
+
+    Using Einstein's convention, we can write the inner product as
+    \begin{equation}
+        \inner{\vec{v}}{\vec{w}} = \GenericRowVec{v}\GenericColVec{w} = v_{i}w^{i}.
+        \label{eq:label}
+    \end{equation}
+    where, again, we know that $i\in\left\{1,2,\dots,n\right\}$ from the context.
+\end{example}
+
+\begin{example}{Einstein summation convention \#3}{esc3}
+    The product of an $m\times n$ matrix $A$ and a vector $\vec{v}$ can be written in component form as
+    \begin{equation}
+        \left(A\vec{v}\right)^{i} = \displaystyle\sum_{j=1}^{n}A_{ij}v^{j}.
+        \label{eq:label}
+    \end{equation}
+    \ldots FINISH WRITING THIS CONFUSING PART
+\end{example}
