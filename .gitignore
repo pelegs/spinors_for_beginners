@@ -2,7 +2,7 @@
 
 # specific to this project
 ./tests/tufte-latex
-./inspiration
+./inspiration/*
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

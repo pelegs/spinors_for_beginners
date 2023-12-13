@@ -34,7 +34,7 @@ Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing
     \label{fig:rulers}
 \end{marginfigure}
 
-Now, we usually rotate rulers to align with the orientation of the magnitude we wish to measure - however here we want our rulers to also measure orientation. Therefore, instead of rotating the ruler to align with a vector we wish to measure, we \textit{project} the vector on the ruler and then take our measurement (\autoref{fig:projecting_onto_rulers}).
+In real life we usually rotate rulers to align with the orientation of the magnitude we wish to measure. However, in our case we want the rulers to also measure orientation (otherwise why not just use the norm?). So instead of rotating the ruler to align with a vector we wish to measure, we \textit{project} the vector on the ruler and then take our measurement (\autoref{fig:projecting_onto_rulers}).
 
 \begin{marginfigure}
     \begin{center}
@@ -55,8 +55,7 @@ Since projection in linear algebra is calculated via the inner product, the meas
     m = \inner{\dualvec{\alpha}}{\vec{v}}.
     \label{eq:ruler_measurement}
 \end{equation}
-
-However, since we can represent a ruler using a vector, we can use the vector representation in \autoref{eq:ruler_measurement}. And again, to distinguish ruler vectors from \enquote{regular} vectors written in an excplicit form, we write the ruler vectors as row vectors:
+However, since we can represent a ruler using a vector, we can use the vector representation in \autoref{eq:ruler_measurement}. And in order to distinguish ruler vectors from \enquote{regular} vectors written in an excplicit form, we write the ruler vectors as row vectors:
 \begin{align}
     \inner{\dualvec{\alpha}}{\vec{v}} &= \GenericRowVec{\alpha}\GenericColVec{v}\\\nonumber
                                       &= \alpha_{1}v_{1} + \alpha_{2}v_{2} + \dots + \alpha_{n}v_{n}.
@@ -89,7 +88,7 @@ In $\Rs[3]$ a ruler is represented in a similar way, but with \textit{planes} in
 \begin{marginfigure}
     \begin{center}
         \tdplotsetmaincoords{50}{110}
-        \begin{tikzpicture}[tdplot_main_coords, rotate=0, scale=0.85]
+        \begin{tikzpicture}[tdplot_main_coords, scale=0.85]
             \pgfmathsetmacro{\a}{1.5}
             \pgfmathsetmacro{\b}{\a+0.5}
             \foreach \z in {-2,-1.25,...,2}
@@ -135,10 +134,100 @@ The linearity of the dual vectors space simplifies many calculations - foremost,
 \end{example}
 
 \subsection{Basis sets and coordinate transformations}
-\begin{enumerate}
-    \item Dual basis: converting from a basis set in $V$ to its dual in $\dualspace{V}$.
-    \item Covariance of dual vectors basis change vs. contra-varience of vectors.
-\end{enumerate}
+% \begin{enumerate}
+%     \item Dual basis: converting from a basis set in $V$ to its dual in $\dualspace{V}$.
+%     \item Covariance of dual vectors basis change vs. contra-varience of vectors.
+% \end{enumerate}
+In \autoref{example:dual_linear_comb} I wrote dual vectors as coordinates in a row form. Since the dual space $\dualRs[n]$ is an $n$-dimensional real vector space, it has infinitely many basis sets, each composed of $n$ vectors. We can use any basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ in $\Rs[n]$ to create a dual basis set $\dualbasis{B}=\left\{\dualeb{1},\dualeb{2},\dots,\dualeb{n}\right\}$ in $\dualRs[n]$: since dual vectors are linear maps, we simply define the vectors in $\dualbasis{B}$ as follows:
+\begin{equation}
+    \inner{\dualeb{i}}{\eb{j}} = \delta^{i}_{j} =
+    \begin{cases}
+        1 & \text{if}\ i=j,\\
+        0 & \text{if}\ i\neq j.
+    \end{cases}
+    \label{eq:dual_basis_def}
+\end{equation}
+
+Some examples:
+\begin{example}{The standard dual basis set}{std_dual_basis}
+    Given the standard basis set in $\Rs[3]$,
+    \[
+        B = \left\{ \colvec{1;0;0},\ \colvec{0;1;0},\ \colvec{0;0;1}\right\},
+    \]
+    its corresponding dual is then
+    \[
+        \dualbasis{B}=\left\{\dualeb{1},\dualeb{2},\dualeb{3}\right\}.
+    \]
+
+    For $\dualeb{1}$ the following is true:
+    \[
+        \inner{\dualeb{1}}{\eb{1}}=1,\quad \inner{\dualeb{1}}{\eb{2}}=0,\quad \inner{\dualeb{1}}{\eb{3}}=0.
+    \]
+    If we write $\dualeb{1}=\rowvec{\alpha;\beta;\gamma}$, then we get that the first equality gives
+    \[
+        1=\inner{\dualeb{1}}{\eb{1}}=\rowvec{\alpha;\beta;\gamma}\colvec{1;0;0} = \alpha,
+    \]
+    i.e. $\alpha=1$. Similarly, the second equation gives
+    \[
+        0=\inner{\dualeb{1}}{\eb{2}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;1;0} = \beta,
+    \]
+    i.e. $\beta=0$. The third equation then gives
+    \[
+        0=\inner{\dualeb{1}}{\eb{3}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;0;1} = \gamma,
+    \]
+    i.e. $\gamma=0$. Altogether we get $\dualeb{1}=\rowvec{1;0;0}$.
+
+    Similar calculations for $\dualeb{2}$ and $\dualeb{3}$ show that $\dualeb{2}=\rowvec{0;1;0}$ and $\dualeb{3}=\rowvec{0;0;1}$.
+
+    In $\Rs[n]$ we get a similar result: the $i$-th dual basis vector is simply the row form of the $i$-th basis vector.
+
+    This is however \underline{not} true for all dual basis sets, as we will see in the next example.
+\end{example}
+
+\begin{example}{Dual basis set in $\Rs[2]$}{another_dual_basis_set}
+    Consider the following basis set in $\Rs[2]$:
+    \[
+        B = \left\{ \colvec{2;-1},\ \colvec{-1;3} \right\}.
+    \]
+\end{example}
+
+In the most general case (i.e. in $\Rs[n]$), a basis set has $n$ vectors. We can represent these basis vectors as an $n\times n$ matrix $E$, where the $j$-th \textbf{column} of $E$ is the $j$-th basis vector. Then, the set of equations defining the dual basis set (\autoref{eq:dual_basis_def}) can be written and solved in matrix form:
+\begin{equation}
+    \dualbasis{E}E = \Id{n},
+    \label{eq:dual_basis_matrix}
+\end{equation}
+where $\dualbasis{E}$ are the dual basis vectors collected together as a matrix. Since dual vectors are written in row form, the $i$-th \textbf{row} of $\dualbasis{E}$ represents the dual basis vector $\dualeb{i}$. From \autoref{eq:dual_basis_matrix} it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must have a non-zero determinant\sidenote{If you're not sure why, I strongly recommend reviewing basic linear algebra.}, we are guaranteed to find $\dualbasis{E}$. This means that for any basis set in $\Rs[n]$ the dual basis exists and is unique.
+
+\begin{example}{Dual set in $\Rs[3]$}{yet_another_dual_basis_set}
+    The following basis set
+    \[
+        B = \left\{ \colvec{0;3;-1},\ \colvec{1;0;1},\ \colvec{1;-2;2}\right\}
+    \]
+    can be represented as the matrix
+    \[
+        E =
+        \begin{bmatrix}
+             0 & 1 &  1 \\
+             3 & 0 & -2 \\
+            -1 & 1 &  2
+        \end{bmatrix}.
+    \]
+
+    The dual vectors can then be calculated from the inverse of $E$:
+    \begin{align*}
+        E^{-1} &=
+        \begin{bmatrix}
+            -2 &  1 &  2 \\
+             4 & -1 & -3 \\
+            -3 &  1 &  3
+        \end{bmatrix}\\
+        \Rightarrow \dualbasis{B} &= \left\{ \rowvec{-2;1;2},\ \rowvec{4;-1;-3},\ \rowvec{-3;1;2}\right\}.
+    \end{align*}
+    (I found the inverse using python, but feel free to do the calculation for yourself as an exercise!)
+
+    \vspace{1em}
+    Indeed, for example, $\inner{\dualeb{1}}{\eb{1}}=-2\cdot0 + 1\cdot3 -1\cdot2 = 1$, and $\inner{\dualeb{3}}{\eb{2}}=-3\cdot1+1\cdot0+3\cdot1 = 0$.
+\end{example}
 
 \subsection{The complex dual (dual vectors in $\Cs[n]$)}
 text
