@@ -211,12 +211,22 @@ Some examples:
     Note that $\dualeb{1}\neq\eb{1}^{\top}$ and $\dualeb{2}\neq\eb{2}^{\top}$! This is important, and we will discuss this thoroughly in the following paragraphs.
 \end{example}
 
-In the most general case (i.e. in $\Rs[n]$), a basis set has $n$ vectors. We can represent these basis vectors as an $n\times n$ matrix $E$, where the $j$-th \textbf{column} of $E$ is the $j$-th basis vector. Then, the set of equations defining the dual basis set (\autoref{eq:dual_basis_def}) can be written and solved in matrix form:
+In the most general case (i.e. in $\Rs[n]$), a basis set has $n$ vectors, and \autoref{eq:dual_basis_def} looks as following:
+\begin{equation}
+    \begin{aligned}
+        \inner{\dualeb{1}}{\eb{1}} &= 1,\ \inner{\dualeb{1}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeb{1}}{\eb{n}} = 0.\\
+        \inner{\dualeb{1}}{\eb{1}} &= 0,\ \inner{\dualeb{2}}{\eb{2}} = 1,\ \dots,\ \inner{\dualeb{2}}{\eb{n}} = 0.\\
+                                   &\vdots\\
+        \inner{\dualeb{n}}{\eb{1}} &= 0,\ \inner{\dualeb{n}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeb{n}}{\eb{n}} = 1.\\
+    \end{aligned}
+    \label{eq:dual_basis_def_Rn}
+\end{equation}
+The above is begging to be represented as a matrix equaion: we collect the \textit{dual} basis vectors $\left\{\dualeb{i}\right\}$ as \textbf{rows} in an $n\times n$ matrix $\dualbasis{E}$. The \textit{regular} basis vectors $\left\{\eb{j}\right\}$ are collected as \textbf{columns} of another $n\times n$ matrix $E$. Then, \autoref{eq:dual_basis_def_Rn} can be written as
 \begin{equation}
     \dualbasis{E}E = \Id{n},
     \label{eq:dual_basis_matrix}
 \end{equation}
-where $\dualbasis{E}$ are the dual basis vectors collected together as a matrix. Since dual vectors are written in row form, the $i$-th \textbf{row} of $\dualbasis{E}$ represents the dual basis vector $\dualeb{i}$. From \autoref{eq:dual_basis_matrix} it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must have a non-zero determinant\sidenote{If you're not sure why, I strongly recommend reviewing basic linear algebra.}, we are guaranteed to find $\dualbasis{E}$. This means that for any basis set in $\Rs[n]$ the dual basis exists and is unique.
+From the equation it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must have a non-zero determinant\sidenote{if you're not sure why, I strongly recommend reviewing basic linear algebra.}, we are guaranteed to find $\dualbasis{E}$. This means that for any basis set in $\Rs[n]$ the dual basis exists and is unique.
 
 \begin{example}{Dual set in $\Rs[3]$}{yet_another_dual_basis_set}
     The following basis set
@@ -246,8 +256,23 @@ where $\dualbasis{E}$ are the dual basis vectors collected together as a matrix.
     (I found the inverse using python, but feel free to do the calculation for yourself as an exercise!)
 
     \vspace{1em}
-    Indeed, for example, $\inner{\dualeb{1}}{\eb{1}}=-2\cdot0 + 1\cdot3 -1\cdot2 = 1$, and $\inner{\dualeb{3}}{\eb{2}}=-3\cdot1+1\cdot0+3\cdot1 = 0$.
+    Indeed, for example, $\inner{\dualeb{1}}{\eb{1}}=-2\cdot0 + 1\cdot3 -1\cdot2 = 1$, and $\inner{\dualeb{3}}{\eb{2}}=-3\cdot1+1\cdot0+3\cdot1 = 0$ as expected.
 \end{example}
+
+In \autoref{sec:change_of_basis} we discussed how vectors, basis vectors and vector components behave under change of basis. Now let us discuss how dual vectors, dual basis vectors and dualvector components behave under the same change. When we transform our representation of vectors from one basis set $\oldB$ to a new basis set $\newB$ we also generate a new basis for the dual space, given by \autoref{eq:dual_basis_matrix}. I will denote the dual basis of $\oldB$ as $\dualOldB$ and the dual of $\newB$ as $\dualNewB$. Let's define $\oldB$ and $\newB$ with actual numbers in $\Rs[3]$ so it is easier to follow the operations:
+\begin{equation}
+    \begin{aligned}
+        \oldB &= \Id{3},\\
+        \newB &=
+        \begin{bmatrix}
+             0 &  1 &  1 \\
+             3 &  0 & -2 \\
+            -1 &  1 &  2
+        \end{bmatrix}.
+    \end{aligned}
+    \label{eq:basis_dual_change_R3}
+\end{equation}
+(i.e. $\oldB$ is the standard basis in for $\Rs[3]$ and $\newB$ is the basis set described in \autoref{example:yet_another_dual_basis_set})
 
 \subsection{The complex dual (dual vectors in $\Cs[n]$)}
 text
