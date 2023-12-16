@@ -231,7 +231,7 @@ From the equation it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must ha
 \begin{example}{Dual set in $\Rs[3]$}{yet_another_dual_basis_set}
     The following basis set
     \[
-        B = \left\{ \colvec{0;3;-1},\ \colvec{1;0;1},\ \colvec{1;-2;2}\right\}
+        B = \left\{ \begin{bNiceMatrix}0\Block[fill=xred!20]{3-1}{}\\3\\-1\end{bNiceMatrix},\ \begin{bNiceMatrix}1\Block[fill=xgreen!20]{3-1}{}\\0\\1\end{bNiceMatrix},\ \begin{bNiceMatrix}1\Block[fill=xblue!20]{3-1}{}\\-2\\2\end{bNiceMatrix}\right\}
     \]
     can be represented as the matrix
     \[
@@ -254,7 +254,7 @@ From the equation it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must ha
             \Block[fill=xpink!20]{1-3}{}
             -3 &  1 &  3
         \end{bNiceMatrix}\\
-        \Rightarrow \dualbasis{B} &= \left\{ \rowvec{-2;1;2},\ \rowvec{4;-1;-3},\ \rowvec{-3;1;2}\right\}.
+        \Rightarrow \dualbasis{B} &= \left\{ \begin{bNiceMatrix}\Block[fill=xpurple!20]{1-3}{}-2 & 1 & 2\end{bNiceMatrix},\ \begin{bNiceMatrix}\Block[fill=xorange!20]{1-3}{}4 & -1 & -3\end{bNiceMatrix},\ \begin{bNiceMatrix}\Block[fill=xpink!20]{1-3}{}-3 & 1 & 3\end{bNiceMatrix}\right\}. 
     \end{align*}
     (I found the inverse using python, but feel free to do the calculation for yourself as an exercise!)
 
