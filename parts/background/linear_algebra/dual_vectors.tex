@@ -138,9 +138,9 @@ The linearity of the dual vectors space simplifies many calculations - foremost,
 %     \item Dual basis: converting from a basis set in $V$ to its dual in $\dualspace{V}$.
 %     \item Covariance of dual vectors basis change vs. contra-varience of vectors.
 % \end{enumerate}
-In \autoref{example:dual_linear_comb} I wrote dual vectors as coordinates in a row form. Since the dual space $\dualRs[n]$ is an $n$-dimensional real vector space, it has infinitely many basis sets, each composed of $n$ vectors. We can use any basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ in $\Rs[n]$ to create a dual basis set $\dualbasis{B}=\left\{\dualeb{1},\dualeb{2},\dots,\dualeb{n}\right\}$ in $\dualRs[n]$: since dual vectors are linear maps, we simply define the vectors in $\dualbasis{B}$ as follows:
+In \autoref{example:dual_linear_comb} I wrote dual vectors as coordinates in a row form. Since the dual space $\dualRs[n]$ is an $n$-dimensional real vector space, it has infinitely many basis sets, each composed of $n$ vectors. We can use any basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ in $\Rs[n]$ to create a dual basis set $\dualbasis{B}=\left\{\dualeblow{1},\dualeblow{2},\dots,\dualeblow{n}\right\}$ in $\dualRs[n]$: since dual vectors are linear maps, we simply define the vectors in $\dualbasis{B}$ as follows:
 \begin{equation}
-    \inner{\dualeb{i}}{\eb{j}} = \delta^{i}_{j} =
+    \inner{\dualeblow{i}}{\eb{j}} = \delta^{i}_{j} =
     \begin{cases}
         1 & \text{if}\ i=j,\\
         0 & \text{if}\ i\neq j.
@@ -156,28 +156,28 @@ Some examples:
     \]
     its corresponding dual is then
     \[
-        \dualbasis{B}=\left\{\dualeb{1},\dualeb{2},\dualeb{3}\right\}.
+        \dualbasis{B}=\left\{\dualeblow{1},\dualeblow{2},\dualeblow{3}\right\}.
     \]
 
-    For $\dualeb{1}$ the following is true:
+    For $\dualeblow{1}$ the following is true:
     \[
-        \inner{\dualeb{1}}{\eb{1}}=1,\quad \inner{\dualeb{1}}{\eb{2}}=0,\quad \inner{\dualeb{1}}{\eb{3}}=0.
+        \inner{\dualeblow{1}}{\eb{1}}=1,\quad \inner{\dualeblow{1}}{\eb{2}}=0,\quad \inner{\dualeblow{1}}{\eb{3}}=0.
     \]
-    If we write $\dualeb{1}=\rowvec{\alpha;\beta;\gamma}$, then we get that the first equality gives
+    If we write $\dualeblow{1}=\rowvec{\alpha;\beta;\gamma}$, then we get that the first equality gives
     \[
-        1=\inner{\dualeb{1}}{\eb{1}}=\rowvec{\alpha;\beta;\gamma}\colvec{1;0;0} = \alpha,
+        1=\inner{\dualeblow{1}}{\eb{1}}=\rowvec{\alpha;\beta;\gamma}\colvec{1;0;0} = \alpha,
     \]
     i.e. $\alpha=1$. Similarly, the second equation gives
     \[
-        0=\inner{\dualeb{1}}{\eb{2}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;1;0} = \beta,
+        0=\inner{\dualeblow{1}}{\eb{2}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;1;0} = \beta,
     \]
     i.e. $\beta=0$. The third equation then gives
     \[
-        0=\inner{\dualeb{1}}{\eb{3}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;0;1} = \gamma,
+        0=\inner{\dualeblow{1}}{\eb{3}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;0;1} = \gamma,
     \]
-    i.e. $\gamma=0$. Altogether we get $\dualeb{1}=\rowvec{1;0;0}$.
+    i.e. $\gamma=0$. Altogether we get $\dualeblow{1}=\rowvec{1;0;0}$.
 
-    Similar calculations for $\dualeb{2}$ and $\dualeb{3}$ show that $\dualeb{2}=\rowvec{0;1;0}$ and $\dualeb{3}=\rowvec{0;0;1}$.
+    Similar calculations for $\dualeblow{2}$ and $\dualeblow{3}$ show that $\dualeblow{2}=\rowvec{0;1;0}$ and $\dualeblow{3}=\rowvec{0;0;1}$.
 
     In $\Rs[n]$ we get a similar result: the $i$-th dual basis vector is simply the row form of the $i$-th basis vector.
 
@@ -196,32 +196,32 @@ Some examples:
     \]
     we simply solve the following four equations:
     \begin{align*}
-        \inner{\dualeb{1}}{\eb{1}} &= \rowvec{a;b}\colvec{2;-1} = 2a-b = 1,\\
-        \inner{\dualeb{1}}{\eb{2}} &= \rowvec{a;b}\colvec{-1;3} = -a+3b = 0,\\
-        \inner{\dualeb{2}}{\eb{1}} &= \rowvec{c;d}\colvec{2;-1} = 2c-d = 0,\\
-        \inner{\dualeb{2}}{\eb{2}} &= \rowvec{c;d}\colvec{-1;3} = -c+3d = 1.
+        \inner{\dualeblow{1}}{\eb{1}} &= \rowvec{a;b}\colvec{2;-1} = 2a-b = 1,\\
+        \inner{\dualeblow{1}}{\eb{2}} &= \rowvec{a;b}\colvec{-1;3} = -a+3b = 0,\\
+        \inner{\dualeblow{2}}{\eb{1}} &= \rowvec{c;d}\colvec{2;-1} = 2c-d = 0,\\
+        \inner{\dualeblow{2}}{\eb{2}} &= \rowvec{c;d}\colvec{-1;3} = -c+3d = 1.
     \end{align*}
 
     which gives $a=0.6, b=0.2, c=0.2, d=0.4$, and thus
     \begin{align*}
-        \dualeb{1} &= \rowvec{0.6;0.2},\\
-        \dualeb{2} &= \rowvec{0.2;0.4}.
+        \dualeblow{1} &= \rowvec{0.6;0.2},\\
+        \dualeblow{2} &= \rowvec{0.2;0.4}.
     \end{align*}
 
-    Note that $\dualeb{1}\neq\eb{1}^{\top}$ and $\dualeb{2}\neq\eb{2}^{\top}$! This is important, and we will discuss this thoroughly in the following paragraphs.
+    Note that $\dualeblow{1}\neq\eb{1}^{\top}$ and $\dualeblow{2}\neq\eb{2}^{\top}$! This is important, and we will discuss this thoroughly in the following paragraphs.
 \end{example}
 
 In the most general case (i.e. in $\Rs[n]$), a basis set has $n$ vectors, and \autoref{eq:dual_basis_def} looks as following:
 \begin{equation}
     \begin{aligned}
-        \inner{\dualeb{1}}{\eb{1}} &= 1,\ \inner{\dualeb{1}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeb{1}}{\eb{n}} = 0.\\
-        \inner{\dualeb{1}}{\eb{1}} &= 0,\ \inner{\dualeb{2}}{\eb{2}} = 1,\ \dots,\ \inner{\dualeb{2}}{\eb{n}} = 0.\\
+        \inner{\dualeblow{1}}{\eb{1}} &= 1,\ \inner{\dualeblow{1}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeblow{1}}{\eb{n}} = 0.\\
+        \inner{\dualeblow{1}}{\eb{1}} &= 0,\ \inner{\dualeblow{2}}{\eb{2}} = 1,\ \dots,\ \inner{\dualeblow{2}}{\eb{n}} = 0.\\
                                    &\vdots\\
-        \inner{\dualeb{n}}{\eb{1}} &= 0,\ \inner{\dualeb{n}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeb{n}}{\eb{n}} = 1.\\
+        \inner{\dualeblow{n}}{\eb{1}} &= 0,\ \inner{\dualeblow{n}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeblow{n}}{\eb{n}} = 1.\\
     \end{aligned}
     \label{eq:dual_basis_def_Rn}
 \end{equation}
-The above is begging to be represented as a matrix equaion: we collect the \textit{dual} basis vectors $\left\{\dualeb{i}\right\}$ as \textbf{rows} in an $n\times n$ matrix $\dualbasis{E}$. The \textit{regular} basis vectors $\left\{\eb{j}\right\}$ are collected as \textbf{columns} of another $n\times n$ matrix $E$. Then, \autoref{eq:dual_basis_def_Rn} can be written as
+The above is begging to be represented as a matrix equaion: we collect the \textit{dual} basis vectors $\left\{\dualeblow{i}\right\}$ as \textbf{rows} in an $n\times n$ matrix $\dualbasis{E}$. The \textit{regular} basis vectors $\left\{\eb{j}\right\}$ are collected as \textbf{columns} of another $n\times n$ matrix $E$. Then, \autoref{eq:dual_basis_def_Rn} can be written as
 \begin{equation}
     \dualbasis{E}E = \Id{n},
     \label{eq:dual_basis_matrix}
@@ -259,7 +259,7 @@ From the equation it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must ha
     (I found the inverse using python, but feel free to do the calculation for yourself as an exercise!)
 
     \vspace{1em}
-    Indeed, for example, $\inner{\dualeb{1}}{\eb{1}}=-2\cdot0 + 1\cdot3 -1\cdot2 = 1$, and $\inner{\dualeb{3}}{\eb{2}}=-3\cdot1+1\cdot0+3\cdot1 = 0$ as expected.
+    Indeed, for example, $\inner{\dualeblow{1}}{\eb{1}}=-2\cdot0 + 1\cdot3 -1\cdot2 = 1$, and $\inner{\dualeblow{3}}{\eb{2}}=-3\cdot1+1\cdot0+3\cdot1 = 0$ as expected.
 \end{example}
 
 In \autoref{sec:change_of_basis} we discussed how vectors, basis vectors and vector components behave under change of basis. Now let us discuss how dual vectors, dual basis vectors and dualvector components behave under the same change. When we transform our representation of vectors from one basis set $\oldB$ to a new basis set $\newB$ we also generate a new basis for the dual space, given by \autoref{eq:dual_basis_matrix}. I will denote the dual basis of $\oldB$ as $\dualOldB$ and the dual of $\newB$ as $\dualNewB$. Let's define $\oldB$ and $\newB$ with actual numbers in $\Rs[3]$ so it is easier to follow the operations:
@@ -276,6 +276,15 @@ In \autoref{sec:change_of_basis} we discussed how vectors, basis vectors and vec
     \label{eq:basis_dual_change_R3}
 \end{equation}
 (i.e. $\oldB$ is the standard basis in for $\Rs[3]$ and $\newB$ is the basis set described in \autoref{example:yet_another_dual_basis_set})
+
+% This needs a re-write
+In this case, the transformation matrix $\Forw$ is simply $\newB$, since $\Id{3}\newB=\newB$. Similarly, the dual basis is represented by $\Id{3}^{-1}=\Id{3}$, and thus the inverse transformation matrix is simply $\Backw=\newB^{*}$, since then $\Id{3}\newB^{*}=\newB^{*}$. This already shows us the first transformation property of dual vectors in a change of basis: the dual basis vectors themselves transform via the inverse transformation $\Backw$ (recall that the \enquote{regular} basis vectors transform with the \enquote{forward} transformation matrix $\Forw$).
+
+Since the dual basis vectors transform \textit{contrary} to the basis transformation matrix, I will label them from now on using an upper index (same as vector components):
+\begin{equation}
+    \dualbasis{B} = \left\{\dualeb{1},\dualeb{2},\dots,\dualeb{n}\right\}.
+    \label{eq:label}
+\end{equation}
 
 \subsection{The complex dual (dual vectors in $\Cs[n]$)}
 text
