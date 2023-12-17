@@ -1,5 +1,6 @@
 % Packages
 \usepackage{amsmath, mathtools, bm, commath}
+\usepackage{tensor}
 \usepackage{physics}
 \usepackage{siunitx}
 \usepackage{nicematrix}
@@ -39,6 +40,7 @@
 \newcommand{\dualbasis}[1]{#1^{*}}
 \newcommand{\dualeblow}[1]{\dualvec{e}_{#1}}
 \newcommand{\dualeb}[1]{\vec{e}^{#1}}
+\newcommand{\dualebc}[1]{\vec{e}_{#1}}
 \newcommand{\dualRs}[1][]{\mathbb{R}^{#1*}}
 \newcommand{\dualCs}[1][]{\mathbb{C}^{#1*}}
 
@@ -78,6 +80,9 @@
 \newcommand{\newB}{\color{xdarkred}\tilde{B}\color{black}}
 \newcommand{\Forw}{\bm{F}}
 \newcommand{\Backw}{\bm{F^{-1}}}
+
+% Transformation matrices components
+\newcommand{\Forwcomps}{F\indices{^i_j}}
 
 % Dual versions
 \newcommand{\dualOldB}{\color{xdarkblue}\dualbasis{B}\color{black}}

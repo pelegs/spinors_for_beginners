@@ -280,11 +280,31 @@ In \autoref{sec:change_of_basis} we discussed how vectors, basis vectors and vec
 % This needs a re-write
 In this case, the transformation matrix $\Forw$ is simply $\newB$, since $\Id{3}\newB=\newB$. Similarly, the dual basis is represented by $\Id{3}^{-1}=\Id{3}$, and thus the inverse transformation matrix is simply $\Backw=\newB^{*}$, since then $\Id{3}\newB^{*}=\newB^{*}$. This already shows us the first transformation property of dual vectors in a change of basis: the dual basis vectors themselves transform via the inverse transformation $\Backw$ (recall that the \enquote{regular} basis vectors transform with the \enquote{forward} transformation matrix $\Forw$).
 
-Since the dual basis vectors transform \textit{contrary} to the basis transformation matrix, I will label them from now on using an upper index (same as vector components):
+Since the dual basis vectors transform \textit{contrary} to the basis transformation matrix, from now on I will label dual basis vectors using an upper index (same as vector components):
 \begin{equation}
     \dualbasis{B} = \left\{\dualeb{1},\dualeb{2},\dots,\dualeb{n}\right\}.
     \label{eq:label}
 \end{equation}
+(accordingly, we say that dual basis vectors transform in a \textit{contravarient} fashion)
+
+% Dual vector component transform covariently text bla bla
+\begin{table}
+    \caption{}\label{tab:}
+    \begin{center}
+        \begin{tabular}[c]{lllll}
+            \toprule
+              & \multicolumn{2}{c}{\enquote{Regular}} & \multicolumn{2}{c}{Dual} \\
+              & Form & Equation & Form & Equation \\
+            \midrule
+            Basis vectors & Covarient & $x$ & Contravarient & $y$ \\
+            Vector components & Contravarient & $y$ & Covarient  & $x$ \\
+            \bottomrule
+        \end{tabular}
+    \end{center}
+\end{table}
+
+This is a test: $\Forwcomps$.
+
 
 \subsection{The complex dual (dual vectors in $\Cs[n]$)}
 text
