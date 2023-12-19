@@ -4,7 +4,7 @@
 % Every ruler can be represented using a specific vector in Rn (direction + density). The measurement is then done via the inner product.
 % These inner products actually represent all possible linear functionals Rn->R. They make a linear space on their own.
 % Define general idea of dual spaces.
-% Basis sets and change of basis - covarience, contravarience and all that.
+% Basis sets and change of basis - covariance, contravariance and all that.
 % relevant SE answers: https://math.stackexchange.com/questions/3749/why-do-we-care-about-dual-spaces, https://math.stackexchange.com/a/3751/849224
 % Citation in bibliography file
 
@@ -20,7 +20,7 @@ where the numbers $v_{1},v_{2},\dots,v_{n}$ are the components in each of the re
 
 While the norm does tell us something useful about a vector, it has two drawbacks: it doesn't tell us anything about the vector's orientation in space, and even worse - it is not linear. We can try and simplify the calculation of the norm by dropping the square root and calculating the \textit{square norm}, but that too isn't linear, nor does it tell us anything about the vector's orientation.
 
-Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing more than a set of graduation lines with an orientation in space (\autoref{fig:rulers}). We can therefore represent a ruler using a vector: the magnitude of the vector is the frequency of the graduation lines, while its direction is the direction of the ruler (which is orthogonal to the graduation lines). To not confuse ruler vectors with \enquote{regular} vectors, I will denote ruler vectors using a greek letter and an asterisk, e.g. $\dualvec{\alpha}$.
+Another way of measuring vectors is by using \textit{rulers}. Rulers are nothing more than a set of graduation lines with an orientation in space (\autoref{fig:rulers}). We can therefore represent a ruler using a vector: the magnitude of the vector is the frequency of the graduation lines, while its direction is the direction of the ruler (which is orthogonal to the graduation lines). To not confuse ruler vectors with regular vectors, I will denote ruler vectors using a greek letter and an asterisk, e.g. $\dualvec{\alpha}$.
 
 \begin{marginfigure}[-35\baselineskip]
     \begin{center} 
@@ -55,7 +55,7 @@ Since projection in linear algebra is calculated via the inner product, the meas
     m = \inner{\dualvec{\alpha}}{\vec{v}}.
     \label{eq:ruler_measurement}
 \end{equation}
-However, since we can represent a ruler using a vector, we can use the vector representation in \autoref{eq:ruler_measurement}. And in order to distinguish ruler vectors from \enquote{regular} vectors written in an excplicit form, we write the ruler vectors as row vectors:
+However, since we can represent a ruler using a vector, we can use the vector representation in \autoref{eq:ruler_measurement}. And in order to distinguish ruler vectors from regular vectors written in an excplicit form, we write the ruler vectors as row vectors:
 \begin{align}
     \inner{\dualvec{\alpha}}{\vec{v}} &= \GenericRowVec{\alpha}\GenericColVec{v}\\\nonumber
                                       &= \alpha_{1}v_{1} + \alpha_{2}v_{2} + \dots + \alpha_{n}v_{n}.
@@ -105,7 +105,7 @@ In $\Rs[3]$ a ruler is represented in a similar way, but with \textit{planes} in
 
 From \autoref{eq:ruler_measurement_explicit} we can see that any ruler $\dualvec{\alpha}$ can be written as the left half of an inner product, i.e. $\inner{\dualvec{\alpha}}{\cdot}$. This hints that the ruler is \textit{acting} on vectors, yielding a scalar. Looking at the explicit form of a ruler acting on a vector, we can see that not only do rulers represent linear functions, but they in-fact represent \textit{all} the possible \textit{linear} functions of the type $\phi:\Rs[n]\to\Rs$. Such functions are called \textit{linear forms}, or more specifically in this case a \textit{1-form}.
 
-Since rulers can be represented as vectors but aren't exactly the same as \enquote{regular} vectors, they are also called \textit{dual vectors}, which is the name I will use for them from now on. For any vector space $\Rs[n]$, the dual vectors form a vector space of their own, called the \textit{dual space to $\Rs[n]$}.
+Since rulers can be represented as vectors but aren't exactly the same as regular vectors, they are also called \textit{dual vectors}, which is the name I will use for them from now on. For any vector space $\Rs[n]$, the dual vectors form a vector space of their own, called the \textit{dual space to $\Rs[n]$}.
 
 The linearity of the dual vectors space simplifies many calculations - foremost, it allows us to construct dual vectors from other dual vectors using linear combinations. See \autoref{example:dual_linear_comb} below.
 
@@ -136,11 +136,11 @@ The linearity of the dual vectors space simplifies many calculations - foremost,
 \subsection{Basis sets and coordinate transformations}
 % \begin{enumerate}
 %     \item Dual basis: converting from a basis set in $V$ to its dual in $\dualspace{V}$.
-%     \item Covariance of dual vectors basis change vs. contra-varience of vectors.
+%     \item Covariance of dual vectors basis change vs. contra-variance of vectors.
 % \end{enumerate}
-In \autoref{example:dual_linear_comb} I wrote dual vectors as coordinates in a row form. Since the dual space $\dualRs[n]$ is an $n$-dimensional real vector space, it has infinitely many basis sets, each composed of $n$ vectors. We can use any basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ in $\Rs[n]$ to create a dual basis set $\dualbasis{B}=\left\{\dualeblow{1},\dualeblow{2},\dots,\dualeblow{n}\right\}$ in $\dualRs[n]$: since dual vectors are linear maps, we simply define the vectors in $\dualbasis{B}$ as follows:
+In \autoref{example:dual_linear_comb} I wrote dual vectors as coordinates in a row form. Since the dual space $\dualRs[n]$ is an $n$-dimensional real vector space, it has infinitely many basis sets, each composed of $n$ vectors. We can use any basis set $B=\left\{\eb{1},\eb{2},\dots,\eb{n}\right\}$ in $\Rs[n]$ to create a dual basis set $\dualbasis{B}=\left\{\dualeb{1},\dualeb{2},\dots,\dualeb{n}\right\}$ in $\dualRs[n]$: since dual vectors are linear maps, we simply define the vectors in $\dualbasis{B}$ as follows:
 \begin{equation}
-    \inner{\dualeblow{i}}{\eb{j}} = \delta^{i}_{j} =
+    \inner{\dualeb{i}}{\eb{j}} = \delta^{i}_{j} =
     \begin{cases}
         1 & \text{if}\ i=j,\\
         0 & \text{if}\ i\neq j.
@@ -148,7 +148,12 @@ In \autoref{example:dual_linear_comb} I wrote dual vectors as coordinates in a r
     \label{eq:dual_basis_def}
 \end{equation}
 
-Some examples:
+\begin{note}{Dual basis vectors notation}{dual_basis_vec_notation}
+    To distinguish dual basis vectors from regular basis vectors, I denote them using a greek letter (since they represent a linear maps) white also using upper-index notation. The latter will be consistent with their propeties as we shall see soon.
+\end{note}
+
+Some examples of calculating dual basis vectors:
+
 \begin{example}{The standard dual basis set}{std_dual_basis}
     Given the standard basis set in $\Rs[3]$,
     \[
@@ -156,28 +161,28 @@ Some examples:
     \]
     its corresponding dual is then
     \[
-        \dualbasis{B}=\left\{\dualeblow{1},\dualeblow{2},\dualeblow{3}\right\}.
+        \dualbasis{B}=\left\{\dualeb{1},\dualeb{2},\dualeb{3}\right\}.
     \]
 
-    For $\dualeblow{1}$ the following is true:
+    For $\dualeb{1}$ the following is true:
     \[
-        \inner{\dualeblow{1}}{\eb{1}}=1,\quad \inner{\dualeblow{1}}{\eb{2}}=0,\quad \inner{\dualeblow{1}}{\eb{3}}=0.
+        \inner{\dualeb{1}}{\eb{1}}=1,\quad \inner{\dualeb{1}}{\eb{2}}=0,\quad \inner{\dualeb{1}}{\eb{3}}=0.
     \]
-    If we write $\dualeblow{1}=\rowvec{\alpha;\beta;\gamma}$, then we get that the first equality gives
+    If we write $\dualeb{1}=\rowvec{\alpha;\beta;\gamma}$, then we get that the first equality gives
     \[
-        1=\inner{\dualeblow{1}}{\eb{1}}=\rowvec{\alpha;\beta;\gamma}\colvec{1;0;0} = \alpha,
+        1=\inner{\dualeb{1}}{\eb{1}}=\rowvec{\alpha;\beta;\gamma}\colvec{1;0;0} = \alpha,
     \]
     i.e. $\alpha=1$. Similarly, the second equation gives
     \[
-        0=\inner{\dualeblow{1}}{\eb{2}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;1;0} = \beta,
+        0=\inner{\dualeb{1}}{\eb{2}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;1;0} = \beta,
     \]
     i.e. $\beta=0$. The third equation then gives
     \[
-        0=\inner{\dualeblow{1}}{\eb{3}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;0;1} = \gamma,
+        0=\inner{\dualeb{1}}{\eb{3}}=\rowvec{\alpha;\beta;\gamma}\colvec{0;0;1} = \gamma,
     \]
-    i.e. $\gamma=0$. Altogether we get $\dualeblow{1}=\rowvec{1;0;0}$.
+    i.e. $\gamma=0$. Altogether we get $\dualeb{1}=\rowvec{1;0;0}$.
 
-    Similar calculations for $\dualeblow{2}$ and $\dualeblow{3}$ show that $\dualeblow{2}=\rowvec{0;1;0}$ and $\dualeblow{3}=\rowvec{0;0;1}$.
+    Similar calculations for $\dualeb{2}$ and $\dualeb{3}$ show that $\dualeb{2}=\rowvec{0;1;0}$ and $\dualeb{3}=\rowvec{0;0;1}$.
 
     In $\Rs[n]$ we get a similar result: the $i$-th dual basis vector is simply the row form of the $i$-th basis vector.
 
@@ -190,43 +195,43 @@ Some examples:
         B = \left\{ \colvec{2;-1},\ \colvec{-1;3} \right\}.
     \]
     
-    To find it dual,
+    To find its dual,
     \[
-        \dualbasis{B} = \left\{ \rowvec{a;b},\ \rowvec{c;d} \right\},
+        \dualbasis{B} = \left\{ \rowvec{\alpha;\beta},\ \rowvec{c;d} \right\},
     \]
     we simply solve the following four equations:
     \begin{align*}
-        \inner{\dualeblow{1}}{\eb{1}} &= \rowvec{a;b}\colvec{2;-1} = 2a-b = 1,\\
-        \inner{\dualeblow{1}}{\eb{2}} &= \rowvec{a;b}\colvec{-1;3} = -a+3b = 0,\\
-        \inner{\dualeblow{2}}{\eb{1}} &= \rowvec{c;d}\colvec{2;-1} = 2c-d = 0,\\
-        \inner{\dualeblow{2}}{\eb{2}} &= \rowvec{c;d}\colvec{-1;3} = -c+3d = 1.
+        \inner{\dualeb{1}}{\eb{1}} &= \rowvec{\alpha;\beta}\colvec{2;-1} = 2\alpha-\beta = 1,\\
+        \inner{\dualeb{1}}{\eb{2}} &= \rowvec{\alpha;\beta}\colvec{-1;3} = -\alpha+3\beta = 0,\\
+        \inner{\dualeb{2}}{\eb{1}} &= \rowvec{c;d}\colvec{2;-1} = 2c-d = 0,\\
+        \inner{\dualeb{2}}{\eb{2}} &= \rowvec{c;d}\colvec{-1;3} = -c+3d = 1.
     \end{align*}
 
-    which gives $a=0.6, b=0.2, c=0.2, d=0.4$, and thus
+    which gives $\alpha=0.6, \beta=0.2, c=0.2, d=0.4$, and thus
     \begin{align*}
-        \dualeblow{1} &= \rowvec{0.6;0.2},\\
-        \dualeblow{2} &= \rowvec{0.2;0.4}.
+        \dualeb{1} &= \rowvec{0.6;0.2},\\
+        \dualeb{2} &= \rowvec{0.2;0.4}.
     \end{align*}
 
-    Note that $\dualeblow{1}\neq\eb{1}^{\top}$ and $\dualeblow{2}\neq\eb{2}^{\top}$! This is important, and we will discuss this thoroughly in the following paragraphs.
+    Note that $\dualeb{1}\neq\eb{1}^{\top}$ and $\dualeb{2}\neq\eb{2}^{\top}$! This is important, and we will discuss this thoroughly in the following paragraphs.
 \end{example}
 
-In the most general case (i.e. in $\Rs[n]$), a basis set has $n$ vectors, and \autoref{eq:dual_basis_def} looks as following:
+In the most general case (i.e. in $\Rs[n]$), a basis set has $n$ vectors, and \autoref{eq:dual_basis_def} has the following form:
 \begin{equation}
     \begin{aligned}
-        \inner{\dualeblow{1}}{\eb{1}} &= 1,\ \inner{\dualeblow{1}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeblow{1}}{\eb{n}} = 0.\\
-        \inner{\dualeblow{1}}{\eb{1}} &= 0,\ \inner{\dualeblow{2}}{\eb{2}} = 1,\ \dots,\ \inner{\dualeblow{2}}{\eb{n}} = 0.\\
+        \inner{\dualeb{1}}{\eb{1}} &= 1,\ \inner{\dualeb{1}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeb{1}}{\eb{n}} = 0.\\
+        \inner{\dualeb{1}}{\eb{1}} &= 0,\ \inner{\dualeb{2}}{\eb{2}} = 1,\ \dots,\ \inner{\dualeb{2}}{\eb{n}} = 0.\\
                                    &\vdots\\
-        \inner{\dualeblow{n}}{\eb{1}} &= 0,\ \inner{\dualeblow{n}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeblow{n}}{\eb{n}} = 1.\\
+        \inner{\dualeb{n}}{\eb{1}} &= 0,\ \inner{\dualeb{n}}{\eb{2}} = 0,\ \dots,\ \inner{\dualeb{n}}{\eb{n}} = 1.\\
     \end{aligned}
     \label{eq:dual_basis_def_Rn}
 \end{equation}
-The above is begging to be represented as a matrix equaion: we collect the \textit{dual} basis vectors $\left\{\dualeblow{i}\right\}$ as \textbf{rows} in an $n\times n$ matrix $\dualbasis{E}$. The \textit{regular} basis vectors $\left\{\eb{j}\right\}$ are collected as \textbf{columns} of another $n\times n$ matrix $E$. Then, \autoref{eq:dual_basis_def_Rn} can be written as
+This above equation is begging to be represented as a matrix equation: we collect the \textit{dual} basis vectors $\left\{\dualeb{i}\right\}$ as \textbf{rows} in an $n\times n$ matrix $\dualbasis{E}$. The \textit{regular} basis vectors $\left\{\eb{j}\right\}$ are collected as \textbf{columns} of another $n\times n$ matrix $E$. Then, \autoref{eq:dual_basis_def_Rn} can be written as
 \begin{equation}
     \dualbasis{E}E = \Id{n},
     \label{eq:dual_basis_matrix}
 \end{equation}
-From the equation it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must have a non-zero determinant\sidenote{if you're not sure why, I strongly recommend reviewing basic linear algebra.}, we are guaranteed to find $\dualbasis{E}$. This means that for any basis set in $\Rs[n]$ the dual basis exists and is unique.
+From the matrix equation it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must have a non-zero determinant\sidenote{if you're not sure why, I strongly recommend reviewing basic linear algebra.}, we are guaranteed to find $\dualbasis{E}$. This means that for any basis set in $\Rs[n]$ the dual basis exists and is unique.
 
 \begin{example}{Dual set in $\Rs[3]$}{yet_another_dual_basis_set}
     The following basis set
@@ -259,7 +264,7 @@ From the equation it is clear that $\dualbasis{E}=E^{-1}$, and since $E$ must ha
     (I found the inverse using python, but feel free to do the calculation for yourself as an exercise!)
 
     \vspace{1em}
-    Indeed, for example, $\inner{\dualeblow{1}}{\eb{1}}=-2\cdot0 + 1\cdot3 -1\cdot2 = 1$, and $\inner{\dualeblow{3}}{\eb{2}}=-3\cdot1+1\cdot0+3\cdot1 = 0$ as expected.
+    Indeed, for example, $\inner{\dualeb{1}}{\eb{1}}=-2\cdot0 + 1\cdot3 -1\cdot2 = 1$, and $\inner{\dualeb{3}}{\eb{2}}=-3\cdot1+1\cdot0+3\cdot1 = 0$ as expected.
 \end{example}
 
 In \autoref{sec:change_of_basis} we discussed how vectors, basis vectors and vector components behave under change of basis. Now let us discuss how dual vectors, dual basis vectors and dualvector components behave under the same change. When we transform our representation of vectors from one basis set $\oldB$ to a new basis set $\newB$ we also generate a new basis for the dual space, given by \autoref{eq:dual_basis_matrix}. I will denote the dual basis of $\oldB$ as $\dualOldB$ and the dual of $\newB$ as $\dualNewB$. Let's define $\oldB$ and $\newB$ with actual numbers in $\Rs[3]$ so it is easier to follow the operations:
@@ -278,33 +283,30 @@ In \autoref{sec:change_of_basis} we discussed how vectors, basis vectors and vec
 (i.e. $\oldB$ is the standard basis in for $\Rs[3]$ and $\newB$ is the basis set described in \autoref{example:yet_another_dual_basis_set})
 
 % This needs a re-write
-In this case, the transformation matrix $\Forw$ is simply $\newB$, since $\Id{3}\newB=\newB$. Similarly, the dual basis is represented by $\Id{3}^{-1}=\Id{3}$, and thus the inverse transformation matrix is simply $\Backw=\newB^{*}$, since then $\Id{3}\newB^{*}=\newB^{*}$. This already shows us the first transformation property of dual vectors in a change of basis: the dual basis vectors themselves transform via the inverse transformation $\Backw$ (recall that the \enquote{regular} basis vectors transform with the \enquote{forward} transformation matrix $\Forw$).
+In this case, the transformation matrix $\Forw$ is simply $\newB$, since $\Id{3}\newB=\newB$. Similarly, the dual basis is represented by $\Id{3}^{-1}=\Id{3}$, and thus the inverse transformation matrix is simply $\Backw=\newB^{*}$, since then $\Id{3}\newB^{*}=\newB^{*}$. This already shows us the first transformation property of dual vectors in a change of basis: the dual basis vectors themselves transform via the inverse transformation $\Backw$ (recall that the regular basis vectors transform with the \enquote{forward} transformation matrix $\Forw$).
 
-Since the dual basis vectors transform \textit{contrary} to the basis transformation matrix, from now on I will label dual basis vectors using an upper index (same as vector components):
-\begin{equation}
-    \dualbasis{B} = \left\{\dualeb{1},\dualeb{2},\dots,\dualeb{n}\right\}.
-    \label{eq:label}
-\end{equation}
-(accordingly, we say that dual basis vectors transform in a \textit{contravarient} fashion)
+Now we understand why the upper-index notation is used for dual basis vectors: this is used since they transform in a \textit{contravariant} fashion to the change in regular basis vectors. Accordingly, we say that the regualr basis vectors transform in a \textit{contravariant} fashion, and indeed they are denoted using lower-index notation.
 
-% Dual vector component transform covariently text bla bla
+At this point, I will introduce back Einstein's index convention. Using the convention, all \textit{covariant} components of any object we are dealing with are denoted using lower-indices, while all \textit{contravariant} components of any such object are denoted using upper-indices. When we see an index repeating twice in a single term - once as an upper-index and once as a lower-index (the order does not matter) - we sum over that index.
+
+\autoref{table:transformation_rules} shows the transformation rules for regualr basis vectors vs. dual basis vectors - and their respective components. In each equation you should find the repeating index, and imagine that there is a summation sign over than index before the transformation matrix. For example, the full regular basis vector transformation is $\ebc{j}=\displaystyle\sum_{i=1}^{n}\Forwcomps\eb{i}$. Note: the inverse transformation $\Backw$ is denoted in component form as $\Backwcomps$ to avoid the confusion arising from the use of the inverse notation, which is also upper-index.
+
+% Dual vector component transform covariantly text bla bla
 \begin{table}
-    \caption{}\label{tab:}
+    \caption{Transformation rules for regular basis vectors, dual basis vectors and their respective components.}\label{table:transformation_rules}
     \begin{center}
-        \begin{tabular}[c]{lllll}
+        \begin{tabular}[c]{l|ll|ll}
             \toprule
-              & \multicolumn{2}{c}{\enquote{Regular}} & \multicolumn{2}{c}{Dual} \\
+              & \multicolumn{2}{c|}{Regular} & \multicolumn{2}{c}{Dual} \\
               & Form & Equation & Form & Equation \\
             \midrule
-            Basis vectors & Covarient & $x$ & Contravarient & $y$ \\
-            Vector components & Contravarient & $y$ & Covarient  & $x$ \\
+            Basis vectors & Co- & $\ebc{j}=\Forwcomps\eb{i}$ & Contra- & $\dualeb{i}=\Backwcomps\dualeb{j}$ \\
+            Vector components & Contra- & $v^{i}=\Backwcomps v^{j}$ & Co-  & $\alpha_{j}=\Forwcomps \alpha_{i}$ \\
             \bottomrule
         \end{tabular}
     \end{center}
 \end{table}
-
-This is a test: $\Forwcomps$.
-
+This kind of implicit summation is called a \textit{contraction}. The transformation matrices $\Forwcomps$ and $\Backwcomps$ are in fact \textit{tensors} of the type $(1,1)$: they each have a single contravariant component (upper-index) and a single covariant component (lower-index).
 
 \subsection{The complex dual (dual vectors in $\Cs[n]$)}
 text
