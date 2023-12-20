@@ -285,7 +285,7 @@ In \autoref{sec:change_of_basis} we discussed how vectors, basis vectors and vec
 % This needs a re-write
 In this case, the transformation matrix $\Forw$ is simply $\newB$, since $\Id{3}\newB=\newB$. Similarly, the dual basis is represented by $\Id{3}^{-1}=\Id{3}$, and thus the inverse transformation matrix is simply $\Backw=\newB^{*}$, since then $\Id{3}\newB^{*}=\newB^{*}$. This already shows us the first transformation property of dual vectors in a change of basis: the dual basis vectors themselves transform via the inverse transformation $\Backw$ (recall that the regular basis vectors transform with the \enquote{forward} transformation matrix $\Forw$).
 
-Now we understand why the upper-index notation is used for dual basis vectors: this is used since they transform in a \textit{contravariant} fashion to the change in regular basis vectors. Accordingly, we say that the regualr basis vectors transform in a \textit{contravariant} fashion, and indeed they are denoted using lower-index notation.
+Now we understand why the upper-index notation is used for dual basis vectors: this is used since they transform in a \textit{contravariant} fashion to the change in regular basis vectors. Accordingly, we say that the regualr basis vectors transform in a \textit{contravariant} fashion, and indeed they are denoted using lower-index notation. For this reason, dual vectors are also sometimes called \textit{covectors}.
 
 At this point, I will introduce back Einstein's index convention. Using the convention, all \textit{covariant} components of any object we are dealing with are denoted using lower-indices, while all \textit{contravariant} components of any such object are denoted using upper-indices. When we see an index repeating twice in a single term - once as an upper-index and once as a lower-index (the order does not matter) - we sum over that index.
 
@@ -293,23 +293,51 @@ At this point, I will introduce back Einstein's index convention. Using the conv
 
 % Dual vector component transform covariantly text bla bla
 \begin{table}
-    \caption{Transformation rules for regular basis vectors, dual basis vectors and their respective components.}\label{table:transformation_rules}
+    \caption{Transformation rules for regular basis vectors, dual basis vectors and their respective components. Note: $\bm{B}=\bm{F}^{-1}$.}\label{table:transformation_rules}
     \begin{center}
         \begin{tabular}[c]{l|ll|ll}
             \toprule
               & \multicolumn{2}{c|}{Regular} & \multicolumn{2}{c}{Dual} \\
               & Form & Equation & Form & Equation \\
             \midrule
-            Basis vectors & Co- & $\ebc{j}=\Forwcomps\eb{i}$ & Contra- & $\dualeb{i}=\Backwcomps\dualeb{j}$ \\
-            Vector components & Contra- & $v^{i}=\Backwcomps v^{j}$ & Co-  & $\alpha_{j}=\Forwcomps \alpha_{i}$ \\
+            Basis vectors & Co & $\ebc{j}=\Forwcomps\eb{i}$ & Contra & $\dualeb{i}=\Backwcomps\dualeb{j}$ \\
+            Components & Contra & $v^{i}=\Backwcomps v^{j}$ & Co  & $\alpha_{j}=\Forwcomps \alpha_{i}$ \\
             \bottomrule
         \end{tabular}
     \end{center}
 \end{table}
 This kind of implicit summation is called a \textit{contraction}. The transformation matrices $\Forwcomps$ and $\Backwcomps$ are in fact \textit{tensors} of the type $(1,1)$: they each have a single contravariant component (upper-index) and a single covariant component (lower-index).
 
-\subsection{The complex dual (dual vectors in $\Cs[n]$)}
-text
+\subsection{Dual vectors in $\Cs[n]$ and the Dirac notation}
+In physics, and especially quantum physics, complex vector spaces are often used. For example, consider the space in which quantum states exist: $\Cs[n]$, where $n$ can be any natural number and even infinity. The standard inner product in $\Cs[n]$ (which we will discuss momentarily) gives rise to a natural norm and thus also a distance function:
+\begin{equation}
+    \text{D}\left(\vec{x},\vec{y}\right) = \norm{\vec{x}-\vec{y}} = \inner{\vec{x}-\vec{y}}{\vec{x}-\vec{y}}.
+    \label{eq:distance_Cn}
+\end{equation}
+Therefore, $\Cs[n]$ together with the standard inner product is a metric space, and in fact a complete one - i.e. it is a \textit{Hilbert space}. Naturally, we would like $\text{D}\left(\vec{x}\right)$ to be always \textit{real} and non-negative - otherwise it is quite strange to consider\sidenote{what is the meaning of a negative, or worse - complex, distance?}.
+
+To that end, and to stay consistent with the form of the inner product in $\Rs[n]$, we define the standard inner product in $\Cs[n]$ to use the \textit{complex conjugate} in one of its arguments, in our case the first argument\sidenote{this is the so-called \enquote{physicist convention}. The other, \enquote{mathematician convention} conjugates the second argument.}:
+\begin{equation}
+    \inner{\vec{x}}{\vec{y}} = \displaystyle\sum_{i=1}^{n}\conj{x}_{i}y_{i}.
+    \label{eq:complex_inner_prod}
+\end{equation}
+This definition makes the induced norm to be always real and non-negative:
+\begin{equation}
+    \vnorm{x}^{2} = \inner{\vec{x}}{\vec{x}} = \displaystyle\sum_{i=1}^{n}\conj{x}_{i}x_{i} = \displaystyle\sum_{i=1}^{n}\abs{x}^{2} \geq 0.
+    \label{eq:non_negative_norm}
+\end{equation}
+
+We can rewrite \autoref{eq:complex_inner_prod} in terms of a dual-vector/vector product:
+\begin{equation}
+    \inner{\vec{x}}{\vec{y}} = \GenericRowVec{\conj{x}}\GenericColVec{y}.
+    \label{eq:complex_inner_prod_row_col}
+\end{equation}
+If we then use a vertical line to separate the arguments of the inner product, i.e. writing it as $\innerproduct{\vec{x}}{\vec{y}}$, we can \enquote{separate} it into two parts:
+\begin{equation}
+    \bra{\vec{x}} = \GenericRowVec{\conj{x}}\quad \text{and}\quad \ket{\vec{y}} = \GenericColVec{y}.
+    \label{eq:braket}
+\end{equation}
+Since the notation for the inner product uses \textit{brackets}, we call $\bra{\vec{x}}$ a \textit{bra}, and $\ket{\vec{y}}$ a \textit{ket} - and generally identify bras with dual vectors and kets with regular vectors. This notation is called the \textit{Dirac notation}\sidenote{and also, unsurprisngly, the \textit{bra-ket notation}.}, named for Paul Dirac who introduced it. It is a surprisingly useful notation for vectors and dualvectors.
 
 % ---------------------------------------------------------------- %
 % STUFF I MIGHT NEED LATER...
