@@ -339,6 +339,33 @@ If we then use a vertical line to separate the arguments of the inner product, i
 \end{equation}
 Since the notation for the inner product uses \textit{brackets}, we call $\bra{\vec{x}}$ a \textit{bra}, and $\ket{\vec{y}}$ a \textit{ket} - and generally identify bras with dual vectors and kets with regular vectors. This notation is called the \textit{Dirac notation}\sidenote{and also, unsurprisngly, the \textit{bra-ket notation}.}, named for Paul Dirac who introduced it. It is a surprisingly useful notation for vectors and dualvectors.
 
+Since it is clear that bras and kets represent covectors and vectors, respectively, I will from now on drop the vector notation (bold letters) \textit{within them}: $\bra{a}, \bra{x_{2}}, \ket{u_{i}}$, etc. Also, depending on context I will sometimes drop the letters all together in favour of just the indices: for example, if we are discussing some vectors $\ket{v_{1}},\ket{v_{2}},\dots, \ket{v_{i}},$ etc. - I might just write $\ket{1},\ket{2},\dots,\ket{i},$ etc.
+
+Vector addition looks exactly as it does with the standard notation:
+\begin{equation}
+    \begin{aligned}
+        \vec{a}+\vec{b}=\vec{c} &\Leftrightarrow \ket{a}+\ket{b}=\ket{c},\\
+        \dualvec{\alpha}+\dualvec{\beta}=\dualvec{\gamma} &\Leftrightarrow \bra{\alpha}+\bra{\beta}=\bra{\gamma}.
+    \end{aligned}
+    \label{eq:braket_addition}
+\end{equation}
+And much like the fact that adding a vector and a dual vector does not make sense, adding a bra and a ket is undefined: $\xcancel{\bra{\alpha}+\ket{b}}$. Sometimes, in order to declutter an equation, the addition can be written inside a bra or a ket:
+\begin{equation}
+    \bra{\alpha+\beta} \equiv \bra{\alpha}+\bra{\beta}.
+    \label{eq:braket_addition_inside_notation}
+\end{equation}
+
+Similarly, scaling dual vectors and vectors by a scalar looks the same as the usual notation, and sometimes this is also inserted into the respective bra/ket:
+\begin{equation}
+    \begin{aligned}
+        \ket{2x} &\equiv 2\ket{x},\\
+        \bra{-3\alpha} &\equiv -3\bra{\alpha}.
+    \end{aligned}
+    \label{eq:braket_scaling}
+\end{equation}
+
+A nice example of using the notation is writing the definition of a dual basis set: \ldots
+
 % ---------------------------------------------------------------- %
 % STUFF I MIGHT NEED LATER...
 %
